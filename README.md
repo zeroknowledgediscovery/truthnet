@@ -3,4 +3,4 @@ Algorithmic Lie Detector
 
 https://slides.com/ishanuchattopadhyay/truthnet
 
-![](truthnet.png | width=100)
+![](https://github.com/zeroknowledgediscovery/truthnet/blob/main/truthnet.png | width=100)
