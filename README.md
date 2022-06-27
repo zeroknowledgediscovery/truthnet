@@ -1,10 +1,11 @@
 # truthnet
-Algorithmic Lie Detector
+## Algorithmic Lie Detector
 
-https://slides.com/ishanuchattopadhyay/truthnet
+
+---
+
+<img src="truthnet.png" alt="drawing" style="width:900px;"/>
 
 ---
 
-<img src="truthnet.png" alt="drawing" style="width:600px;"/>
-
----
+![Slides](https://slides.com/ishanuchattopadhyay/truthnet)
