@@ -5,6 +5,6 @@ https://slides.com/ishanuchattopadhyay/truthnet
 
 ---
 
-<img src="truthnet.png" alt="drawing" style="width:200px;"/>
+<img src="truthnet.png" alt="drawing" style="width:600px;"/>
 
 ---
