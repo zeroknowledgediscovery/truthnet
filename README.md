@@ -8,4 +8,4 @@
 
 ---
 
-[Slides](https://slides.com/ishanuchattopadhyay/truthnet)
+[Slides for key concepts](https://slides.com/ishanuchattopadhyay/truthnet)
