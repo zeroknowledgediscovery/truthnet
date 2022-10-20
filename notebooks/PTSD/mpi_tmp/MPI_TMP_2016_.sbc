@@ -1,0 +1,16 @@
+#!/bin/bash
+#SBATCH --job-name=MPI_TMP_2016
+#SBATCH --output=/project2/ishanu/NLS_DATA/cognet/examples/PTSD/mpi_tmp/MPI_TMP_2016O.out
+#SBATCH --error=/project2/ishanu/NLS_DATA/cognet/examples/PTSD/mpi_tmp/MPI_TMP_2016E.err
+#SBATCH --time=2:00:00
+#SBATCH --qos=normal
+#SBATCH --mem=56000
+#SBATCH --nodes=4
+#SBATCH --ntasks-per-node=28
+#SBATCH --partition=broadwl
+module load midway2
+module unload python
+module unload openmpi
+module load python/anaconda-2020.02
+module load mpi4py
+date; mpiexec -n 112 python3 -m mpi4py.futures PTSD_cognet.py; date
