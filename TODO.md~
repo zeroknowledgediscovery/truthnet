@@ -1,8 +1,0 @@
-# Objective
-
-+ getSuspects to return which items are worst performing for the suspects
-+ not re-enetr datapath
-+ handle classes in dataset (dx=0/1)
-+ return reconstruction error for participants
-+ add malingering suspect, and denial suspects, in addition to randomization suspects
-
