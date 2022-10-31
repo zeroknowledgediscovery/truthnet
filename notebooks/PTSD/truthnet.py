@@ -14,7 +14,7 @@ from cognet.model import model
 class truthnet:
     """
     """
-    def __init__(self,qsteps=200,processes=11,datapath=datapath):
+    def __init__(self,qsteps=200,processes=11,datapath=None):
         
         self.cognet_obj = cg()
         self.model_obj = model()
@@ -32,7 +32,7 @@ class truthnet:
         return 
     
     def load_data(self,datapath=None):
-        if datapath is None:
+        if datapath is not None:
             self.datapath=datapath
         self.data_obj=dataFormatter(samples=self.datapath)
         self.features,self.samples = self.data_obj.Qnet_formatter()
