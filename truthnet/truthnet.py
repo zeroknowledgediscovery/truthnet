@@ -143,8 +143,11 @@ class truthnet:
     
     def __cithreshold(self,
                       alpha,
-                      df=self.urandom_dissonance_df,
+                      df=None,
                       n_sided = 1 ):
+        if df is None:
+            df = self.urandom_dissonance_df 
+            
         qnet_mean = df.mean(axis=1).mean()
         qnet_std = df.mean(axis=1).std(ddof=1)
         z_crit = stats.norm.ppf(1-alpha/n_sided)
