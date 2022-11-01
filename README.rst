@@ -5,7 +5,7 @@ Emergenet
 .. image:: https://zenodo.org/badge/526971595.svg
    :target: https://zenodo.org/badge/latestdoi/526971595
 
-.. image:: http://zed.uchicago.edu/logo/emergenet.png
+.. image:: http://zed.uchicago.edu/logo/truthnet.png
    :height: 300px
    :scale: 25%
    :alt: cognet logo
@@ -15,8 +15,8 @@ Emergenet
 
 :Info: Draft link will be posted here
 :Author: ZeD@UChicago <zed.uchicago.edu>
-:Description: Superfast risk estimation for emerging strains (https://pypi.org/project/emergenet/)
-:Documentation: https://zeroknowledgediscovery.github.io/emergenet/
+:Description: Algorithmic Lie Detector (https://pypi.org/project/truthnet/)
+:Documentation: https://zeroknowledgediscovery.github.io/truthnet/
 
 **Usage:**
 

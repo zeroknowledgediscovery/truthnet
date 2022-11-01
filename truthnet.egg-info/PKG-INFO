@@ -1,12 +1,12 @@
 Metadata-Version: 2.1
 Name: truthnet
-Version: 0.0.0
+Version: 0.0.1
 Summary: Algorithmic Lie Detector
 Home-page: https://github.com/zeroknowledgediscovery/truthnet
 Author: zed.uchicago.edu
 Author-email: ishanu@uchicago.edu
 License: LICENSE
-Download-URL: https://github.com/zeroknowledgediscovery/truthnet/archive/ 0.0.0.tar.gz
+Download-URL: https://github.com/zeroknowledgediscovery/truthnet/archive/ 0.0.1.tar.gz
 Description: ===============
         Emergenet
         ===============
@@ -14,7 +14,7 @@ Description: ===============
         .. image:: https://zenodo.org/badge/526971595.svg
            :target: https://zenodo.org/badge/latestdoi/526971595
         
-        .. image:: http://zed.uchicago.edu/logo/emergenet.png
+        .. image:: http://zed.uchicago.edu/logo/truthnet.png
            :height: 300px
            :scale: 25%
            :alt: cognet logo
@@ -24,8 +24,8 @@ Description: ===============
         
         :Info: Draft link will be posted here
         :Author: ZeD@UChicago <zed.uchicago.edu>
-        :Description: Superfast risk estimation for emerging strains (https://pypi.org/project/emergenet/)
-        :Documentation: https://zeroknowledgediscovery.github.io/emergenet/
+        :Description: Algorithmic Lie Detector (https://pypi.org/project/truthnet/)
+        :Documentation: https://zeroknowledgediscovery.github.io/truthnet/
         
         **Usage:**
         
