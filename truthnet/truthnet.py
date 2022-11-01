@@ -49,7 +49,7 @@ class truthnet:
             processes=self.cognet_obj.MAX_PROCESSES
         
         if fit:
-            self.model_obj.fit(data_obj=data_obj,
+            self.model_obj.fit(data_obj=self.data_obj,
                                njobs=processes)
             save_qnet(self.model_obj.myQnet,
                       self.modelpath,
