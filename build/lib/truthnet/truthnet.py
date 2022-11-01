@@ -79,7 +79,7 @@ class truthnet:
         self.cognet_obj.MAX_PROCESSES = processes
         return_dict = self.cognet_obj.dissonance_matrix(
             outfile=outfile,processes=self.cognet_obj.MAX_PROCESSES)
-        self.dissonance = pd.DataFrame(return_dict.copy())
+        self.dissonance_ = pd.DataFrame(return_dict.copy())
         return
 
     def __erase(self,row):
@@ -169,7 +169,7 @@ class truthnet:
         if datapath is None:
             datapath=self.datapath
         __data=pd.read_csv(datapath)
-        __data["mdissonance"] = self.dissonance.mean(axis=1)
+        __data["mdissonance"] = self.dissonance_.mean(axis=1)
 
         suspects=__data[__data.mdissonance>=self.cithreshold[alpha]].copy()
 
