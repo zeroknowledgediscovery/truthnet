@@ -1,0 +1,12 @@
+LICENSE.md
+MANIFEST.in
+README.rst
+setup.py
+version.py
+truthnet/__init__.py
+truthnet/truthnet.py
+truthnet.egg-info/PKG-INFO
+truthnet.egg-info/SOURCES.txt
+truthnet.egg-info/dependency_links.txt
+truthnet.egg-info/requires.txt
+truthnet.egg-info/top_level.txt
