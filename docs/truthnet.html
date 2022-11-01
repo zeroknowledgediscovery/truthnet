@@ -110,6 +110,15 @@ class truthnet:
             outfile=outfile,processes=self.cognet_obj.MAX_PROCESSES)
         self.dissonance = pd.DataFrame(return_dict.copy())
         return
+
+    def erase(row):
+        def get_(i):
+            if np.random.rand() \
+            &gt; self.missing/len(self.urandom_dissonance_df.columns):
+                return np.nan
+            return i
+    
+        return [get_(i) for i in row]
     
     def generateRandomResponse(self,
                                n=1,
@@ -142,7 +151,15 @@ class truthnet:
             results.append(
                 self.cognet_obj.dissonance(0,
                                            sample=usamples.iloc[s]))
+
+        df=pd.DataFrame(results)
+        
         self.urandom_dissonance_df = pd.DataFrame(results)
+        self.urandom_dissonance_df \
+                  = self.urandom_dissonance_df.apply(self.erase,
+                                                     axis=1,
+                                                     result_type=&#39;broadcast&#39;)
+        
 
         self.__cithreshold(alpha=alpha,n_sided=n_sided)
         return
@@ -293,6 +310,15 @@ class truthnet:
             outfile=outfile,processes=self.cognet_obj.MAX_PROCESSES)
         self.dissonance = pd.DataFrame(return_dict.copy())
         return
+
+    def erase(row):
+        def get_(i):
+            if np.random.rand() \
+            &gt; self.missing/len(self.urandom_dissonance_df.columns):
+                return np.nan
+            return i
+    
+        return [get_(i) for i in row]
     
     def generateRandomResponse(self,
                                n=1,
@@ -325,7 +351,15 @@ class truthnet:
             results.append(
                 self.cognet_obj.dissonance(0,
                                            sample=usamples.iloc[s]))
+
+        df=pd.DataFrame(results)
+        
         self.urandom_dissonance_df = pd.DataFrame(results)
+        self.urandom_dissonance_df \
+                  = self.urandom_dissonance_df.apply(self.erase,
+                                                     axis=1,
+                                                     result_type=&#39;broadcast&#39;)
+        
 
         self.__cithreshold(alpha=alpha,n_sided=n_sided)
         return
@@ -404,6 +438,25 @@ class truthnet:
         outfile=outfile,processes=self.cognet_obj.MAX_PROCESSES)
     self.dissonance = pd.DataFrame(return_dict.copy())
     return</code></pre>
+</details>
+</dd>
+<dt id="truthnet.truthnet.truthnet.erase"><code class="name flex">
+<span>def <span class="ident">erase</span></span>(<span>row)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def erase(row):
+    def get_(i):
+        if np.random.rand() \
+        &gt; self.missing/len(self.urandom_dissonance_df.columns):
+            return np.nan
+        return i
+
+    return [get_(i) for i in row]</code></pre>
 </details>
 </dd>
 <dt id="truthnet.truthnet.truthnet.fit"><code class="name flex">
@@ -492,7 +545,15 @@ class truthnet:
         results.append(
             self.cognet_obj.dissonance(0,
                                        sample=usamples.iloc[s]))
+
+    df=pd.DataFrame(results)
+    
     self.urandom_dissonance_df = pd.DataFrame(results)
+    self.urandom_dissonance_df \
+              = self.urandom_dissonance_df.apply(self.erase,
+                                                 axis=1,
+                                                 result_type=&#39;broadcast&#39;)
+    
 
     self.__cithreshold(alpha=alpha,n_sided=n_sided)
     return</code></pre>
@@ -598,6 +659,7 @@ class truthnet:
 <h4><code><a title="truthnet.truthnet.truthnet" href="#truthnet.truthnet.truthnet">truthnet</a></code></h4>
 <ul class="">
 <li><code><a title="truthnet.truthnet.truthnet.dissonance" href="#truthnet.truthnet.truthnet.dissonance">dissonance</a></code></li>
+<li><code><a title="truthnet.truthnet.truthnet.erase" href="#truthnet.truthnet.truthnet.erase">erase</a></code></li>
 <li><code><a title="truthnet.truthnet.truthnet.fit" href="#truthnet.truthnet.truthnet.fit">fit</a></code></li>
 <li><code><a title="truthnet.truthnet.truthnet.generateRandomResponse" href="#truthnet.truthnet.truthnet.generateRandomResponse">generateRandomResponse</a></code></li>
 <li><code><a title="truthnet.truthnet.truthnet.getSuspects" href="#truthnet.truthnet.truthnet.getSuspects">getSuspects</a></code></li>

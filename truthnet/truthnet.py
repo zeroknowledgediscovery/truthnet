@@ -81,6 +81,15 @@ class truthnet:
             outfile=outfile,processes=self.cognet_obj.MAX_PROCESSES)
         self.dissonance = pd.DataFrame(return_dict.copy())
         return
+
+    def erase(row):
+        def get_(i):
+            if np.random.rand() \
+            > self.missing/len(self.urandom_dissonance_df.columns):
+                return np.nan
+            return i
+    
+        return [get_(i) for i in row]
     
     def generateRandomResponse(self,
                                n=1,
@@ -113,7 +122,15 @@ class truthnet:
             results.append(
                 self.cognet_obj.dissonance(0,
                                            sample=usamples.iloc[s]))
+
+        df=pd.DataFrame(results)
+        
         self.urandom_dissonance_df = pd.DataFrame(results)
+        self.urandom_dissonance_df \
+                  = self.urandom_dissonance_df.apply(self.erase,
+                                                     axis=1,
+                                                     result_type='broadcast')
+        
 
         self.__cithreshold(alpha=alpha,n_sided=n_sided)
         return
