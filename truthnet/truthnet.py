@@ -82,7 +82,7 @@ class truthnet:
         self.dissonance = pd.DataFrame(return_dict.copy())
         return
 
-    def erase(row):
+    def __erase(self,row):
         def get_(i):
             if np.random.rand() \
             > self.missing/len(self.urandom_dissonance_df.columns):
@@ -123,11 +123,11 @@ class truthnet:
                 self.cognet_obj.dissonance(0,
                                            sample=usamples.iloc[s]))
 
-        df=pd.DataFrame(results)
+        #df=pd.DataFrame(results)
         
         self.urandom_dissonance_df = pd.DataFrame(results)
         self.urandom_dissonance_df \
-                  = self.urandom_dissonance_df.apply(self.erase,
+                  = self.urandom_dissonance_df.apply(__self.erase,
                                                      axis=1,
                                                      result_type='broadcast')
         
