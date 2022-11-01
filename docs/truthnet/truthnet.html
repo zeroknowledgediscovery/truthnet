@@ -1,0 +1,592 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.9.2" />
+<title>truthnet.truthnet API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#666666;background-color:black;//mix-blend-mode:difference;color:#bbbbbb;z-index:3}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#66bb66;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#66FF66}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:transparent;padding:1px 4px;color:#FFA500;overflow-wrap:break-word}h1 code{background:transparent}pre{overflow-wrap:break-word;background:#111111;word-wrap:break-word;border:0;border-top:1px solid #666;border-bottom:1px solid #666;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#333333;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#aaeeaa;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;color:#bbbbbb;background-color:black;overflow-wrap:break-word}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS_CHTML" integrity="sha256-kZafAc6mZvK3W3v1pHOcUix30OHQN6pU/NO2oFkqZVw=" crossorigin></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>truthnet.truthnet</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import numpy as np
+import pandas as pd
+import pqdm
+from cognet.cognet import cognet
+from cognet.cognet import mp_compute, qsampled_distance, distfunc_line, distfunc_multiples
+from matplotlib import pyplot as plt
+from scipy import stats
+from cognet.dataFormatter import dataFormatter
+from cognet.cognet import cognet as cg
+from quasinet.qnet import qdistance, save_qnet
+from cognet.model import model 
+
+
+class truthnet:
+    &#34;&#34;&#34;
+    &#34;&#34;&#34;
+    def __init__(self,qsteps=200,processes=11,datapath=None):
+        
+        self.cognet_obj = cg()
+        self.model_obj = model()
+        self.data_obj=None
+        self.features=None
+        self.samples=None
+        self.modelpath=None
+        self.cognet_obj.MAX_PROCESSES=processes
+        self.cithreshold={}
+        self.datapath=None
+        self.suspects=pd.DataFrame()
+        
+        self.QSTEPS=qsteps
+        
+        return 
+    
+    def load_data(self,datapath=None):
+        if datapath is not None:
+            self.datapath=datapath
+        self.data_obj=dataFormatter(samples=self.datapath)
+        self.features,self.samples = self.data_obj.Qnet_formatter()
+        return self.features,self.samples
+    
+    def fit(self,fit=True,
+            save=True,
+            processes=None,
+            modelpath=None):
+        if modelpath is not None:
+            self.modelpath=modelpath
+
+        if processes is None:
+            processes=self.cognet_obj.MAX_PROCESSES
+        
+        if fit:
+            self.model_obj.fit(data_obj=data_obj,
+                               njobs=processes)
+            save_qnet(self.model_obj.myQnet,
+                      self.modelpath,
+                      low_mem=False)
+        else:
+            self.model_obj.load(self.modelpath)
+        
+        self.cognet_obj.load_from_model(self.model_obj,
+                                        self.data_obj,
+                                        &#39;all&#39;)
+        return
+        
+    def dissonance(self,processes=11,outfile=None):
+        self.cognet_obj.set_nsamples(len(self.samples),
+                                     random=False,
+                                     verbose=False)
+        self.cognet_obj.MAX_PROCESSES = processes
+        return_dict = self.cognet_obj.dissonance_matrix(
+            outfile=outfile,processes=self.cognet_obj.MAX_PROCESSES)
+        self.dissonance = pd.DataFrame(return_dict.copy())
+        return
+    
+    def generateRandomResponse(self,
+                               n=1,
+                               processes=None,
+                               samples=None,
+                               mode=&#39;prob&#39;,
+                               alpha=0.05,
+                               n_sided=1,
+                               steps=200):
+        &#34;&#34;&#34;random sample from the underlying distributions by column.
+        
+        Args:
+            type (str): Mode, can be &#34;null&#34;, &#34;uniform&#34;, or &#34;prob&#34; (Default)
+            df (pandas.DataFrame): Data. If None, qnet samples are used.
+            n (int): number of random samples to take. Defaults to 1.
+            steps (int): number of steps to qsample. Defaults to 1000
+            
+        Returns:
+            
+        &#34;&#34;&#34;
+        if processes is None:
+                processes = self.cognet_obj.MAX_PROCESSES
+        usamples = self.cognet_obj.random_sample(df=samples,
+                                            type=mode,
+                                            n=n,
+                                            steps=steps,
+                                            n_jobs=processes)
+        results = []
+        for s in range(len(usamples)):
+            results.append(
+                self.cognet_obj.dissonance(0,
+                                           sample=usamples.iloc[s]))
+        self.urandom_dissonance_df = pd.DataFrame(results)
+
+        self.__cithreshold(alpha=alpha,n_sided=n_sided)
+        return
+    
+    def __cithreshold(self,
+                      alpha,
+                      n_sided = 1 ):
+        qnet_mean = self.urandom_dissonance_df.mean(axis=1).mean()
+        qnet_std = self.urandom_dissonance_df.mean(axis=1).std(ddof=1)
+        z_crit = stats.norm.ppf(1-alpha/n_sided)
+        self.cithreshold[alpha]=(-z_crit*qnet_std)+qnet_mean
+        return
+
+    def getSuspects(self,
+                    samples=None,
+                    alpha=0.05,
+                    datapath=None,
+                    processes=None,
+                    append=True,
+                    steps=None,
+                    mode=&#39;uniform&#39;):
+
+        if samples is None:
+            samples=len(self.samples)
+        if processes is None:
+            processes=self.cognet_obj.MAX_PROCESSES
+
+        if mode==&#39;null&#39;:
+            if steps is None:
+                steps=self.QSTEPS                
+        
+        self.generateRandomResponse(n=samples,
+                                    processes=processes,
+                                    steps=steps,
+                                    mode=mode,alpha=alpha)
+        if datapath is None:
+            datapath=self.datapath
+        __data=pd.read_csv(datapath)
+        __data[&#34;mdissonance&#34;] = self.dissonance.mean(axis=1)
+
+        suspects=__data[__data.mdissonance&gt;=self.cithreshold[alpha]].copy()
+
+        if append:
+            if self.suspects.empty:
+                self.suspects=suspects.copy()
+                self.suspects=self.suspects.assign(mode=mode,
+                                                   alpha=alpha)
+            else:
+                self.suspects=pd.concat([self.suspects,
+                                    suspects.assign(mode=mode,alpha=alpha)])
+        else:
+            self.suspects=suspects.copy()
+            self.suspects=self.suspects.assign(mode=mode,
+                                               alpha=alpha)
+        
+        self.suspects.drop_duplicates(inplace=True)
+        return self.suspects.copy()
+
+    </code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="truthnet.truthnet.truthnet"><code class="flex name class">
+<span>class <span class="ident">truthnet</span></span>
+<span>(</span><span>qsteps=200, processes=11, datapath=None)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class truthnet:
+    &#34;&#34;&#34;
+    &#34;&#34;&#34;
+    def __init__(self,qsteps=200,processes=11,datapath=None):
+        
+        self.cognet_obj = cg()
+        self.model_obj = model()
+        self.data_obj=None
+        self.features=None
+        self.samples=None
+        self.modelpath=None
+        self.cognet_obj.MAX_PROCESSES=processes
+        self.cithreshold={}
+        self.datapath=None
+        self.suspects=pd.DataFrame()
+        
+        self.QSTEPS=qsteps
+        
+        return 
+    
+    def load_data(self,datapath=None):
+        if datapath is not None:
+            self.datapath=datapath
+        self.data_obj=dataFormatter(samples=self.datapath)
+        self.features,self.samples = self.data_obj.Qnet_formatter()
+        return self.features,self.samples
+    
+    def fit(self,fit=True,
+            save=True,
+            processes=None,
+            modelpath=None):
+        if modelpath is not None:
+            self.modelpath=modelpath
+
+        if processes is None:
+            processes=self.cognet_obj.MAX_PROCESSES
+        
+        if fit:
+            self.model_obj.fit(data_obj=data_obj,
+                               njobs=processes)
+            save_qnet(self.model_obj.myQnet,
+                      self.modelpath,
+                      low_mem=False)
+        else:
+            self.model_obj.load(self.modelpath)
+        
+        self.cognet_obj.load_from_model(self.model_obj,
+                                        self.data_obj,
+                                        &#39;all&#39;)
+        return
+        
+    def dissonance(self,processes=11,outfile=None):
+        self.cognet_obj.set_nsamples(len(self.samples),
+                                     random=False,
+                                     verbose=False)
+        self.cognet_obj.MAX_PROCESSES = processes
+        return_dict = self.cognet_obj.dissonance_matrix(
+            outfile=outfile,processes=self.cognet_obj.MAX_PROCESSES)
+        self.dissonance = pd.DataFrame(return_dict.copy())
+        return
+    
+    def generateRandomResponse(self,
+                               n=1,
+                               processes=None,
+                               samples=None,
+                               mode=&#39;prob&#39;,
+                               alpha=0.05,
+                               n_sided=1,
+                               steps=200):
+        &#34;&#34;&#34;random sample from the underlying distributions by column.
+        
+        Args:
+            type (str): Mode, can be &#34;null&#34;, &#34;uniform&#34;, or &#34;prob&#34; (Default)
+            df (pandas.DataFrame): Data. If None, qnet samples are used.
+            n (int): number of random samples to take. Defaults to 1.
+            steps (int): number of steps to qsample. Defaults to 1000
+            
+        Returns:
+            
+        &#34;&#34;&#34;
+        if processes is None:
+                processes = self.cognet_obj.MAX_PROCESSES
+        usamples = self.cognet_obj.random_sample(df=samples,
+                                            type=mode,
+                                            n=n,
+                                            steps=steps,
+                                            n_jobs=processes)
+        results = []
+        for s in range(len(usamples)):
+            results.append(
+                self.cognet_obj.dissonance(0,
+                                           sample=usamples.iloc[s]))
+        self.urandom_dissonance_df = pd.DataFrame(results)
+
+        self.__cithreshold(alpha=alpha,n_sided=n_sided)
+        return
+    
+    def __cithreshold(self,
+                      alpha,
+                      n_sided = 1 ):
+        qnet_mean = self.urandom_dissonance_df.mean(axis=1).mean()
+        qnet_std = self.urandom_dissonance_df.mean(axis=1).std(ddof=1)
+        z_crit = stats.norm.ppf(1-alpha/n_sided)
+        self.cithreshold[alpha]=(-z_crit*qnet_std)+qnet_mean
+        return
+
+    def getSuspects(self,
+                    samples=None,
+                    alpha=0.05,
+                    datapath=None,
+                    processes=None,
+                    append=True,
+                    steps=None,
+                    mode=&#39;uniform&#39;):
+
+        if samples is None:
+            samples=len(self.samples)
+        if processes is None:
+            processes=self.cognet_obj.MAX_PROCESSES
+
+        if mode==&#39;null&#39;:
+            if steps is None:
+                steps=self.QSTEPS                
+        
+        self.generateRandomResponse(n=samples,
+                                    processes=processes,
+                                    steps=steps,
+                                    mode=mode,alpha=alpha)
+        if datapath is None:
+            datapath=self.datapath
+        __data=pd.read_csv(datapath)
+        __data[&#34;mdissonance&#34;] = self.dissonance.mean(axis=1)
+
+        suspects=__data[__data.mdissonance&gt;=self.cithreshold[alpha]].copy()
+
+        if append:
+            if self.suspects.empty:
+                self.suspects=suspects.copy()
+                self.suspects=self.suspects.assign(mode=mode,
+                                                   alpha=alpha)
+            else:
+                self.suspects=pd.concat([self.suspects,
+                                    suspects.assign(mode=mode,alpha=alpha)])
+        else:
+            self.suspects=suspects.copy()
+            self.suspects=self.suspects.assign(mode=mode,
+                                               alpha=alpha)
+        
+        self.suspects.drop_duplicates(inplace=True)
+        return self.suspects.copy()</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="truthnet.truthnet.truthnet.dissonance"><code class="name flex">
+<span>def <span class="ident">dissonance</span></span>(<span>self, processes=11, outfile=None)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def dissonance(self,processes=11,outfile=None):
+    self.cognet_obj.set_nsamples(len(self.samples),
+                                 random=False,
+                                 verbose=False)
+    self.cognet_obj.MAX_PROCESSES = processes
+    return_dict = self.cognet_obj.dissonance_matrix(
+        outfile=outfile,processes=self.cognet_obj.MAX_PROCESSES)
+    self.dissonance = pd.DataFrame(return_dict.copy())
+    return</code></pre>
+</details>
+</dd>
+<dt id="truthnet.truthnet.truthnet.fit"><code class="name flex">
+<span>def <span class="ident">fit</span></span>(<span>self, fit=True, save=True, processes=None, modelpath=None)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def fit(self,fit=True,
+        save=True,
+        processes=None,
+        modelpath=None):
+    if modelpath is not None:
+        self.modelpath=modelpath
+
+    if processes is None:
+        processes=self.cognet_obj.MAX_PROCESSES
+    
+    if fit:
+        self.model_obj.fit(data_obj=data_obj,
+                           njobs=processes)
+        save_qnet(self.model_obj.myQnet,
+                  self.modelpath,
+                  low_mem=False)
+    else:
+        self.model_obj.load(self.modelpath)
+    
+    self.cognet_obj.load_from_model(self.model_obj,
+                                    self.data_obj,
+                                    &#39;all&#39;)
+    return</code></pre>
+</details>
+</dd>
+<dt id="truthnet.truthnet.truthnet.generateRandomResponse"><code class="name flex">
+<span>def <span class="ident">generateRandomResponse</span></span>(<span>self, n=1, processes=None, samples=None, mode='prob', alpha=0.05, n_sided=1, steps=200)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>random sample from the underlying distributions by column.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>type</code></strong> :&ensp;<code>str</code></dt>
+<dd>Mode, can be "null", "uniform", or "prob" (Default)</dd>
+<dt><strong><code>df</code></strong> :&ensp;<code>pandas.DataFrame</code></dt>
+<dd>Data. If None, qnet samples are used.</dd>
+<dt><strong><code>n</code></strong> :&ensp;<code>int</code></dt>
+<dd>number of random samples to take. Defaults to 1.</dd>
+<dt><strong><code>steps</code></strong> :&ensp;<code>int</code></dt>
+<dd>number of steps to qsample. Defaults to 1000</dd>
+</dl>
+<p>Returns:</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def generateRandomResponse(self,
+                           n=1,
+                           processes=None,
+                           samples=None,
+                           mode=&#39;prob&#39;,
+                           alpha=0.05,
+                           n_sided=1,
+                           steps=200):
+    &#34;&#34;&#34;random sample from the underlying distributions by column.
+    
+    Args:
+        type (str): Mode, can be &#34;null&#34;, &#34;uniform&#34;, or &#34;prob&#34; (Default)
+        df (pandas.DataFrame): Data. If None, qnet samples are used.
+        n (int): number of random samples to take. Defaults to 1.
+        steps (int): number of steps to qsample. Defaults to 1000
+        
+    Returns:
+        
+    &#34;&#34;&#34;
+    if processes is None:
+            processes = self.cognet_obj.MAX_PROCESSES
+    usamples = self.cognet_obj.random_sample(df=samples,
+                                        type=mode,
+                                        n=n,
+                                        steps=steps,
+                                        n_jobs=processes)
+    results = []
+    for s in range(len(usamples)):
+        results.append(
+            self.cognet_obj.dissonance(0,
+                                       sample=usamples.iloc[s]))
+    self.urandom_dissonance_df = pd.DataFrame(results)
+
+    self.__cithreshold(alpha=alpha,n_sided=n_sided)
+    return</code></pre>
+</details>
+</dd>
+<dt id="truthnet.truthnet.truthnet.getSuspects"><code class="name flex">
+<span>def <span class="ident">getSuspects</span></span>(<span>self, samples=None, alpha=0.05, datapath=None, processes=None, append=True, steps=None, mode='uniform')</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def getSuspects(self,
+                samples=None,
+                alpha=0.05,
+                datapath=None,
+                processes=None,
+                append=True,
+                steps=None,
+                mode=&#39;uniform&#39;):
+
+    if samples is None:
+        samples=len(self.samples)
+    if processes is None:
+        processes=self.cognet_obj.MAX_PROCESSES
+
+    if mode==&#39;null&#39;:
+        if steps is None:
+            steps=self.QSTEPS                
+    
+    self.generateRandomResponse(n=samples,
+                                processes=processes,
+                                steps=steps,
+                                mode=mode,alpha=alpha)
+    if datapath is None:
+        datapath=self.datapath
+    __data=pd.read_csv(datapath)
+    __data[&#34;mdissonance&#34;] = self.dissonance.mean(axis=1)
+
+    suspects=__data[__data.mdissonance&gt;=self.cithreshold[alpha]].copy()
+
+    if append:
+        if self.suspects.empty:
+            self.suspects=suspects.copy()
+            self.suspects=self.suspects.assign(mode=mode,
+                                               alpha=alpha)
+        else:
+            self.suspects=pd.concat([self.suspects,
+                                suspects.assign(mode=mode,alpha=alpha)])
+    else:
+        self.suspects=suspects.copy()
+        self.suspects=self.suspects.assign(mode=mode,
+                                           alpha=alpha)
+    
+    self.suspects.drop_duplicates(inplace=True)
+    return self.suspects.copy()</code></pre>
+</details>
+</dd>
+<dt id="truthnet.truthnet.truthnet.load_data"><code class="name flex">
+<span>def <span class="ident">load_data</span></span>(<span>self, datapath=None)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def load_data(self,datapath=None):
+    if datapath is not None:
+        self.datapath=datapath
+    self.data_obj=dataFormatter(samples=self.datapath)
+    self.features,self.samples = self.data_obj.Qnet_formatter()
+    return self.features,self.samples</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<img src="logozed_nowhite.png" alt="drawing" style="width:400px;"/>
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="truthnet" href="index.html">truthnet</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="truthnet.truthnet.truthnet" href="#truthnet.truthnet.truthnet">truthnet</a></code></h4>
+<ul class="">
+<li><code><a title="truthnet.truthnet.truthnet.dissonance" href="#truthnet.truthnet.truthnet.dissonance">dissonance</a></code></li>
+<li><code><a title="truthnet.truthnet.truthnet.fit" href="#truthnet.truthnet.truthnet.fit">fit</a></code></li>
+<li><code><a title="truthnet.truthnet.truthnet.generateRandomResponse" href="#truthnet.truthnet.truthnet.generateRandomResponse">generateRandomResponse</a></code></li>
+<li><code><a title="truthnet.truthnet.truthnet.getSuspects" href="#truthnet.truthnet.truthnet.getSuspects">getSuspects</a></code></li>
+<li><code><a title="truthnet.truthnet.truthnet.load_data" href="#truthnet.truthnet.truthnet.load_data">load_data</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+Author: <a href="https://zed.uchicago.edu"> Zero Knowledge Discovery, University of Chicago</a>. Email: ishanu@uchicago.edu
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.2</a>.</p>
+</footer>
+</body>
+</html>
