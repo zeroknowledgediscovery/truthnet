@@ -14,7 +14,11 @@ from cognet.model import model
 class truthnet:
     """
     """
-    def __init__(self,qsteps=200,processes=11,datapath=None):
+    def __init__(self,
+                 qsteps=200,
+                 missing_id='',
+                 processes=11,
+                 datapath=None):
         
         self.cognet_obj = cg()
         self.model_obj = model()
@@ -26,14 +30,20 @@ class truthnet:
         self.cithreshold={}
         self.datapath=None
         self.suspects=pd.DataFrame()
-        
+        self.missing=0
+        self.missing_id=missing_id
         self.QSTEPS=qsteps
         
         return 
     
     def load_data(self,datapath=None):
+        
         if datapath is not None:
             self.datapath=datapath
+
+        alldata=pd.read_csv(self.datapath)
+        self.missing = (alldata!=self.missing_id).sum(axis=1).median()
+        
         self.data_obj=dataFormatter(samples=self.datapath)
         self.features,self.samples = self.data_obj.Qnet_formatter()
         return self.features,self.samples
