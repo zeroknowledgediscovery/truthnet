@@ -127,7 +127,7 @@ class truthnet:
         
         self.urandom_dissonance_df = pd.DataFrame(results)
         self.urandom_dissonance_df \
-                  = self.urandom_dissonance_df.apply(__self.erase,
+                  = self.urandom_dissonance_df.apply(self.__erase,
                                                      axis=1,
                                                      result_type='broadcast')
         
