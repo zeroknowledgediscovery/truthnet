@@ -1,0 +1,199 @@
+%
+%#############################################
+\ifFIGS
+\begin{table}[t]\centering
+
+  \mnp{\textwidth}{
+\captionN{Out-performance of \enet recommendations over WHO 
+for Influenza A vaccine composition}\label{tabperf}\centering
+\vspace{-7pt}
+
+\sffamily\fontsize{7}{8}\selectfont
+
+\input{Figures/tabdata/improvement_qnet}
+% \end{table*}
+% \else
+% \refstepcounter{table}\label{tabperf}
+% \fi
+% %#############################################
+% %#############################################
+
+
+% %#############################################
+% %#############################################
+% \begin{table}[!hb]\centering
+}
+\vskip .5em
+
+  \mnp{\textwidth}{
+\captionN{H1N1 HA Northern Hemisphere}\label{tabrec0}
+\vspace{-10pt}
+
+\sffamily\fontsize{7}{8}\selectfont
+
+\input{Figures/tabdata/north_h1n1_ha.tex}
+\flushleft
+
+\fontsize{7}{7}\selectfont
+$^\star$ Dominant strain is calculated as the one closest to the centroid in the strain space that year in the edit distance metric
+
+% \end{table}
+
+% %#############################################
+% %#############################################
+
+% \begin{table}[!hb]\centering
+}
+\vskip .5em
+\mnp{\textwidth}{
+  
+\captionN{H1N1 HA Southern Hemisphere}\label{tabrec1}
+\vspace{-10pt}
+
+\sffamily\fontsize{7}{8}\selectfont
+
+\input{Figures/tabdata/south_h1n1_ha.tex}
+\flushleft
+
+\fontsize{8}{8}\selectfont
+$^\star$ Dominant strain is calculated as the one closest to the centroid in the strain space that year in the edit distance metric
+}
+\end{table}
+ \else
+ \refstepcounter{table}\label{tabperf}
+ \fi
+% %#############################################
+% %#############################################
+\begin{table}[!ht]\centering
+\captionN{H3N2 HA Northern Hemisphere}\label{tabrec2}
+
+\sffamily\fontsize{7}{8}\selectfont
+
+\input{Figures/tabdata/north_h3n2_ha.tex}
+\flushleft
+
+\fontsize{7}{7}\selectfont
+$^\star$ Dominant strain is calculated as the one closest to the centroid in the strain space that year in the edit distance metric
+\end{table}
+%#############################################
+%#############################################
+
+\begin{table}[!ht]\centering
+\captionN{H3N2 HA Southern Hemisphere}\label{tabrec3}
+
+\sffamily\fontsize{7}{8}\selectfont
+
+\input{Figures/tabdata/south_h3n2_ha.tex}
+\flushleft
+
+\fontsize{7}{7}\selectfont
+$^\star$ Dominant strain is calculated as the one closest to the centroid in the strain space that year in the edit distance metric
+\end{table}
+%#############################################
+%#############################################
+
+\clearpage
+
+%#############################################
+%#############################################
+\ifFIGS
+\begin{figure*}[!ht]
+  \centering
+  \tikzexternalenable
+    \tikzsetnextfilename{sequence}
+\vspace{-5pt}
+ %\tikzXtrue
+  \iftikzX
+  \input{Figures/sequence_}  
+  \vspace{0pt}   
+  
+  \else
+  \includegraphics[width=0.87\textwidth]{Figures/External/sequence.pdf}  \vspace{-5pt}   
+
+  \fi
+  
+\vspace{0pt}
+
+\captionN{\textbf{Sequence comparisons.} Comparing the \enet  (ENT) and the WHO recommendation (WHO), and the observed dominant strain (DOM), we note that the correct \enet  predictions tend to be within the RBD, both for H1N1 and H3N2 for HA (panel a shows one example). Additionally, by comparing the type, side chain area, and the accessible side chain area, we note that DOM and ENT are often close in important chemical properties, while WHO deviations are  not (panel b-f). Panels g-i show the localization of the deviations in the molecular structure of HA, where we note that the changes are most frequent in the HA1 sub-unit (the globular head), and around residues and structures that have been commonly implicated in receptor binding interactions $e.g$ the $\approx 200$ loop, the $\approx 220$ loop and the $\approx 180$-helix~\cite{tzarum2015structure,lazniewski2018structural,garcia2015dynamic}.}\label{figseq}
+\end{figure*}
+\else
+\refstepcounter{figure}\label{figseq}
+\fi
+%#############################################
+%#############################################
+%#############################################
+\ifFIGS
+
+\begin{table}[!ht]\centering
+\captionN{Influenza A Strains Evaluated by IRAT and Corresponding \enet Computed Risk Scores}\label{irattab}
+
+\sffamily\fontsize{7}{8}\selectfont
+
+\input{Figures/tabdata/irat_predictions}
+\flushleft
+
+ \fontsize{8}{8}\selectfont
+ $^{\star\star}$  \enet constructed using all human strains that match the HA sub-type, $e.g.$, H5Nx for H5N6.\\
+ $^{\star\star\star}$ distance estaimated averaging over those obtained by considering all \enet{s} from other subtypes.
+\end{table}
+\else
+\refstepcounter{table}\label{irattab}
+\fi
+% #############################################
+
+%#############################################
+
+
+
+\ifFIGS
+
+\begin{table}[!ht]\centering
+\captionN{Count of identified strains above estimated emergence risk threshold}\label{riskytab}
+
+\sffamily\fontsize{7}{8}\selectfont
+
+\input{Figures/tabdata/riskycount}
+\end{table}
+\else
+\refstepcounter{table}\label{riskytab}
+\fi
+% #############################################
+%#############################################
+\ifFIGS
+
+\begin{table}[!ht]\centering
+\captionN{Influenza A Strains Evaluated by IRAT and Corresponding \enet Computed Risk Scores}\label{highrisktab}
+
+\bf\sffamily\fontsize{7}{7}\selectfont
+
+\input{Figures/tabdata/highrisk35}
+\end{table}
+\else
+\refstepcounter{table}\label{highrisktab}
+\fi
+% #############################################
+
+\ifFIGS
+
+\begin{figure}[!ht]
+  \tikzexternalenable
+  \tikzsetnextfilename{riskyseq}
+  \centering
+ %\tikzXtrue
+ 
+  
+  \iftikzX  
+  \input{Figures/sequence_risky}
+ \else
+  \includegraphics[width=.95\textwidth]{Figures/External/riskyseq}
+  \fi 
+  \vspace{-18pt}
+  
+\captionN{HA sequence comparison  with dominant human strains (DOM\_HUMAN H1N1, H3N2)  with \enet estimated top 5 risky strains (2020-2022 April) along with the teh most risky H9N2 strain (A/mink/China/chick embryo/2020), showing substantial differences from the circulating strains both in and out of the RBD. }\label{figriskyseq}
+\end{figure}
+\else
+\refstepcounter{figure}\label{figriskyseq}
+\fi
+
+% #############################################
+
