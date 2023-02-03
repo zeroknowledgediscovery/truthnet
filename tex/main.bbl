@@ -5,6 +5,11 @@
 \providecommand{\bibinfo}[2]{#2}
 \providecommand{\eprint}[2][]{\url{#2}}
 
+\bibitem{rogers2008clinical}
+\bibinfo{author}{Rogers, R.~E.}
+\newblock \emph{\bibinfo{title}{Clinical assessment of malingering and
+  deception}} (\bibinfo{publisher}{Guilford Press}, \bibinfo{year}{2008}).
+
 \bibitem{Ganslen1990}
 \bibinfo{author}{Ganslen, R.}
 \newblock \bibinfo{title}{The polygraph and lie detection}.
@@ -38,13 +43,6 @@
 \newblock \emph{\bibinfo{journal}{IEEE Transactions on Human-Machine Systems}}
   \textbf{\bibinfo{volume}{50}}, \bibinfo{pages}{266--273}
   (\bibinfo{year}{2020}).
-
-\bibitem{Rogers1997}
-\bibinfo{author}{Rogers, R.}
-\newblock \bibinfo{title}{An overview of malingering and its assessment}.
-\newblock \emph{\bibinfo{journal}{Psychiatric Clinics of North America}}
-  \textbf{\bibinfo{volume}{20}}, \bibinfo{pages}{15--27}
-  (\bibinfo{year}{1997}).
 
 \bibitem{Lee2019}
 \bibinfo{author}{Lee, J.~H.}, \bibinfo{author}{Kim, Y.} \&
@@ -85,5 +83,18 @@
 \newblock \emph{\bibinfo{journal}{Psychology, Crime \& Law}}
   \textbf{\bibinfo{volume}{23}}, \bibinfo{pages}{875--895}
   (\bibinfo{year}{2017}).
+
+\bibitem{Eckman1969}
+\bibinfo{author}{Eckman, P.} \& \bibinfo{author}{Friesen, W.~V.}
+\newblock \bibinfo{title}{Nonverbal leakage and clues to deception}.
+\newblock \emph{\bibinfo{journal}{Psychiatry}} \textbf{\bibinfo{volume}{32}},
+  \bibinfo{pages}{88--106} (\bibinfo{year}{1969}).
+
+\bibitem{Lykken1959}
+\bibinfo{author}{Lykken, D.~T.}
+\newblock \bibinfo{title}{The gsr in the detection of guilt}.
+\newblock \emph{\bibinfo{journal}{Scientific American}}
+  \textbf{\bibinfo{volume}{200}}, \bibinfo{pages}{50--60}
+  (\bibinfo{year}{1959}).
 
 \end{thebibliography}

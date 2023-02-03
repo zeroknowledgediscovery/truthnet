@@ -1,48 +1,48 @@
-This is BibTeX, Version 0.99d (TeX Live 2021)
-Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+This is BibTeX, Version 0.99d (TeX Live 2018)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: main.aux
 The style file: naturemag.bst
 Database file #1: tnet.bib
 Warning--I didn't find a database entry for "Granziero2019"
-You've used 10 entries,
+You've used 12 entries,
             2348 wiz_defined-function locations,
-            1059 strings with 10320 characters,
-and the built_in function-call counts, 4171 in all, are:
-= -- 283
-> -- 112
+            1072 strings with 10508 characters,
+and the built_in function-call counts, 4792 in all, are:
+= -- 323
+> -- 124
 < -- 0
-+ -- 56
-- -- 28
-* -- 536
-:= -- 465
-add.period$ -- 30
-call.type$ -- 10
-change.case$ -- 10
++ -- 62
+- -- 31
+* -- 608
+:= -- 532
+add.period$ -- 35
+call.type$ -- 12
+change.case$ -- 11
 chr.to.int$ -- 0
-cite$ -- 10
-duplicate$ -- 364
-empty$ -- 379
-format.name$ -- 36
-if$ -- 833
+cite$ -- 12
+duplicate$ -- 421
+empty$ -- 449
+format.name$ -- 40
+if$ -- 965
 int.to.chr$ -- 0
-int.to.str$ -- 10
-missing$ -- 88
-newline$ -- 58
-num.names$ -- 10
-pop$ -- 56
+int.to.str$ -- 12
+missing$ -- 102
+newline$ -- 67
+num.names$ -- 12
+pop$ -- 71
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 57
+skip$ -- 69
 stack$ -- 0
-substring$ -- 210
-swap$ -- 380
+substring$ -- 228
+swap$ -- 432
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 0
-while$ -- 20
-width$ -- 12
-write$ -- 117
+while$ -- 23
+width$ -- 14
+write$ -- 136
 (There was 1 warning)
