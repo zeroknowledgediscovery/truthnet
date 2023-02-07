@@ -9,16 +9,14 @@ from cognet.dataFormatter import dataFormatter
 from cognet.cognet import cognet as cg
 from quasinet.qnet import qdistance, save_qnet
 from cognet.model import model 
+import os
+import contextlib
 
 
 class truthnet:
     """
     """
-    def __init__(self,
-                 qsteps=200,
-                 missing_id='',
-                 processes=11,
-                 datapath=None):
+    def __init__(self,qsteps=200,processes=11,datapath=None):
         
         self.cognet_obj = cg()
         self.model_obj = model()
@@ -30,26 +28,18 @@ class truthnet:
         self.cithreshold={}
         self.datapath=None
         self.suspects=pd.DataFrame()
-        self.missing=0
-        self.missing_id=missing_id
+        self.dissonance=None
         self.QSTEPS=qsteps
-        self.core = None
-        self.suspects = None
-        self.dissonance = None
-        
+        self.suspects=None
+        self.coresamples=None
+        self.null_dissonance_df = None
+        self.null_dissonance_steps = None
+
         return 
     
     def load_data(self,datapath=None):
-        
         if datapath is not None:
             self.datapath=datapath
-
-        alldata=pd.read_csv(self.datapath)
-        self.missing = (alldata!=self.missing_id).sum(axis=1).median()
-
-        if self.QSTEPS is None:
-            self.QSTEPS = self.missing
-        
         self.data_obj=dataFormatter(samples=self.datapath)
         self.features,self.samples = self.data_obj.Qnet_formatter()
         return self.features,self.samples
@@ -65,7 +55,7 @@ class truthnet:
             processes=self.cognet_obj.MAX_PROCESSES
         
         if fit:
-            self.model_obj.fit(data_obj=self.data_obj,
+            self.model_obj.fit(data_obj=data_obj,
                                njobs=processes)
             save_qnet(self.model_obj.myQnet,
                       self.modelpath,
@@ -79,23 +69,15 @@ class truthnet:
         return
         
     def getDissonance(self,processes=11,outfile=None):
-        self.cognet_obj.set_nsamples(len(self.samples),
-                                     random=False,
-                                     verbose=False)
-        self.cognet_obj.MAX_PROCESSES = processes
-        return_dict = self.cognet_obj.dissonance_matrix(
-            outfile=outfile,processes=self.cognet_obj.MAX_PROCESSES)
+        with open(os.devnull, "w") as f, contextlib.redirect_stdout(f):
+            self.cognet_obj.set_nsamples(len(self.samples),
+                                         random=False,
+                                         verbose=False)
+            self.cognet_obj.MAX_PROCESSES = processes
+            return_dict = self.cognet_obj.dissonance_matrix(
+                outfile=outfile,processes=self.cognet_obj.MAX_PROCESSES)
         self.dissonance = pd.DataFrame(return_dict.copy())
         return
-
-    def __erase(self,row):
-        def get_(i):
-            if np.random.rand() \
-            > self.missing/len(self.urandom_dissonance_df.columns):
-                return np.nan
-            return i
-    
-        return [get_(i) for i in row]
     
     def generateRandomResponse(self,
                                n=1,
@@ -104,6 +86,7 @@ class truthnet:
                                mode='prob',
                                alpha=0.05,
                                n_sided=1,
+                               getsuspects=True,
                                steps=200):
         """random sample from the underlying distributions by column.
         
@@ -128,125 +111,126 @@ class truthnet:
             results.append(
                 self.cognet_obj.dissonance(0,
                                            sample=usamples.iloc[s]))
+        if getsuspects:
+            self.urandom_dissonance_df = pd.DataFrame(results)
+        else:
+            self.null_dissonance_df = pd.DataFrame(results)
+            self.null_dissonance_steps = steps
 
-        #df=pd.DataFrame(results)
-        
-        self.urandom_dissonance_df = pd.DataFrame(results)
-        self.urandom_dissonance_df \
-                  = self.urandom_dissonance_df.apply(self.__erase,
-                                                     axis=1,
-                                                     result_type='broadcast')
-        
-
-        self.__cithreshold(alpha=alpha,n_sided=n_sided)
+        if getsuspects:
+            self.__cithreshold(alpha=alpha,n_sided=n_sided,mode='suspect')
+        else:
+            self.__cithreshold(alpha=alpha,n_sided=n_sided,mode='core')
+            
         return
     
     def __cithreshold(self,
                       alpha,
-                      df=None,
-                      n_sided = 1 ):
-        if df is None:
-            df = self.urandom_dissonance_df 
+                      n_sided = 1,
+                      mode = 'suspect'):
+        if mode == 'suspect':
+            qnet_mean = self.urandom_dissonance_df.mean(axis=1).mean()
+            qnet_std = self.urandom_dissonance_df.mean(axis=1).std(ddof=1)
+        if mode == 'core':
+            qnet_mean = self.null_dissonance_df.mean(axis=1).mean()
+            qnet_std = self.null_dissonance_df.mean(axis=1).std(ddof=1)
             
-        qnet_mean = df.mean(axis=1).mean()
-        qnet_std = df.mean(axis=1).std(ddof=1)
-        z_crit = stats.norm.ppf(1-alpha/n_sided)
-        self.cithreshold[alpha]=(-z_crit*qnet_std)+qnet_mean
-        return
+        z_critL = stats.norm.ppf(1-alpha/n_sided)
+        z_critR = stats.norm.ppf(1-(1-alpha)/n_sided)
+        self.cithreshold[(mode,alpha)]=((-z_critL*qnet_std)+qnet_mean,
+                                        (-z_critR*qnet_std)+qnet_mean)
+        return 
+
 
     def getSuspects(self,
                     samples=None,
                     alpha=0.05,
-                    datapath=None,
-                    processes=None,
-                    append=True,
-                    steps=None,
-                    mode='uniform'):
-
+                    processes=None):
+        """get suspects at the specified significance level based on trained Qnet.
+        
+        Args:
+            samples (int): No. of random samples drawn (no. of samples in dataframe used to construct QNet)
+            alpha (float): significance level (default=0.05).
+            processes (int): max number of parallel processes used (default=10).
+            
+        Returns:
+            suspects (pandas.DataFrame)
+        """
+        
+        self.suspects=None
         if samples is None:
             samples=len(self.samples)
         if processes is None:
             processes=self.cognet_obj.MAX_PROCESSES
 
-        if mode=='null':
-            if steps is None:
-                steps=self.QSTEPS                
+        self.generateRandomResponse(n=samples,
+                                    processes=processes,
+                                    steps=None,
+                                    mode='uniform',
+                                    alpha=alpha)
+
+        mean_dissonance=pd.DataFrame(
+            data=self.dissonance.mean(axis=1), columns=["mean_dissonance"])
+
+        self.suspects=mean_dissonance[mean_dissonance.mean_dissonance
+                                      >=self.cithreshold[('suspect',alpha)][0]].copy()
+
+        self.suspects.drop_duplicates(inplace=True)
+        return self.suspects.copy()
+
+    
+    def getCoresamples(self,
+                       samples=None,
+                       alpha=0.05,
+                       steps=None,
+                       processes=None):
+        """get samples out-of-model-core at the specified significance level based on trained Qnet.
         
+        Args:
+            samples (int): No. of random samples drawn (no. of samples in dataframe used to construct QNet)
+            alpha (float): significance level (default=0.05).
+            processes (int): max number of parallel processes used (default=10).
+            
+        Returns:
+            suspects (pandas.DataFrame)
+        """
+        #alpha=1-alpha
+        self.suspects=None
+        if samples is None:
+            samples=len(self.samples)
+        if processes is None:
+            processes=self.cognet_obj.MAX_PROCESSES
+        if steps is None:
+            steps=self.QSTEPS                
+           
+
         self.generateRandomResponse(n=samples,
                                     processes=processes,
                                     steps=steps,
-                                    mode=mode,alpha=alpha)
-        if datapath is None:
-            datapath=self.datapath
-        __data=pd.read_csv(datapath)
-        __data["mdissonance"] = self.dissonance.mean(axis=1)
+                                    mode='null',
+                                    getsuspects=False,
+                                    alpha=alpha)
 
-        suspects=__data[__data.mdissonance>=self.cithreshold[alpha]].copy()
+        mean_dissonance=pd.DataFrame(
+            data=self.dissonance.mean(axis=1), columns=["mean_dissonance"])
 
-        if append:
-            if self.suspects.empty:
-                self.suspects=suspects.copy()
-                self.suspects=self.suspects.assign(mode=mode,
-                                                   alpha=alpha)
-            else:
-                self.suspects=pd.concat([self.suspects,
-                                    suspects.assign(mode=mode,alpha=alpha)])
-        else:
-            self.suspects=suspects.copy()
-            self.suspects=self.suspects.assign(mode=mode,
-                                               alpha=alpha)
-        
-        self.suspects.drop_duplicates(inplace=True)
-        return self.suspects.copy()
+        self.coresamples=mean_dissonance[mean_dissonance.mean_dissonance
+                                         <=self.cithreshold[('core',alpha)][1]].copy()
+
+        self.coresamples.drop_duplicates(inplace=True)
+        return self.coresamples.copy()
 
     
 
 
 
-    def getCore(self,
-                    samples=None,
-                    alpha=0.05,
-                    datapath=None,
-                    processes=None,
-                    append=True,
-                    steps=None,
-                    mode='null'):
 
-        if samples is None:
-            samples=len(self.samples)
-        if processes is None:
-            processes=self.cognet_obj.MAX_PROCESSES
 
-        if mode=='null':
-            if steps is None:
-                steps=self.QSTEPS                
-        
-        self.generateRandomResponse(n=samples,
-                                    processes=processes,
-                                    steps=steps,
-                                    mode=mode,alpha=alpha)
-        if datapath is None:
-            datapath=self.datapath
-        __data=pd.read_csv(datapath)
-        __data["mdissonance"] = self.dissonance.mean(axis=1)
 
-        self.__cithreshold(alpha=1-alpha,n_sided=1)
-        core=__data[__data.mdissonance>=self.cithreshold[1-alpha]].copy()
 
-        if append:
-            if self.core.empty:
-                self.core=core.copy()
-                self.core=self.core.assign(mode=mode,
-                                           alpha=alpha)
-            else:
-                self.core=pd.concat([self.core,
-                                    core.assign(mode=mode,alpha=alpha)])
-        else:
-            self.core=core.copy()
-            self.core=self.core.assign(mode=mode,
-                                               alpha=alpha)
-        
-        self.core.drop_duplicates(inplace=True)
-        return self.core.copy()
+
+
+
+
 
     

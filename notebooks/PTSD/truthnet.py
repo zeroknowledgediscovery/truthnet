@@ -31,8 +31,10 @@ class truthnet:
         self.dissonance=None
         self.QSTEPS=qsteps
         self.suspects=None
-        self.edgesamples=None
-        
+        self.coresamples=None
+        self.null_dissonance_df = None
+        self.null_dissonance_steps = None
+
         return 
     
     def load_data(self,datapath=None):
@@ -84,6 +86,7 @@ class truthnet:
                                mode='prob',
                                alpha=0.05,
                                n_sided=1,
+                               getsuspects=True,
                                steps=200):
         """random sample from the underlying distributions by column.
         
@@ -108,18 +111,34 @@ class truthnet:
             results.append(
                 self.cognet_obj.dissonance(0,
                                            sample=usamples.iloc[s]))
-        self.urandom_dissonance_df = pd.DataFrame(results)
+        if getsuspects:
+            self.urandom_dissonance_df = pd.DataFrame(results)
+        else:
+            self.null_dissonance_df = pd.DataFrame(results)
+            self.null_dissonance_steps = steps
 
-        self.__cithreshold(alpha=alpha,n_sided=n_sided)
+        if getsuspects:
+            self.__cithreshold(alpha=alpha,n_sided=n_sided,mode='suspect')
+        else:
+            self.__cithreshold(alpha=alpha,n_sided=n_sided,mode='core')
+            
         return
     
     def __cithreshold(self,
                       alpha,
-                      n_sided = 1 ):
-        qnet_mean = self.urandom_dissonance_df.mean(axis=1).mean()
-        qnet_std = self.urandom_dissonance_df.mean(axis=1).std(ddof=1)
-        z_crit = stats.norm.ppf(1-alpha/n_sided)
-        self.cithreshold[alpha]=(-z_crit*qnet_std)+qnet_mean
+                      n_sided = 1,
+                      mode = 'suspect'):
+        if mode == 'suspect':
+            qnet_mean = self.urandom_dissonance_df.mean(axis=1).mean()
+            qnet_std = self.urandom_dissonance_df.mean(axis=1).std(ddof=1)
+        if mode == 'core':
+            qnet_mean = self.null_dissonance_df.mean(axis=1).mean()
+            qnet_std = self.null_dissonance_df.mean(axis=1).std(ddof=1)
+            
+        z_critL = stats.norm.ppf(1-alpha/n_sided)
+        z_critR = stats.norm.ppf(1-(1-alpha)/n_sided)
+        self.cithreshold[(mode,alpha)]=((-z_critL*qnet_std)+qnet_mean,
+                                        (-z_critR*qnet_std)+qnet_mean)
         return 
 
 
@@ -154,13 +173,13 @@ class truthnet:
             data=self.dissonance.mean(axis=1), columns=["mean_dissonance"])
 
         self.suspects=mean_dissonance[mean_dissonance.mean_dissonance
-                                 >=self.cithreshold[alpha]].copy()
+                                      >=self.cithreshold[('suspect',alpha)][0]].copy()
 
         self.suspects.drop_duplicates(inplace=True)
         return self.suspects.copy()
 
     
-    def getEdgesamples(self,
+    def getCoresamples(self,
                        samples=None,
                        alpha=0.05,
                        steps=None,
@@ -175,7 +194,7 @@ class truthnet:
         Returns:
             suspects (pandas.DataFrame)
         """
-        
+        #alpha=1-alpha
         self.suspects=None
         if samples is None:
             samples=len(self.samples)
@@ -189,16 +208,17 @@ class truthnet:
                                     processes=processes,
                                     steps=steps,
                                     mode='null',
+                                    getsuspects=False,
                                     alpha=alpha)
 
         mean_dissonance=pd.DataFrame(
             data=self.dissonance.mean(axis=1), columns=["mean_dissonance"])
 
-        self.edgesamples=mean_dissonance[mean_dissonance.mean_dissonance
-                                 >=self.cithreshold[alpha]].copy()
+        self.coresamples=mean_dissonance[mean_dissonance.mean_dissonance
+                                         <=self.cithreshold[('core',alpha)][1]].copy()
 
-        self.edgesamples.drop_duplicates(inplace=True)
-        return self.edgesamples.copy()
+        self.coresamples.drop_duplicates(inplace=True)
+        return self.coresamples.copy()
 
     
 
