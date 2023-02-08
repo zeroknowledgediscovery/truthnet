@@ -1,12 +1,12 @@
 Metadata-Version: 2.1
 Name: truthnet
-Version: 0.0.15
+Version: 0.0.16
 Summary: Algorithmic Lie Detector
 Home-page: https://github.com/zeroknowledgediscovery/truthnet
 Author: zed.uchicago.edu
 Author-email: ishanu@uchicago.edu
 License: LICENSE
-Download-URL: https://github.com/zeroknowledgediscovery/truthnet/archive/ 0.0.15.tar.gz
+Download-URL: https://github.com/zeroknowledgediscovery/truthnet/archive/ 0.0.16.tar.gz
 Keywords: computational social science,decision trees,machine learning,malingering
 Platform: UNKNOWN
 Classifier: Development Status :: 4 - Beta
