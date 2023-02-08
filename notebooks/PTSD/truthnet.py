@@ -55,14 +55,25 @@ class truthnet:
             processes=self.cognet_obj.MAX_PROCESSES
         
         if fit:
-            self.model_obj.fit(data_obj=data_obj,
-                               njobs=processes)
-            save_qnet(self.model_obj.myQnet,
-                      self.modelpath,
-                      low_mem=False)
-        else:
-            self.model_obj.load(self.modelpath)
-        
+            with open(os.devnull, "w") as f, contextlib.redirect_stdout(f):
+                from cognet.dataFormatter import dataFormatter
+                from cognet.model import model 
+
+                data_ = dataFormatter(samples=self.datapath)
+                features_,samples_ = data_.Qnet_formatter()
+                model_ = model()
+                model_.fit(data_obj=data_,
+                           min_samples_split=2,
+                           alpha=0.05,
+                           max_depth=-1,
+                           max_feats=-1,
+                           early_stopping=False,
+                           verbose=0,
+                           random_state=None,
+                           njobs=processes)
+                model_.save(self.modelpath,low_mem=True)
+
+        self.model_obj.load(self.modelpath)
         self.cognet_obj.load_from_model(self.model_obj,
                                         self.data_obj,
                                         'all')
@@ -146,10 +157,10 @@ class truthnet:
                     samples=None,
                     alpha=0.05,
                     processes=None):
-        """get suspects at the specified significance level based on trained Qnet.
+        """get suspects at a specified significance level using trained Qnet.
         
         Args:
-            samples (int): No. of random samples drawn (no. of samples in dataframe used to construct QNet)
+            samples (int): No. of random samples drawn (no. of samples used to construct QNet)
             alpha (float): significance level (default=0.05).
             processes (int): max number of parallel processes used (default=10).
             
@@ -184,10 +195,10 @@ class truthnet:
                        alpha=0.05,
                        steps=None,
                        processes=None):
-        """get samples out-of-model-core at the specified significance level based on trained Qnet.
+        """get samples in model-core at a specified significance level using trained Qnet.
         
         Args:
-            samples (int): No. of random samples drawn (no. of samples in dataframe used to construct QNet)
+            samples (int): No. of random samples drawn (no. of samples used to construct QNet)
             alpha (float): significance level (default=0.05).
             processes (int): max number of parallel processes used (default=10).
             
