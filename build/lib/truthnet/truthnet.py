@@ -143,6 +143,7 @@ class truthnet:
 
 
     def getSuspects(self,
+                    mode='uniform',
                     samples=None,
                     alpha=0.05,
                     processes=None):
@@ -166,7 +167,7 @@ class truthnet:
         self.generateRandomResponse(n=samples,
                                     processes=processes,
                                     steps=None,
-                                    mode='uniform',
+                                    mode=mode,
                                     alpha=alpha)
 
         mean_dissonance=pd.DataFrame(
