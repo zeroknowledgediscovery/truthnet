@@ -133,7 +133,7 @@ class truthnet:
         else:
             self.__cithreshold(alpha=alpha,n_sided=n_sided,mode='core')
             
-        return
+        return usamples
     
     def __cithreshold(self,
                       alpha,
@@ -156,6 +156,8 @@ class truthnet:
     def getSuspects(self,
                     samples=None,
                     alpha=0.05,
+                    mode='uniform',
+                    return_samples=False,
                     processes=None):
         """get suspects at a specified significance level using trained Qnet.
         
@@ -174,11 +176,11 @@ class truthnet:
         if processes is None:
             processes=self.cognet_obj.MAX_PROCESSES
 
-        self.generateRandomResponse(n=samples,
-                                    processes=processes,
-                                    steps=None,
-                                    mode='uniform',
-                                    alpha=alpha)
+        usamples = self.generateRandomResponse(n=samples,
+                                               processes=processes,
+                                               steps=None,
+                                               mode=mode,
+                                               alpha=alpha)
 
         mean_dissonance=pd.DataFrame(
             data=self.dissonance.mean(axis=1), columns=["mean_dissonance"])
@@ -187,13 +189,17 @@ class truthnet:
                                       >=self.cithreshold[('suspect',alpha)][0]].copy()
 
         self.suspects.drop_duplicates(inplace=True)
-        return self.suspects.copy()
+        if return_samples:
+            return self.suspects.copy(), usamples
+        else:
+            return self.suspects.copy()
 
     
     def getCoresamples(self,
                        samples=None,
                        alpha=0.05,
                        steps=None,
+                       return_samples=False,
                        processes=None):
         """get samples in model-core at a specified significance level using trained Qnet.
         
@@ -215,12 +221,12 @@ class truthnet:
             steps=self.QSTEPS                
            
 
-        self.generateRandomResponse(n=samples,
-                                    processes=processes,
-                                    steps=steps,
-                                    mode='null',
-                                    getsuspects=False,
-                                    alpha=alpha)
+        usamples=self.generateRandomResponse(n=samples,
+                                             processes=processes,
+                                             steps=steps,
+                                             mode='null',
+                                             getsuspects=False,
+                                             alpha=alpha)
 
         mean_dissonance=pd.DataFrame(
             data=self.dissonance.mean(axis=1), columns=["mean_dissonance"])
@@ -229,19 +235,8 @@ class truthnet:
                                          <=self.cithreshold[('core',alpha)][1]].copy()
 
         self.coresamples.drop_duplicates(inplace=True)
-        return self.coresamples.copy()
+        if return_samples:
+            return self.coresamples.copy(), usamples
+        else:
+            return self.coresamples.copy()
 
-    
-
-
-
-
-
-
-
-
-
-
-
-
-    
