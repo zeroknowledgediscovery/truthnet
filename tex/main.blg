@@ -4,45 +4,45 @@ The top-level auxiliary file: main.aux
 The style file: naturemag.bst
 Database file #1: tnet.bib
 Warning--I didn't find a database entry for "Granziero2019"
-You've used 12 entries,
+You've used 17 entries,
             2348 wiz_defined-function locations,
-            1072 strings with 10508 characters,
-and the built_in function-call counts, 4792 in all, are:
-= -- 323
-> -- 124
+            1106 strings with 11399 characters,
+and the built_in function-call counts, 6990 in all, are:
+= -- 482
+> -- 176
 < -- 0
-+ -- 62
-- -- 31
-* -- 608
-:= -- 532
-add.period$ -- 35
-call.type$ -- 12
-change.case$ -- 11
++ -- 87
+- -- 44
+* -- 886
+:= -- 769
+add.period$ -- 50
+call.type$ -- 17
+change.case$ -- 19
 chr.to.int$ -- 0
-cite$ -- 12
-duplicate$ -- 421
-empty$ -- 449
-format.name$ -- 40
-if$ -- 965
+cite$ -- 17
+duplicate$ -- 612
+empty$ -- 655
+format.name$ -- 56
+if$ -- 1410
 int.to.chr$ -- 0
-int.to.str$ -- 12
-missing$ -- 102
-newline$ -- 67
-num.names$ -- 12
-pop$ -- 71
+int.to.str$ -- 17
+missing$ -- 147
+newline$ -- 92
+num.names$ -- 19
+pop$ -- 102
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 69
+skip$ -- 105
 stack$ -- 0
-substring$ -- 228
-swap$ -- 432
+substring$ -- 348
+swap$ -- 629
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 0
-while$ -- 23
-width$ -- 14
-write$ -- 136
+while$ -- 39
+width$ -- 19
+write$ -- 192
 (There was 1 warning)

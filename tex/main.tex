@@ -31,6 +31,22 @@
   
 \vspace{10pt} 
 
+
+\section*{Introduction}
+
+Lie detection is an essential aspect of various fields, including law enforcement, national security, and mental health. The ability to accurately determine whether an individual is telling the truth or lying is crucial for making well-informed decisions and judgments. Traditional methods for lie detection, such as polygraph examinations, have been used for decades, but they have their limitations, and their accuracy remains a topic of debate~\cite{Ganslen1990}. Consequently, researchers from various disciplines, including psychology, sociology, and law enforcement, have been searching for more reliable and effective methods for detecting deception~\cite{DePaulo2003}.
+
+One significant challenge in the field of lie detection is malingering, which is the intentional manipulation of test results for personal gain~\cite{Rogers1997}. Malingering can lead to misdiagnosis and the misallocation of resources, particularly in mental health settings~\cite{rogers2008clinical}. As a result, there is a growing interest in developing methods that are robust against malingering and capable of accurately detecting deception.
+
+Recent advances in technology have enabled the development of various computational approaches for lie detection, including machine learning algorithms and computer vision techniques~\cite{Chan2018, Wang2020, Lee2019}. These approaches have shown promising results in detecting deception based on patterns in language, facial expressions, body movements, and eye movements~\cite{Yu2018, Ducharme2017}.
+
+This paper presents \textit{truthnet}, a Python package designed to identify if an individual is responding honestly to a structured interview by measuring an average increase of dissonance. In the context of mental health diagnosis, such "algorithmic lie detectors" can advance the field by improving the detection of malingering, which is the intentional fabrication or exaggeration of symptoms for external incentives. By leveraging state-of-the-art machine learning techniques and well-established psychological principles, \textit{truthnet} aims to provide a more objective and reliable method for identifying malingering, helping mental health professionals more accurately diagnose and treat patients who genuinely need assistance.
+
+In this paper, we discuss the background and challenges in lie detection and malingering, review the state-of-the-art techniques in malingering detection, and present the \textit{truthnet} package as a novel approach to advance the field of mental health diagnosis.
+
+\clearpage
+
+
 \subsection*{Introduction}
 
 
@@ -141,6 +157,33 @@ The polyggraph measures these physiological responses during a controlled questi
 % % In this study, we use sequences for the Haemagglutinnin (HA)  and Neuraminidase (NA) for Influenza A (for subtypes H1N1 and H3N2), which are key enablers of cellular entry and exit mechanisms respectively~\cite{mcauley2019influenza}.
 % We use two public sequence databases: 1) National Center for Biotechnology Information (NCBI) virus~\cite{hatcher2017virus} and 2) GISAID~\cite{bogner2006global} databases. The former is a community portal for viral sequence data, aiming to increase the usability of data archived in various NCBI repositories. GISAID has a  more restricted user agreement, and use of GISAID data in an analysis requires acknowledgment of the contributions of both the submitting and the originating laboratories (Corresponding acknowledgment tables are included as supplementary information). We collected a total of $187,294$ sequences in our analysis, although not all were used due to some being duplicates (see \SUPPLEMENTARY Table~S-\ref{tabseq}).
 
+
+\section{Truthnet}
+
+The proposed Python package, \textit{truthnet}, is designed to identify if an individual is responding honestly to a structured interview, measured by an average increase of dissonance. In the context of mental health diagnosis, such "algorithmic lie detectors" can advance the field by improving the detection of malingering, which is the intentional fabrication or exaggeration of symptoms for external incentives.
+
+Current methods for detecting malingering have various limitations, such as relying on self-report measures or being influenced by clinician bias. The development of an algorithmic approach based on dissonance has the potential to provide a more objective and reliable method for identifying malingering. By leveraging state-of-the-art machine learning techniques and well-established psychological principles, \textit{truthnet} can help mental health professionals more accurately diagnose and treat patients who genuinely need assistance.
+
+\section{State of the Art in Malingering Detection}
+
+The detection of malingering has been an active area of research in recent years, with several studies proposing various methods to improve its identification. Some examples from the literature discussing state-of-the-art techniques in malingering detection are as follows:
+
+\begin{enumerate}
+    \item \cite{rogers2008} provides an overview of detection strategies for malingering and defensiveness in clinical settings. It discusses various methods, such as symptom validity testing, performance validity testing, and the use of psychological inventories to identify inconsistencies and other indicators of dishonesty in self-reported symptoms.
+    
+    \item \cite{merten2016} introduces the Self-Report Symptom Inventory (SRSI), a new instrument designed to assess distorted symptom endorsement, which is often seen in malingering cases. The SRSI has been shown to have good psychometric properties and can be used alongside other measures to improve the detection of malingering.
+    
+    \item \cite{sollman2011} conducted a meta-analysis of studies focusing on the detection of inadequate effort on neuropsychological testing, which is a common indicator of malingering. The analysis provides an updated and comprehensive review of various methods used for detecting malingering, including symptom validity tests, performance validity tests, and other cognitive measures.
+    
+    \item \cite{vanimpelen2014} focuses on the Structured Inventory of Malingered Symptomatology (SIMS), a widely used self-report measure for detecting malingering. The systematic review and meta-analysis provide an in-depth examination of the psychometric properties of the SIMS, its performance across different populations and settings, and its utility in detecting malingering.
+\end{enumerate}
+
+These studies represent a portion of the current state-of-the-art research in malingering detection. Various methods, ranging from symptom validity tests to novel self-report inventories, are being developed and refined to improve the identification of malingering in clinical settings. It is essential to continue this research and integrate novel approaches, such as \textit{truthnet}, to advance the field of mental health diagnosis.
+
+\section{Conclusion}
+
+The development and implementation of algorithmic lie detectors, such as \textit{truthnet}, have the potential to significantly impact the field of mental health diagnosis. By providing a more objective and reliable method for detecting malingering, mental health professionals can
+ensure that resources and treatment are provided to those who genuinely need them. Further research in this area, including the integration of machine learning techniques and psychological principles, will help to refine and enhance these detection methods for the betterment of mental health care.
 
 
 % #############################################

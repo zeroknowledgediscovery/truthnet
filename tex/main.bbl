@@ -5,26 +5,12 @@
 \providecommand{\bibinfo}[2]{#2}
 \providecommand{\eprint}[2][]{\url{#2}}
 
-\bibitem{rogers2008clinical}
-\bibinfo{author}{Rogers, R.~E.}
-\newblock \emph{\bibinfo{title}{Clinical assessment of malingering and
-  deception}} (\bibinfo{publisher}{Guilford Press}, \bibinfo{year}{2008}).
-
 \bibitem{Ganslen1990}
 \bibinfo{author}{Ganslen, R.}
 \newblock \bibinfo{title}{The polygraph and lie detection}.
 \newblock \emph{\bibinfo{journal}{The American Journal of Psychology}}
   \textbf{\bibinfo{volume}{103}}, \bibinfo{pages}{189--202}
   (\bibinfo{year}{1990}).
-
-\bibitem{Chan2018}
-\bibinfo{author}{Chan, E.~Y.}, \bibinfo{author}{Danker-Hopfe, H.} \&
-  \bibinfo{author}{Riemann, D.}
-\newblock \bibinfo{title}{A machine learning approach to polysomnographic sleep
-  study for lie detection}.
-\newblock \emph{\bibinfo{journal}{IEEE Journal of Biomedical and Health
-  Informatics}} \textbf{\bibinfo{volume}{22}}, \bibinfo{pages}{716--722}
-  (\bibinfo{year}{2018}).
 
 \bibitem{DePaulo2003}
 \bibinfo{author}{DePaulo, B.~M.}, \bibinfo{author}{Lindsay, J.~J.},
@@ -34,6 +20,27 @@
 \newblock \emph{\bibinfo{journal}{Psychological Bulletin}}
   \textbf{\bibinfo{volume}{129}}, \bibinfo{pages}{74--118}
   (\bibinfo{year}{2003}).
+
+\bibitem{Rogers1997}
+\bibinfo{author}{Rogers, R.}
+\newblock \bibinfo{title}{An overview of malingering and its assessment}.
+\newblock \emph{\bibinfo{journal}{Psychiatric Clinics of North America}}
+  \textbf{\bibinfo{volume}{20}}, \bibinfo{pages}{15--27}
+  (\bibinfo{year}{1997}).
+
+\bibitem{rogers2008clinical}
+\bibinfo{author}{Rogers, R.~E.}
+\newblock \emph{\bibinfo{title}{Clinical assessment of malingering and
+  deception}} (\bibinfo{publisher}{Guilford Press}, \bibinfo{year}{2008}).
+
+\bibitem{Chan2018}
+\bibinfo{author}{Chan, E.~Y.}, \bibinfo{author}{Danker-Hopfe, H.} \&
+  \bibinfo{author}{Riemann, D.}
+\newblock \bibinfo{title}{A machine learning approach to polysomnographic sleep
+  study for lie detection}.
+\newblock \emph{\bibinfo{journal}{IEEE Journal of Biomedical and Health
+  Informatics}} \textbf{\bibinfo{volume}{22}}, \bibinfo{pages}{716--722}
+  (\bibinfo{year}{2018}).
 
 \bibitem{Wang2020}
 \bibinfo{author}{Wang, X.}, \bibinfo{author}{Yang, Y.}, \bibinfo{author}{Zhang,
@@ -51,20 +58,6 @@
   malingering based on self-reported symptom checklists}.
 \newblock \emph{\bibinfo{journal}{PLoS ONE}} \textbf{\bibinfo{volume}{14}},
   \bibinfo{pages}{e0213776} (\bibinfo{year}{2019}).
-
-\bibitem{Wong2005}
-\bibinfo{author}{Wong, S.} \& \bibinfo{author}{O'Sullivan, M.}
-\newblock \bibinfo{title}{The structured interview of reported symptoms (sirs):
-  An overview}.
-\newblock \emph{\bibinfo{journal}{Assessment}} \textbf{\bibinfo{volume}{12}},
-  \bibinfo{pages}{289--307} (\bibinfo{year}{2005}).
-
-\bibitem{Ekman1992}
-\bibinfo{author}{Ekman, P.} \& \bibinfo{author}{O'Sullivan, M.}
-\newblock \bibinfo{title}{Who can catch a liar?}
-\newblock \emph{\bibinfo{journal}{American Psychologist}}
-  \textbf{\bibinfo{volume}{46}}, \bibinfo{pages}{913--920}
-  (\bibinfo{year}{1991}).
 
 \bibitem{Yu2018}
 \bibinfo{author}{Yu, H.}, \bibinfo{author}{Chen, Y.} \& \bibinfo{author}{Fu,
@@ -84,6 +77,20 @@
   \textbf{\bibinfo{volume}{23}}, \bibinfo{pages}{875--895}
   (\bibinfo{year}{2017}).
 
+\bibitem{Wong2005}
+\bibinfo{author}{Wong, S.} \& \bibinfo{author}{O'Sullivan, M.}
+\newblock \bibinfo{title}{The structured interview of reported symptoms (sirs):
+  An overview}.
+\newblock \emph{\bibinfo{journal}{Assessment}} \textbf{\bibinfo{volume}{12}},
+  \bibinfo{pages}{289--307} (\bibinfo{year}{2005}).
+
+\bibitem{Ekman1992}
+\bibinfo{author}{Ekman, P.} \& \bibinfo{author}{O'Sullivan, M.}
+\newblock \bibinfo{title}{Who can catch a liar?}
+\newblock \emph{\bibinfo{journal}{American Psychologist}}
+  \textbf{\bibinfo{volume}{46}}, \bibinfo{pages}{913--920}
+  (\bibinfo{year}{1991}).
+
 \bibitem{Eckman1969}
 \bibinfo{author}{Eckman, P.} \& \bibinfo{author}{Friesen, W.~V.}
 \newblock \bibinfo{title}{Nonverbal leakage and clues to deception}.
@@ -96,5 +103,41 @@
 \newblock \emph{\bibinfo{journal}{Scientific American}}
   \textbf{\bibinfo{volume}{200}}, \bibinfo{pages}{50--60}
   (\bibinfo{year}{1959}).
+
+\bibitem{rogers2008}
+\bibinfo{author}{Rogers, R.}
+\newblock \bibinfo{title}{Detection strategies for malingering and
+  defensiveness}.
+\newblock In \bibinfo{editor}{Rogers, R.} (ed.)
+  \emph{\bibinfo{booktitle}{Clinical assessment of malingering and deception}},
+  \bibinfo{pages}{14--35} (\bibinfo{publisher}{Guilford Press},
+  \bibinfo{address}{New York, NY}, \bibinfo{year}{2008}), \bibinfo{edition}{3}
+  edn.
+
+\bibitem{merten2016}
+\bibinfo{author}{Merten, T.}, \bibinfo{author}{Merckelbach, H.},
+  \bibinfo{author}{Giger, P.} \& \bibinfo{author}{Stevens, A.}
+\newblock \bibinfo{title}{The self-report symptom inventory (srsi): A new
+  instrument for the assessment of distorted symptom endorsement}.
+\newblock \emph{\bibinfo{journal}{Psychological Injury and Law}}
+  \textbf{\bibinfo{volume}{9}}, \bibinfo{pages}{102--111}
+  (\bibinfo{year}{2016}).
+
+\bibitem{sollman2011}
+\bibinfo{author}{Sollman, M.~J.} \& \bibinfo{author}{Berry, D.~T.}
+\newblock \bibinfo{title}{Detection of inadequate effort on neuropsychological
+  testing: a meta-analytic update and extension}.
+\newblock \emph{\bibinfo{journal}{Archives of Clinical Neuropsychology}}
+  \textbf{\bibinfo{volume}{26}}, \bibinfo{pages}{774--789}
+  (\bibinfo{year}{2011}).
+
+\bibitem{vanimpelen2014}
+\bibinfo{author}{van Impelen, A.}, \bibinfo{author}{Merckelbach, H.},
+  \bibinfo{author}{Jelicic, M.} \& \bibinfo{author}{Merten, T.}
+\newblock \bibinfo{title}{The structured inventory of malingered symptomatology
+  (sims): a systematic review and meta-analysis}.
+\newblock \emph{\bibinfo{journal}{The Clinical Neuropsychologist}}
+  \textbf{\bibinfo{volume}{28}}, \bibinfo{pages}{1336--1365}
+  (\bibinfo{year}{2014}).
 
 \end{thebibliography}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2022.6.1)  3 FEB 2023 11:15
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2022.6.1)  28 APR 2023 11:39
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -2102,44 +2102,46 @@ LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <10> not available
 (Font)              Font shape `OT1/phv/b/n' tried instead on input line 27.
 LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <10> not available
 (Font)              Font shape `OT1/phv/m/sl' tried instead on input line 28.
+LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <14.05249> not available
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 35.
+LaTeX Font Info:    Font shape `OT1/phv/bx/sc' in size <14.05249> not available
+
+(Font)              Font shape `OT1/phv/b/sc' tried instead on input line 35.
+ [1{/usr/share/texlive/texmf-dist/fonts/map/pdftex/updmap/pdftex.map}]
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <11> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 34.
- [1{/usr/share/texlive/texmf-dist/fonts/map/pdftex/updmap/pdftex.map}] [2]
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 50.
+ [2
+
+]
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <6.6749> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 102.
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 118.
 
 
 Package natbib Warning: Citation `Granziero2019' on page 3 undefined on input l
-ine 102.
+ine 118.
 
-(./main.bbl
-LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <14.05249> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 1.
-LaTeX Font Info:    Font shape `OT1/phv/bx/sc' in size <14.05249> not available
-
-(Font)              Font shape `OT1/phv/b/sc' tried instead on input line 1.
-) [3]
+[3] (./main.bbl [4]) [5]
 
 Package natbib Warning: There were undefined citations.
 
-[4
+[6
 
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 169.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 169.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 212.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 212.
  (./main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 169.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 169.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 212.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 212.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 169.
+(rerunfilecheck)             Checksum: 7DBCC20C734F62CA9B933DB4207111B0;164.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 212.
  ) 
 Here is how much of TeX's memory you used:
- 47239 strings out of 492678
- 1059666 string characters out of 6133536
- 1606528 words of memory out of 11000000
- 50200 multiletter control sequences out of 15000+600000
+ 47279 strings out of 492678
+ 1060254 string characters out of 6133536
+ 1605613 words of memory out of 11000000
+ 50225 multiletter control sequences out of 15000+600000
  85761 words of font info for 184 fonts, out of 8000000 for 9000
  1137 hyphenation exceptions out of 8191
  64i,12n,96p,1027b,693s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -2152,10 +2154,10 @@ ve/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist
 /urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helveti
 c/uhvro8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/zapfding/uzdr.pfb>
 
-Output written on main.pdf (4 pages, 58262 bytes).
+Output written on main.pdf (6 pages, 66665 bytes).
 PDF statistics:
- 128 PDF objects out of 1000 (max. 8388607)
- 91 compressed objects within 1 object stream
- 20 named destinations out of 1000 (max. 500000)
- 121 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 174 PDF objects out of 1000 (max. 8388607)
+ 134 compressed objects within 2 object streams
+ 35 named destinations out of 1000 (max. 500000)
+ 145 words of extra memory for PDF output out of 10000 (max. 10000000)
 
