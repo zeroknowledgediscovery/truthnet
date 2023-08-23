@@ -1,0 +1,62 @@
+graph Tree {
+node [shape=box, style="filled, rounded",color="black",penwidth="3",fontcolor="black",                 fontname=helvetica] ;
+graph [ranksep="0 equally", splines=straight,                 bgcolor=transparent, dpi=200] ;
+edge [fontname=helvetica, fontweight=bold,fontcolor=grey14,color=black] ;
+0 [label="1
+Prob: 1:1.0 2:0.0 3:0.0 4:0.0
+Frac: 0.019", fillcolor="#ffc155"] ;
+1 [label="436", fillcolor="#f5c455"] ;
+2 [label="1
+Prob: 1:1.0 2:0.0 3:0.0 4:0.0
+Frac: 0.01", fillcolor="#ffc155"] ;
+3 [label="730", fillcolor="#f4c556"] ;
+4 [label="1
+Prob: 1:0.8 2:0.0 3:0.2 4:0.0
+Frac: 0.003", fillcolor="#d4cb7f"] ;
+5 [label="4553", fillcolor="#f3c556"] ;
+6 [label="1
+Prob: 1:0.9 2:0.1 3:0.0 4:0.0
+Frac: 0.111", fillcolor="#f4c555"] ;
+7 [label="4587", fillcolor="#edc65a"] ;
+8 [label="1
+Prob: 1:0.9 2:0.1 3:0.0 4:0.0
+Frac: 0.074", fillcolor="#f3c555"] ;
+9 [label="4255", fillcolor="#e5c85f"] ;
+10 [label="1
+Prob: 1:0.7 2:0.2 3:0.1 4:0.0
+Frac: 0.088", fillcolor="#d9ca67"] ;
+11 [label="4251", fillcolor="#ccce6e"] ;
+12 [label="1
+Prob: 1:0.9 2:0.1 3:0.0 4:0.0
+Frac: 0.024", fillcolor="#f5c15a"] ;
+13 [label="4257", fillcolor="#d1ce67"] ;
+14 [label="1
+Prob: 1:0.6 2:0.2 3:0.1 4:0.0
+Frac: 0.117", fillcolor="#cad16a"] ;
+15 [label="4452", fillcolor="#bed177"] ;
+16 [label="1
+Prob: 1:0.6 2:0.3 3:0.1 4:0.1
+Frac: 0.379", fillcolor="#c4d070"] ;
+17 [label="4525", fillcolor="#b9d27b"] ;
+18 [label="1
+Prob: 1:0.3 2:0.3 3:0.3 4:0.1
+Frac: 0.174", fillcolor="#a2d593"] ;
+1 -- 0 [label=" 1\n 3\n 4",penwidth=3] ;
+1 -- 3 [label=" 2\n 5",penwidth=3] ;
+3 -- 2 [label=" 1",penwidth=3] ;
+3 -- 5 [label=" 2\n 3",penwidth=3] ;
+5 -- 4 [label=" 3",penwidth=3] ;
+5 -- 6 [label=" 1\n 2\n 4",penwidth=3] ;
+7 -- 1 [label=" 1",penwidth=3] ;
+7 -- 9 [label=" 2\n 3\n 4\n 5\n 6",penwidth=3] ;
+9 -- 8 [label=" 1",penwidth=3] ;
+9 -- 10 [label=" 2\n 3\n 4\n 5",penwidth=3] ;
+11 -- 7 [label=" 1",penwidth=3] ;
+11 -- 15 [label=" 2\n 3\n 4\n 5",penwidth=3] ;
+13 -- 12 [label=" 1\n 2",penwidth=3] ;
+13 -- 14 [label=" 3\n 5",penwidth=3] ;
+15 -- 13 [label=" 1",penwidth=3] ;
+15 -- 17 [label=" 2\n 3\n 4\n 5",penwidth=3] ;
+17 -- 16 [label=" 1",penwidth=3] ;
+17 -- 18 [label=" 2\n 3",penwidth=3] ;
+{rank = same;}}

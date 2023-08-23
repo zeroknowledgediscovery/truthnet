@@ -1,0 +1,32 @@
+graph Tree {
+node [shape=box, style="filled, rounded",color="black",penwidth="3",fontcolor="black",                 fontname=helvetica] ;
+graph [ranksep="0 equally", splines=straight,                 bgcolor=transparent, dpi=200] ;
+edge [fontname=helvetica, fontweight=bold,fontcolor=grey14,color=black] ;
+0 [label="2
+Prob: 1:0.2 2:0.8
+Frac: 0.009", fillcolor="#7fe0d4"] ;
+1 [label="114", fillcolor="#eec565"] ;
+2 [label="1
+Prob: 1:0.9 2:0.1
+Frac: 0.587", fillcolor="#f0c463"] ;
+3 [label="4527", fillcolor="#e0c873"] ;
+4 [label="1
+Prob: 1:0.8 2:0.2
+Frac: 0.214", fillcolor="#d8ca7b"] ;
+5 [label="4262", fillcolor="#cccd87"] ;
+6 [label="1
+Prob: 1:0.9 2:0.1
+Frac: 0.028", fillcolor="#f0c463"] ;
+7 [label="4452", fillcolor="#c0d093"] ;
+8 [label="1
+Prob: 1:0.6 2:0.4
+Frac: 0.161", fillcolor="#b7d29c"] ;
+1 -- 0 [label=" 3",penwidth=3] ;
+1 -- 2 [label=" 1\n 2\n 4",penwidth=3] ;
+3 -- 1 [label=" 1",penwidth=3] ;
+3 -- 5 [label=" 2\n 3\n 4",penwidth=3] ;
+5 -- 4 [label=" 1\n 2",penwidth=3] ;
+5 -- 7 [label=" 3\n 4\n 5",penwidth=3] ;
+7 -- 6 [label=" 1",penwidth=3] ;
+7 -- 8 [label=" 2\n 3\n 4\n 5",penwidth=3] ;
+{rank = same;}}

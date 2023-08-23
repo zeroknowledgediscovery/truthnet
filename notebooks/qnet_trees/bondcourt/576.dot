@@ -1,0 +1,56 @@
+graph Tree {
+node [shape=box, style="filled, rounded",color="black",penwidth="3",fontcolor="black",                 fontname=helvetica] ;
+graph [ranksep="0 equally", splines=straight,                 bgcolor=transparent, dpi=200] ;
+edge [fontname=helvetica, fontweight=bold,fontcolor=grey14,color=black] ;
+0 [label="1
+Prob: 1:1.0 2:0.0 3:0.0 4:0.0 5:0.0
+Frac: 0.032", fillcolor="#ffc155"] ;
+1 [label="265", fillcolor="#ffbb5d"] ;
+2 [label="1
+Prob: 1:1.0 2:0.0 3:0.0 4:0.0 5:0.0
+Frac: 0.016", fillcolor="#ffc155"] ;
+3 [label="4452", fillcolor="#ffb863"] ;
+4 [label="1
+Prob: 1:0.8 2:0.0 3:0.0 4:0.0 5:0.2
+Frac: 0.032", fillcolor="#ffa67f"] ;
+5 [label="4441", fillcolor="#ffb16d"] ;
+6 [label="1
+Prob: 1:1.0 2:0.0 3:0.0 4:0.0 5:0.0
+Frac: 0.024", fillcolor="#ffc155"] ;
+7 [label="4452", fillcolor="#ffb666"] ;
+8 [label="1
+Prob: 1:1.0 2:0.0 3:0.0 4:0.0 5:0.0
+Frac: 0.024", fillcolor="#ffc155"] ;
+9 [label="4255", fillcolor="#ffb960"] ;
+10 [label="1
+Prob: 1:1.0 2:0.0 3:0.0 4:0.0 5:0.0
+Frac: 0.024", fillcolor="#ffc155"] ;
+11 [label="4525", fillcolor="#f7c35b"] ;
+12 [label="1
+Prob: 1:0.6 2:0.4 3:0.0 4:0.0 5:0.0
+Frac: 0.064", fillcolor="#e4d855"] ;
+13 [label="4255", fillcolor="#f1c35d"] ;
+14 [label="1
+Prob: 1:0.7 2:0.2 3:0.0 4:0.1 5:0.0
+Frac: 0.088", fillcolor="#e3c264"] ;
+15 [label="4262", fillcolor="#c6d080"] ;
+16 [label="1
+Prob: 1:0.4 2:0.2 3:0.3 4:0.1 5:0.0
+Frac: 0.696", fillcolor="#b3d58f"] ;
+1 -- 0 [label=" 2",penwidth=3] ;
+1 -- 9 [label=" 3\n 4",penwidth=3] ;
+3 -- 2 [label=" 3",penwidth=3] ;
+3 -- 7 [label=" 1\n 2\n 4",penwidth=3] ;
+5 -- 4 [label=" 1\n 2",penwidth=3] ;
+5 -- 6 [label=" 3",penwidth=3] ;
+7 -- 5 [label=" 1\n 2",penwidth=3] ;
+7 -- 8 [label=" 4",penwidth=3] ;
+9 -- 3 [label=" 1\n 2",penwidth=3] ;
+9 -- 10 [label=" 4",penwidth=3] ;
+11 -- 1 [label=" 1",penwidth=3] ;
+11 -- 12 [label=" 2",penwidth=3] ;
+13 -- 11 [label=" 1\n 2\n 4",penwidth=3] ;
+13 -- 14 [label=" 3\n 5",penwidth=3] ;
+15 -- 13 [label=" 1",penwidth=3] ;
+15 -- 16 [label=" 2\n 3\n 4\n 5",penwidth=3] ;
+{rank = same;}}
