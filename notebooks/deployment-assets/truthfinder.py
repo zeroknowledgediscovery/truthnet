@@ -1,6 +1,6 @@
 def getrocprob(raw_scores,rocdata):
     sample_prevalence=rocdata['positive_samples']/rocdata['total_samples']
-    prevalence = rocdata.get('prevalence',sample_prevalence)
+    prevalence = 0.15#rocdata.get('prevalence',sample_prevalence)
     
     from zedstat.zedstat import score_to_probability
     prob=score_to_probability(raw_scores,df=rocdata['roc'],
