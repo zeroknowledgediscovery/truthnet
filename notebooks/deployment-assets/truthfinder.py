@@ -30,7 +30,7 @@ def _diss_linear(s, qnet, missing_response="", missing_diss_value=0):
 def truthfinder(patients_responses, model_path, classifier_path, roc_path):
     import pandas as pd
     from quasinet.qnet import load_qnet
-    import pickle
+    import dill as pickle
 
     patients_responses = [
         {
