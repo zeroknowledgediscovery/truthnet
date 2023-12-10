@@ -711,6 +711,24 @@ class truthnet:
         missing_value=0,
         avg_non_missing=None,
     ):
+        """_summary_
+
+        Args:
+            n_m2_samples (_type_, optional): Number of malingering samples to generate. Defaults to None.
+            m2_model (_type_, optional): Model to use for generating malingering samples. Defaults to None.
+            diss_models (_type_, optional): Models used to compute dissonances of samples. Defaults to None.
+            length (_type_, optional): Length of samples. Defaults to None.
+            m2_method (str, optional): Specify "unconditional" to use unconditional distributions for malingering samples (otherwise use conditional/qnet sampling). Defaults to "unconditional".
+            n_runif_samples (_type_, optional): Number of random uniform samples to generate. Defaults to None.
+            diss_fcn (_type_, optional): Dissonance function to use. Defaults to _diss_linear.
+            order (_type_, optional): Order of questions asked (not applicable currently). Defaults to None.
+            data_samples (_type_, optional): Actual data samples to compute dissonances of. Defaults to None.
+            missing_value (int, optional): Dissonance value for missing responses. Defaults to 0.
+            avg_non_missing (_type_, optional): If specified, generate samples with this percentage of non-missing responses. Defaults to None.
+
+        Returns:
+            _type_: Dictionaries of generated samples and corresponding dissonances
+        """
         samples = {}
         dissonances = {}
 
@@ -785,6 +803,16 @@ class truthnet:
         classifier_outfile=None,
         plot=False,
     ):
+        """_summary_
+
+        Args:
+            groups (list, optional): classes used for training; possible classes are "actual", "m2" (expert malingering), and "runif" (random malingering) Defaults to ["actual", "m2"].
+            n_maling_samples (int, optional): Number of malingering samples to generate and use for training. Defaults to 10.
+            diss_models (_type_, optional): Models use to compute dissonances of samples. Defaults to None.
+            roc_outfile (_type_, optional): Path to save roc curve file. Defaults to None.
+            classifier_outfile (_type_, optional): Path to save classifier. Defaults to None.
+            plot (bool, optional): Display plot of the roc curve. Defaults to False.
+        """
         import pandas as pd
         from sklearn.ensemble import RandomForestClassifier
 
