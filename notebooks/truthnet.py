@@ -83,7 +83,7 @@ class truthnet:
         self.length = len(self.features[list(self.features)[0]])
         return self.features, self.samples
 
-    def fit(self, fit=True, processes=None, modelpaths=None):
+    def fit(self, fit=True, gz=False, processes=None, modelpaths=None):
         from model import model
 
         if modelpaths is not None:
@@ -114,7 +114,7 @@ class truthnet:
                     model_.save(self.modelpaths[mod], low_mem=True)
 
         for model in modelpaths:
-            self.models[model].load(self.modelpaths[model])
+            self.models[model].load(self.modelpaths[model], gz=gz)
             # self.load_from_model(self.models[model], self.data_obj[model], "all")
         return
 
