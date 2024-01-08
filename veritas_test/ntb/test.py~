@@ -1,0 +1,24 @@
+#!/~/.pyenv/shims/python3.9
+
+import sys
+sys.path.append("../") 
+from infer_veritas import  *
+from truthfinder import *
+import gzip
+
+with gzip.open('response_jsons/validation_cat.pkl.gz', 'rb') as filepath:
+    catadata = pickle.load(filepath)
+with gzip.open('response_jsons/validation_index20.pkl.gz', 'rb') as filepath:
+    fulldata20 = pickle.load(filepath)
+with gzip.open('response_jsons/validation_ptsd_full.pkl.gz', 'rb') as filepath:
+    fulldata = pickle.load(filepath)
+
+
+Veritas_model_path='veritas_models/veritas_ptsd.pkl.gz'
+
+#import gz
+import dill as pickle
+with gzip.open(Veritas_model_path, 'rb') as file:
+    vmodel=pickle.load(file)
+
+print(vmodel)
