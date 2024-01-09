@@ -16,6 +16,7 @@ with gzip.open('../response_jsons/validation_index20.pkl.gz', 'rb') as filepath:
 
 
 Veritas_model_path='../veritas_models/veritas_ptsd.pkl.gz'
+Veritas_model_path='../veritas_models/veritas_001.pkl.gz'
 
 #import gz
 import dill as pickle
@@ -79,4 +80,4 @@ with ThreadPoolExecutor(max_workers=10) as executor:
 #    H[subjectid]=(lowert,veritas,score)
 
 hf=pd.DataFrame(H)
-hf.to_csv('res.csv')
+hf.to_csv('res1.csv')
