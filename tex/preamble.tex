@@ -1,7 +1,8 @@
 \usepackage{etex}
+\newcommand\hmmax{0}
+\newcommand\bmmax{0}
 \usepackage{amssymb,amsfonts,amsmath,amsthm}
 \usepackage{graphicx}
-\usepackage{booktabs}
 \usepackage[usenames,x11names, dvipsnames, svgnames]{xcolor}
 \usepackage{amsmath,amssymb}
 \usepackage{dsfont}
@@ -24,7 +25,12 @@
 \usepackage{verbatim}
 \usepackage{multirow}
 \usepackage{longtable}
-\usepackage{tikz-network}
+\usepackage{siunitx}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{ragged2e}
+
+\usepackage{bm}
 % \usepackage[T1,euler-digits]{eulervm}
 % \usepackage{times}
 % \usepackage{pxfonts}
@@ -35,12 +41,19 @@
 \usetikzlibrary{decorations.text}
 \usepgfplotslibrary{colorbrewer} 
 \usepgfplotslibrary{statistics}
+\usetikzlibrary{shapes,calc,shadows,fadings,arrows,decorations.pathreplacing,automata,positioning}
+\usetikzlibrary{shadows.blur}
+\usetikzlibrary{fit}
+\usepackage{comment}
+\usepackage[size=normal]{subcaption}
 
 \tikzexternalize[prefix=./Figures/External/]% activate externalization!
 \tikzexternaldisable
 % \addtolength{\voffset}{.1in}  
 \usepackage{geometry}
 \geometry{a4paper, left=.65in,right=.65in,top=.8in,bottom=0.7in}
+
+\usepackage{pdflscape}
 
 \addtolength{\textwidth}{-.1in}    
 \addtolength{\hoffset}{.05in}    
@@ -218,10 +231,6 @@ outer color=transparent!100]
 % ################################################
 % ################################################
 % ################################################
-\def\DISCLOSURE#1{\def\disclosure{#1}}
-\DISCLOSURE{\raisebox{15pt}{$\phantom{XxxX}$This sheet contains proprietary information 
-    not to be released to third parties except for the explicit purpose of evaluation.}
-}
 % ####################################
 \newcommand{\set}[1]{\left\{ #1 \right\}}
 \newcommand{\paren}[1]{\left( #1 \right)}
@@ -253,58 +262,6 @@ outer color=transparent!100]
 \newcommand{\Pp}[1][n]{\mathscr{P}^+_{#1}}
 \renewcommand{\entropy}[1]{\boldsymbol{h}\left ( #1 \right )}
 
-
-
-\makeatletter
-\pgfdeclarepatternformonly[\hatchdistance,\hatchthickness]{flexible hatch}
-{\pgfqpoint{0pt}{0pt}}
-{\pgfqpoint{\hatchdistance}{\hatchdistance}}
-{\pgfpoint{\hatchdistance-1pt}{\hatchdistance-1pt}}%
-{
-  \pgfsetcolor{\tikz@pattern@color}
-  \pgfsetlinewidth{\hatchthickness}
-  \pgfpathmoveto{\pgfqpoint{0pt}{0pt}}
-  \pgfpathlineto{\pgfqpoint{\hatchdistance}{\hatchdistance}}
-  \pgfusepath{stroke}
-}
-\makeatother
-
-\pgfdeclarepatternformonly{north east lines wide}%
-{\pgfqpoint{-1pt}{-1pt}}%
-{\pgfqpoint{10pt}{10pt}}%
-{\pgfqpoint{9pt}{9pt}}%
-{
-  \pgfsetlinewidth{0.7pt}
-  \pgfpathmoveto{\pgfqpoint{0pt}{0pt}}
-  \pgfpathlineto{\pgfqpoint{9.1pt}{9.1pt}}
-  \pgfusepath{stroke}
-}
-
-\pgfdeclarepatternformonly{north west lines wide}%
-{\pgfqpoint{-1pt}{-1pt}}%
-{\pgfqpoint{10pt}{10pt}}%
-{\pgfqpoint{9pt}{9pt}}%
-{
-  \pgfsetlinewidth{0.7pt}
-  \pgfpathmoveto{\pgfqpoint{0pt}{9pt}}
-  \pgfpathlineto{\pgfqpoint{9.1pt}{-0.1pt}}
-  \pgfusepath{stroke}
-}
-\makeatletter
-
-\pgfdeclarepatternformonly[\hatchdistance,\hatchthickness]{flexible hatchB}
-{\pgfqpoint{0pt}{\hatchdistance}}
-{\pgfqpoint{\hatchdistance}{0pt}}
-{\pgfpoint{1pt}{\hatchdistance-1pt}}%
-{
-  \pgfsetcolor{\tikz@pattern@color}
-  \pgfsetlinewidth{\hatchthickness}
-  \pgfpathmoveto{\pgfqpoint{0pt}{\hatchdistance}}
-  \pgfpathlineto{\pgfqpoint{\hatchdistance}{0pt}}
-  \pgfusepath{stroke}
-}    \makeatother
-
-
 \def\TPR{\textrm{TPR}\xspace}
 \def\TNR{\textrm{TNR}\xspace}
 \def\FPR{\textrm{FPR}\xspace}
@@ -331,13 +288,14 @@ outer color=transparent!100]
 \usetikzlibrary{arrows.meta}
 \usepackage{pgfplotstable}
 \usepackage[super,compress,sort,comma]{natbib}
-%\usepackage{natbib}
+
 \usepackage{setspace}
 \usetikzlibrary{math}
 \usetikzlibrary{matrix}
 \usepackage{xstring}
 \usepackage{xspace}
 \usepackage{flushend}
+
 \makeatletter
 \renewcommand\section{\@startsection {section}{1}{\z@}%
   {-2ex \@plus -1ex \@minus -.2ex}%
@@ -430,18 +388,13 @@ outer color=transparent!100]
     }
   }
 
-  %\newcommand{\HLT}[2][Red1]{{\color{#1}#2}}
-
- % \def\commatonone{\expandafter\zappointzerozero
-%    \romannumeral`\^^@}
-%\def\zappointzerozero#1.00{\zapcomma#1,!}
-%\def\zapcomma#1,#2{#1\ifx!#2\else#2\expandafter\zapcomma\fi}
 \def\commatononei#1,{#1}
 \def\commatononej#1,#2,{#1#2}
 \def\commatonone#1{\expandafter\commatononei#1}
 \def\commatononeT#1{\expandafter\commatononej#1}
 \newcommand{\Sum} [2] {#1 + #2 = \the\numexpr #1 + #2 \relax \\}
 
-
-\usepackage{sistyle}
-\SIthousandsep{,}
+\newcounter{Ccounter}
+\setcounter{Ccounter}{1}
+\newcommand{\comm}[1]{{\color{gray} {\bf \sffamily Comment~\#\theCcounter.~}#1}\xspace}
+\newcommand{\resp}[1]{{\color{Blue2} {\bf \sffamily Author Response~\#\theCcounter.~}#1}\stepcounter{Ccounter}\xspace}

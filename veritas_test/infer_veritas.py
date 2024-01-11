@@ -10,10 +10,11 @@ import dill as pickle  # Dill functions similarly to pickle
 import gzip
 import shap
 from scipy.stats import t, lognorm
-from truthfinder import reveal, funcm
+from truthfinder import reveal, funcm, funcw, dissonance_distr_median
 from distfit import distfit
 from sklearn import metrics
 from zedstat import zedstat
+from concurrent.futures import ProcessPoolExecutor
 
 # VeRITAS
 # objewctive here is to train the veritas model which will be used to determine if a
@@ -44,6 +45,22 @@ from zedstat import zedstat
 # UPPER THRESHOLD, estimates a threshold on the ration of loglikelihhods of a response being produced by aqnet inferred fro the positive cases vs that inferred for negative cases
 # So for non-malingering response, one needs to be above UPPER threshold, below veritas threshold, and above the LOWER threshold.
 
+
+global_NSTR = None
+global_steps = None
+global_model = None
+
+def init_globals(model, steps, NSTR):
+    global global_model, global_steps,  global_NSTR
+    global_model = model
+    global_steps = steps
+    global_NSTR = NSTR
+
+def task(seed):
+    s=qsample(global_NSTR, global_model, steps=global_steps)
+    return funcm(s,global_model),dissonance_distr_median(s,global_model)
+
+    
 class truthnet:
     """
     The truthnet class is designed to train the Veritas model which is used to determine if a
@@ -118,15 +135,15 @@ class truthnet:
         else:
             self.data = pd.read_csv(self.datapath, dtype=str, na_filter=False).fillna('').astype(str)
 
-
+        if self.VERBOSE:
+            print('data reading complete')
+            
         self.data = self.synccols(self.data)
         
         if self.VERBOSE:
             print(self.data)
         
         num_training=np.rint(self.training_fraction*self.data.index.size).astype(int)
-
-        
         training_index=np.random.choice(self.data.index.values,num_training, replace=False)
 
         self.training_index=training_index
@@ -148,6 +165,10 @@ class truthnet:
 
             featurenames = df_training_pos.drop(self.target_label,
                                                 axis=1).columns
+
+            if self.VERBOSE:
+                print("training qnets")
+            
             modelneg=Qnet(feature_names=featurenames,alpha=alpha)
             modelneg.fit(Xneg_training)
             modelpos=Qnet(feature_names=featurenames,alpha=alpha)
@@ -216,114 +237,121 @@ class truthnet:
         
         return
 
+    def save(self, filepath):
+        '''
+        save veritas model
+        '''
+        with gzip.open(filepath, 'wb') as file:
+            M=self.veritas_model
+            pickle.dump(M, file)
     
     def calibrate(self,
-                  qsteps=1000,
+                  qsteps=1000,num_workers=11,
                   calibration_num=10000):
 
         """
-        Calibrates the decision thresholds for the Veritas model using the distribution of scores from the trained model. It involves sampling, revealing, and fitting distributions to determine appropriate thresholds.
+        Calibrates the decision thresholds for the Veritas model using the distribution of scores
+        from the trained model. It involves sampling, revealing, and fitting distributions 
+        to determine appropriate thresholds.
 
         Parameters:
             - qsteps (int): Number of steps for q-sampling during calibration.
             - calibration_num (int): Number of samples to use for calibration.
         """
 
-        featurenames=self.veritas_model['model'].feature_names
-        NULLSTR=np.array(['']*len(featurenames))
-        adict=[]
-        for i in tqdm(range(calibration_num)):
-            sq=qsample(NULLSTR,self.veritas_model['model'],steps=qsteps)
-            ff=pd.DataFrame(sq.reshape(1, -1),
-                            columns=featurenames)[featurenames[self.shap_index[:self.query_limit]]]
-            adict=np.append(adict,{'xx'+str(i):ff.iloc[0].to_dict()})
-        
-        Rjson=reveal(list(adict),
-                     self.veritas_model,
-                     perturb=0,
-                     score=(self.target_label is not None),
-                     ci=False,
-                     model_path=False)
-        
-        r_=[(x.get('veritas'),
-             x.get('score'),
-             x.get('lower_threshold')) for x in Rjson[0]]
-        r=pd.DataFrame(r_,columns=['veritas','upper','lower'])
+        featurenames = self.veritas_model['model'].feature_names
+        NSTR = np.array([''] * len(featurenames)).astype('U100')
+        model = self.veritas_model['model']
 
-        dfit=distfit(distr='lognorm')
-        dfit.fit_transform(r.lower.values)
-        df,loc,scale=dfit.model['params']
-        dist = lognorm(df, loc=loc, scale=scale)
+        if self.VERBOSE:
+            print('calibrating...')
+
+        seed=0
+        init_globals(model, qsteps, NSTR)
+        with ProcessPoolExecutor(max_workers=num_workers,
+                                 initializer=init_globals,
+                                 initargs=(model, qsteps, NSTR)) as executor:
+            seeds = [seed for _ in range(calibration_num)]
+            results = list(tqdm(executor.map(task, seeds),
+                            total=calibration_num))
+
+
+        lower_ = np.array([x[0] for x in results])
+        veritas_ = np.array([x[1] for x in results])
         
+        self.veritas_model['calibration_lower']=lower_
+        self.veritas_model['calibration_veritas']=veritas_
+
+        # Fitting distributions to lower and veritas thresholds
+        dfit = distfit(distr='lognorm')
+        dfit.fit_transform(lower_)
+        df, loc, scale = dfit.model['params']
+        dist = lognorm(df, loc=loc, scale=scale)
         self.veritas_model['dist_lower'] = dist        
         self.veritas_model['LOWER_THRESHOLD'] = dist.ppf(self.threshold_alpha)
 
-        dfitv=distfit(smooth=10,distr='lognorm')
-        dfitv.fit_transform(r.veritas.values)
-        dfv,locv,scalev=dfitv.model['params']
+        dfitv = distfit(smooth=10, distr='lognorm')
+        dfitv.fit_transform(veritas_)
+        dfv, locv, scalev = dfitv.model['params']
         distv = lognorm(dfv, loc=locv, scale=scalev)
-         
         self.veritas_model['dist_veritas'] = distv        
         self.veritas_model['VERITAS_THRESHOLD'] = distv.ppf(self.threshold_alpha_veritas)
 
-        rn=None
-        # use test data to infer the decision_threshold
+        if self.VERBOSE:
+            print(self.veritas_model)
+        
+        # Using test data to infer the decision threshold for the upper threshold
         if self.target_label:
-            df_test = self.data.loc[[x for x in self.data.index.values
-                                   if x not in self.training_index],:][np.array(
-                                           list(self.veritas_model['model']\
-                                                .feature_names)+[self.target_label])]
-            featurenames=df_test.drop(self.target_label, axis=1).columns
+            df_test = self.data.loc[[x for x in self.data.index.values if x not in self.training_index], :]
+            featurenames = df_test.drop(self.target_label, axis=1, errors='ignore').columns
+            labels = df_test[self.target_label].values.astype(int)
 
-            df_test = df_test[df_test[self.target_label]!= '']
-            df_test[self.target_label] =  df_test[self.target_label].astype(int)
+            df_test = df_test.drop(self.target_label, axis=1, errors='ignore')
+            df_test = pd.concat([pd.DataFrame(columns=featurenames),
+                                  df_test[featurenames[self.shap_index[:self.query_limit]]]]).fillna('')
+            X= df_test.values.astype(str)
 
-            adictn=df_test[featurenames[self.shap_index[:self.query_limit]]].T.to_dict()
-            adictn=[{key:value} for key,value in adictn.items()]
+            pred = np.array([funcw(s,
+                         self.veritas_model['model'],
+                         self.veritas_model['model_neg']) for s in X])
 
-            keyindex=[list(x.keys())[0] for x in adictn]
-            labels = df_test.loc[keyindex,self.target_label].values
-
-            Rjsonn=reveal(adictn,
-                         self.veritas_model,
-                         perturb=0,
-                         ci=False,
-                         model_path=False)
-
-            rn_=[(x.get('veritas'),
-                 x.get('score'),
-                 x.get('lower_threshold')) for x in Rjsonn[0]]
-            rn=pd.DataFrame(rn_,columns=['veritas','upper','lower'])
-
-            self.veritas_model['calibration_df'] = rn
-
-            pred=rn.upper.values
-
+            #adictn = df_test[featurenames[self.shap_index[:self.query_limit]]].T.to_dict()
+            #adictn = [{key: value} for key, value in adictn.items()]
+            #keyindex = [list(x.keys())[0] for x in adictn]
+            #labels = df_test.loc[keyindex, self.target_label].values
+            #
+            #Rjsonn = reveal(adictn, self.veritas_model, perturb=0, ci=False, model_path=False)
+            #rn_ = [(x.get('veritas'), x.get('score'), x.get('lower_threshold')) for x in Rjsonn[0]]
+            #rn = pd.DataFrame(rn_, columns=['veritas', 'upper', 'lower'])
+            #pred = rn.upper.values
+            #
+            # Calculating metrics and determining the upper threshold
             fpr, tpr, thresholds = metrics.roc_curve(labels, pred, pos_label=1)
-            rf=pd.DataFrame(tpr,fpr,columns=['tpr']).assign(threshold=thresholds)
-            rf.index.name='fpr'
-
-            self.veritas_model['calibration_roc'] = rf
-
-
-            zt=zedstat.processRoc(df=rf.reset_index(),
-                                  order=3, 
-                                  total_samples=2*calibration_num,
-                                  positive_samples=calibration_num,
-                                  alpha=0.01,
-                                  prevalence=0.5)
+            rf = pd.DataFrame(tpr, fpr, columns=['tpr']).assign(threshold=thresholds)
+            rf.index.name = 'fpr'
+            rf=rf.reset_index()
+            zt = zedstat.processRoc(df=rf, order=3, total_samples=2*calibration_num,
+                                    positive_samples=calibration_num, alpha=0.01, prevalence=0.5)
             zt.smooth(STEP=0.001)
             zt.allmeasures(interpolate=True)
             zt.usample(precision=3)
-            Z=zt.get()
-
-            self.veritas_model['upper_scoretoprobability'] =   zt.scoretoprobability
-            self.veritas_model['UPPER_THRESHOLD'] = Z[Z.ppv>0.85].threshold.values[-1]
+            Z = zt.get()
+            
+            if self.VERBOSE:
+                rf.to_csv('tmp.csv')
+                print(X,labels,pred,rf,Z)
+                
+            self.veritas_model['upper_scoretoprobability'] = zt.scoretoprobability
+            
+            if Z.ppv.values[0] > 0.85:
+                THR=0.85
+            else:
+                THR=Z.ppv.values[2]
+                
+            self.veritas_model['UPPER_THRESHOLD'] = Z[Z.ppv > THR].threshold.values[-1]
             self.veritas_model['AUC'] = zt.auc()
-        
-        return r,rn
-
-
+        return 
+    
     def synccols(self, df_):
         df=df_.copy()
         if self.target_label:
@@ -334,26 +362,16 @@ class truthnet:
             col = [x for x in col0 if x in col1]
             return df[col]
         else:
-            return remove_identical_columns(df_)
-    
-
-def save_veritas_model(model, filepath):
-    '''
-    save veritas model
-    '''
-    with gzip.open(filepath, 'wb') as file:
-        pickle.dump(model, filepath)
-
+            return remove_identical_columns(df_)    
         
 def load_veritas_model(filepath):
     '''
     load veritas model
     '''
     with gzip.open(filepath, 'rb') as file:
-        model = pickle.load(filepath)
+        model = pickle.load(file)
 
     return model
-
 
 def remove_identical_columns(df):
     # Identify columns where all values are the same

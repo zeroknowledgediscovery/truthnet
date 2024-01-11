@@ -1,0 +1,10 @@
+from infer_veritas import  *
+from truthfinder import *
+
+TR=truthnet(datapath=modelpath,
+            target_label=targetlabel,query_limit=querylimit,
+            VERBOSE=False)
+
+TR.fit(shapnum=10)
+TR.calibrate(calibration_num=5000)
+M=TR.veritas_model

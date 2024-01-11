@@ -22,29 +22,35 @@ def check_json_format(json_data):
     """
     # Check if the data is a list
     if not isinstance(json_data, (np.ndarray,list)):
+        print('not nd.array or list')
         return False
 
     for item in json_data:
         # Each item in the list should be a dictionary (object)
         if not isinstance(item, dict):
+            print('items not dict')
             return False
 
         for patient_id, questions in item.items():
             # Patient ID should be a string or int
             if not isinstance(patient_id, (str, int)):
+                print('pid not str or int')
                 return False
 
             # Questions should be a dictionary (object)
             if not isinstance(questions, dict):
+                print('questions not dict')
                 return False
 
             for question_id, answer in questions.items():
                 # Question ID should be a string or int
                 if not isinstance(question_id, (str, int)):
+                    print('question id not str or int')
                     return False
 
                 # Answer should be an integer
                 if not isinstance(answer, (str,int)):
+                    print('question response not str or int')
                     return False
 
     print('ckeck passed')
@@ -157,7 +163,7 @@ def reveal(resp_json,
 
         if score:
             i['score']=funcw(s,
-                         veritas_model['model'],
+                         veritas_model['model'], 
                          veritas_model['model_neg'])
         else:
             i['score']=0

@@ -5,21 +5,43 @@
 \providecommand{\bibinfo}[2]{#2}
 \providecommand{\eprint}[2][]{\url{#2}}
 
-\bibitem{Ganslen1990}
-\bibinfo{author}{Ganslen, R.}
-\newblock \bibinfo{title}{The polygraph and lie detection}.
-\newblock \emph{\bibinfo{journal}{The American Journal of Psychology}}
-  \textbf{\bibinfo{volume}{103}}, \bibinfo{pages}{189--202}
-  (\bibinfo{year}{1990}).
+\bibitem{shao2017evolution}
+\bibinfo{author}{Shao, W.}, \bibinfo{author}{Li, X.}, \bibinfo{author}{Goraya,
+  M.~U.}, \bibinfo{author}{Wang, S.} \& \bibinfo{author}{Chen, J.-L.}
+\newblock \bibinfo{title}{Evolution of influenza a virus by mutation and
+  re-assortment}.
+\newblock \emph{\bibinfo{journal}{International journal of molecular sciences}}
+  \textbf{\bibinfo{volume}{18}}, \bibinfo{pages}{1650} (\bibinfo{year}{2017}).
 
-\bibitem{DePaulo2003}
-\bibinfo{author}{DePaulo, B.~M.}, \bibinfo{author}{Lindsay, J.~J.},
-  \bibinfo{author}{Malone, B.~E.}, \bibinfo{author}{Muhlenbruck, L.} \&
-  \bibinfo{author}{Charlton, K.}
-\newblock \bibinfo{title}{Cues to deception}.
-\newblock \emph{\bibinfo{journal}{Psychological Bulletin}}
-  \textbf{\bibinfo{volume}{129}}, \bibinfo{pages}{74--118}
+\bibitem{mills2004transmissibility}
+\bibinfo{author}{Mills, C.~E.}, \bibinfo{author}{Robins, J.~M.} \&
+  \bibinfo{author}{Lipsitch, M.}
+\newblock \bibinfo{title}{Transmissibility of 1918 pandemic influenza}.
+\newblock \emph{\bibinfo{journal}{Nature}} \textbf{\bibinfo{volume}{432}},
+  \bibinfo{pages}{904--906} (\bibinfo{year}{2004}).
+
+\bibitem{reid2003origin}
+\bibinfo{author}{Reid, A.~H.} \& \bibinfo{author}{Taubenberger, J.~K.}
+\newblock \bibinfo{title}{The origin of the 1918 pandemic influenza virus: a
+  continuing enigma}.
+\newblock \emph{\bibinfo{journal}{Journal of general virology}}
+  \textbf{\bibinfo{volume}{84}}, \bibinfo{pages}{2285--2292}
   (\bibinfo{year}{2003}).
+
+\bibitem{landolt2007up}
+\bibinfo{author}{Landolt, G.~A.} \& \bibinfo{author}{Olsen, C.~W.}
+\newblock \bibinfo{title}{Up to new tricks--a review of cross-species
+  transmission of influenza a viruses}.
+\newblock \emph{\bibinfo{journal}{Animal Health Research Reviews}}
+  \textbf{\bibinfo{volume}{8}}, \bibinfo{pages}{1--21} (\bibinfo{year}{2007}).
+
+\bibitem{ali2015multimodal}
+\bibinfo{author}{Ali, S.}, \bibinfo{author}{Jabeen, S.} \&
+  \bibinfo{author}{Alam, F.}
+\newblock \bibinfo{title}{Multimodal approach to identifying malingered
+  posttraumatic stress disorder: A review}.
+\newblock \emph{\bibinfo{journal}{Innovations in Clinical Neuroscience}}
+  \textbf{\bibinfo{volume}{12}}, \bibinfo{pages}{12} (\bibinfo{year}{2015}).
 
 \bibitem{Rogers1997}
 \bibinfo{author}{Rogers, R.}
@@ -32,6 +54,293 @@
 \bibinfo{author}{Rogers, R.~E.}
 \newblock \emph{\bibinfo{title}{Clinical assessment of malingering and
   deception}} (\bibinfo{publisher}{Guilford Press}, \bibinfo{year}{2008}).
+
+\bibitem{frueh2007us}
+\bibinfo{author}{Frueh, B.}, \bibinfo{author}{Grubaugh, A.},
+  \bibinfo{author}{Elhai, J.} \& \bibinfo{author}{Buckley, T.}
+\newblock \bibinfo{title}{Us department of veterans affairs disability policies
+  for posttraumatic stress disorder: administrative trends and implications for
+  treatment, rehabilitation, and research}.
+\newblock \emph{\bibinfo{journal}{Am J Public Health}}
+  \textbf{\bibinfo{volume}{97}}, \bibinfo{pages}{2143--5}
+  (\bibinfo{year}{2007}).
+
+\bibitem{taylor2007detection}
+\bibinfo{author}{Taylor, S.}, \bibinfo{author}{Frueh, B.~C.} \&
+  \bibinfo{author}{Asmundson, G. J.~G.}
+\newblock \bibinfo{title}{Detection and management of malingering in people
+  presenting for treatment of posttraumatic stress disorder: Methods,
+  obstacles, and recommendations}.
+\newblock \emph{\bibinfo{journal}{Journal of Anxiety Disorders}}
+  \textbf{\bibinfo{volume}{21}}, \bibinfo{pages}{22--41}
+  (\bibinfo{year}{2007}).
+
+\bibitem{guriel2003assessing}
+\bibinfo{author}{Guriel, J.} \& \bibinfo{author}{Fremouw, W.}
+\newblock \bibinfo{title}{Assessing malingered posttraumatic stress disorder: A
+  critical review}.
+\newblock \emph{\bibinfo{journal}{Clinical Psychology Review}}
+  \textbf{\bibinfo{volume}{23}}, \bibinfo{pages}{881--904}
+  (\bibinfo{year}{2003}).
+
+\bibitem{salloway1990opiate}
+\bibinfo{author}{Salloway, S.}, \bibinfo{author}{Southwick, S.} \&
+  \bibinfo{author}{Sadowsky, M.}
+\newblock \bibinfo{title}{Opiate withdrawal presenting as posttraumatic stress
+  disorder}.
+\newblock \emph{\bibinfo{journal}{Hospital and Community Psychiatry}}
+  \textbf{\bibinfo{volume}{41}}, \bibinfo{pages}{666--667}
+  (\bibinfo{year}{1990}).
+
+\bibitem{resnick2008malingering}
+\bibinfo{author}{Resnick, P.~J.}, \bibinfo{author}{West, S.} \&
+  \bibinfo{author}{Payne, J.~W.}
+\newblock \bibinfo{title}{Malingering of posttraumatic disorders}.
+\newblock In \bibinfo{editor}{Rogers, R.} (ed.)
+  \emph{\bibinfo{booktitle}{Clinical assessment of malingering and deception}},
+  \bibinfo{pages}{109--127} (\bibinfo{publisher}{Guilford Press},
+  \bibinfo{year}{2008}), \bibinfo{edition}{3} edn.
+
+\bibitem{burkett1998stolen}
+\bibinfo{author}{Burkett, B.~G.} \& \bibinfo{author}{Whitley, G.}
+\newblock \emph{\bibinfo{title}{Stolen valor: How the Vietnam generation was
+  robbed of its heroes and history}} (\bibinfo{publisher}{Verity Press},
+  \bibinfo{year}{1998}).
+
+\bibitem{goldstein2016epidemiology}
+\bibinfo{author}{Goldstein, R.~B.} \emph{et~al.}
+\newblock \bibinfo{title}{The epidemiology of dsm-5 posttraumatic stress
+  disorder in the united states: results from the national epidemiologic survey
+  on alcohol and related conditions-iii}.
+\newblock \emph{\bibinfo{journal}{Social psychiatry and psychiatric
+  epidemiology}} \textbf{\bibinfo{volume}{51}}, \bibinfo{pages}{1137--1148}
+  (\bibinfo{year}{2016}).
+
+\bibitem{schnurr2009posttraumatic}
+\bibinfo{author}{Schnurr, P.~P.}, \bibinfo{author}{Lunney, C.~A.},
+  \bibinfo{author}{Bovin, M.~J.} \& \bibinfo{author}{Marx, B.~P.}
+\newblock \bibinfo{title}{Posttraumatic stress disorder and quality of life:
+  Extension of findings to veterans of the wars in iraq and afghanistan}.
+\newblock \emph{\bibinfo{journal}{Clinical psychology review}}
+  \textbf{\bibinfo{volume}{29}}, \bibinfo{pages}{727--735}
+  (\bibinfo{year}{2009}).
+
+\bibitem{lopiccolo1999current}
+\bibinfo{author}{LoPiccolo, C.}, \bibinfo{author}{Goodkin, K.} \&
+  \bibinfo{author}{Baldewicz, T.}
+\newblock \bibinfo{title}{Current issues in the diagnosis and management of
+  malingering}.
+\newblock \emph{\bibinfo{journal}{Ann Med}} \textbf{\bibinfo{volume}{31}},
+  \bibinfo{pages}{166--174} (\bibinfo{year}{1999}).
+
+\bibitem{oboler2000disability}
+\bibinfo{author}{Oboler, S.}
+\newblock \bibinfo{title}{Disability evaluations under the department of
+  veterans affairs}.
+\newblock In \bibinfo{editor}{Rondinelli, R.} \& \bibinfo{editor}{Katz, R.}
+  (eds.) \emph{\bibinfo{booktitle}{Impairment Rating and Disability
+  Evaluation}}, \bibinfo{pages}{187--217} (\bibinfo{publisher}{W. B. Saunders},
+  \bibinfo{address}{Philadelphia, PA}, \bibinfo{year}{2000}).
+
+\bibitem{taylor2006clinician}
+\bibinfo{author}{Taylor, S.}
+\newblock \emph{\bibinfo{title}{Clinician's Guide to Treating PTSD: A
+  Cognitive-Behavioral Approach}} (\bibinfo{publisher}{Guilford Press},
+  \bibinfo{address}{New York}, \bibinfo{year}{2006}).
+
+\bibitem{rosen2006dsm}
+\bibinfo{author}{Rosen, G.}
+\newblock \bibinfo{title}{Dsm’s cautionary guideline to rule out malingering
+  can protect the ptsd data base}.
+\newblock \emph{\bibinfo{journal}{J Anxiety Disorders}}
+  \textbf{\bibinfo{volume}{20}}, \bibinfo{pages}{530--535}
+  (\bibinfo{year}{2006}).
+
+\bibitem{marx2011ptsd}
+\bibinfo{author}{Marx, B.} \& \bibinfo{author}{Holowka, D.}
+\newblock \bibinfo{title}{Ptsd disability assessment}.
+\newblock \emph{\bibinfo{journal}{PTSD Res Q}} \textbf{\bibinfo{volume}{22}},
+  \bibinfo{pages}{1--6} (\bibinfo{year}{2011}).
+
+\bibitem{rogers1994explanatory}
+\bibinfo{author}{Rogers, R.}, \bibinfo{author}{Sewell, K.} \&
+  \bibinfo{author}{Goldstein, A.}
+\newblock \bibinfo{title}{Explanatory models of malingering: a prototypical
+  analysis}.
+\newblock \emph{\bibinfo{journal}{Law \& Hum Behav}}
+  \textbf{\bibinfo{volume}{18}}, \bibinfo{pages}{543--52}
+  (\bibinfo{year}{1994}).
+
+\bibitem{leeshaley1997mmpi2}
+\bibinfo{author}{Lees-Haley, P.}
+\newblock \bibinfo{title}{Mmpi-2 base rates for 492 personal injury plaintiffs:
+  implications and challenges for forensic assessment}.
+\newblock \emph{\bibinfo{journal}{J Clin Psychol}}
+  \textbf{\bibinfo{volume}{53}}, \bibinfo{pages}{745--55}
+  (\bibinfo{year}{1997}).
+
+\bibitem{Wong2005}
+\bibinfo{author}{Wong, S.} \& \bibinfo{author}{O'Sullivan, M.}
+\newblock \bibinfo{title}{The structured interview of reported symptoms (sirs):
+  An overview}.
+\newblock \emph{\bibinfo{journal}{Assessment}} \textbf{\bibinfo{volume}{12}},
+  \bibinfo{pages}{289--307} (\bibinfo{year}{2005}).
+
+\bibitem{smith1997detection}
+\bibinfo{author}{Smith, G.~P.} \& \bibinfo{author}{Burger, G.~K.}
+\newblock \bibinfo{title}{Detection of malingering: validation of the
+  structured inventory of malingered symptomatology (sims)}.
+\newblock \emph{\bibinfo{journal}{Journal of the American Academy of Psychiatry
+  and the Law Online}} \textbf{\bibinfo{volume}{25}}, \bibinfo{pages}{183--189}
+  (\bibinfo{year}{1997}).
+
+\bibitem{ben2012interpreting}
+\bibinfo{author}{Ben-Porath, Y.~S.}
+\newblock \emph{\bibinfo{title}{Interpreting the mmpi-2-rf}}
+  (\bibinfo{publisher}{U of Minnesota Press}, \bibinfo{year}{2012}).
+
+\bibitem{ekman1991who}
+\bibinfo{author}{Ekman, P.} \& \bibinfo{author}{O'Sullivan, M.}
+\newblock \bibinfo{title}{Who can catch a liar?}
+\newblock \emph{\bibinfo{journal}{American Psychologist}}
+  \textbf{\bibinfo{volume}{46}}, \bibinfo{pages}{913} (\bibinfo{year}{1991}).
+
+\bibitem{mihalcea2009lie}
+\bibinfo{author}{Mihalcea, R.} \& \bibinfo{author}{Strapparava, C.}
+\newblock \bibinfo{title}{The lie detector: Explorations in the automatic
+  recognition of deceptive language}.
+\newblock In \emph{\bibinfo{booktitle}{ACL-IJCNLP 2009}}
+  (\bibinfo{year}{2009}).
+
+\bibitem{burgoon2008cognitive}
+\bibinfo{author}{Burgoon, J.~K.}, \bibinfo{author}{Blair, J.~P.} \&
+  \bibinfo{author}{Strom, R.~E.}
+\newblock \bibinfo{title}{Cognitive biases and nonverbal cue availability in
+  detecting deception}.
+\newblock \emph{\bibinfo{journal}{Human Communication Research}}
+  \textbf{\bibinfo{volume}{34}}, \bibinfo{pages}{572--599}
+  (\bibinfo{year}{2008}).
+
+\bibitem{zhou2004automating}
+\bibinfo{author}{Zhou, L.}, \bibinfo{author}{Burgoon, J.~K.},
+  \bibinfo{author}{Nunamaker~Jr, J.~F.} \& \bibinfo{author}{Twitchell, D.}
+\newblock \bibinfo{title}{Automating linguistics-based cues for detecting
+  deception in text-based asynchronous computer-mediated communications}.
+\newblock \emph{\bibinfo{journal}{Group Decision and Negotiation}}
+  \textbf{\bibinfo{volume}{13}}, \bibinfo{pages}{81--106}
+  (\bibinfo{year}{2004}).
+
+\bibitem{Ekman1992}
+\bibinfo{author}{Ekman, P.} \& \bibinfo{author}{O'Sullivan, M.}
+\newblock \bibinfo{title}{Who can catch a liar?}
+\newblock \emph{\bibinfo{journal}{American Psychologist}}
+  \textbf{\bibinfo{volume}{46}}, \bibinfo{pages}{913--920}
+  (\bibinfo{year}{1991}).
+
+\bibitem{brenner2021development}
+\bibinfo{author}{Brenner, L.~A.} \emph{et~al.}
+\newblock \bibinfo{title}{Development and validation of computerized adaptive
+  assessment tools for the measurement of posttraumatic stress disorder among
+  us military veterans}.
+\newblock \emph{\bibinfo{journal}{JAMA Network Open}}
+  \textbf{\bibinfo{volume}{4}}, \bibinfo{pages}{e2115707--e2115707}
+  (\bibinfo{year}{2021}).
+
+\bibitem{gibbons2012development}
+\bibinfo{author}{Gibbons, R.~D.} \emph{et~al.}
+\newblock \bibinfo{title}{Development of a computerized adaptive test for
+  depression}.
+\newblock \emph{\bibinfo{journal}{Archives of general psychiatry}}
+  \textbf{\bibinfo{volume}{69}}, \bibinfo{pages}{1104--1112}
+  (\bibinfo{year}{2012}).
+
+\bibitem{mcdermott2013malingering}
+\bibinfo{author}{McDermott, B.}, \bibinfo{author}{Dualan, I.} \&
+  \bibinfo{author}{Scott, C.}
+\newblock \bibinfo{title}{Malingering in the correctional system: does
+  incentive affect prevalence?}
+\newblock \emph{\bibinfo{journal}{Int'l J L \& Psychiatry}}
+  \textbf{\bibinfo{volume}{36}}, \bibinfo{pages}{287--92}
+  (\bibinfo{year}{2013}).
+
+\bibitem{schmidt2020base}
+\bibinfo{author}{Schmidt, T.}, \bibinfo{author}{Kr{\"u}ger, M.} \&
+  \bibinfo{author}{Ullmann, U.}
+\newblock \bibinfo{title}{Base rate of probable malingering and its indicators
+  in the assessment of mental disorders-retrospective analysis of a sample of
+  forensic psychological evaluations}.
+\newblock \emph{\bibinfo{journal}{Die Rehabilitation}}
+  \textbf{\bibinfo{volume}{59}}, \bibinfo{pages}{231--236}
+  (\bibinfo{year}{2020}).
+
+\bibitem{matto2019systematic}
+\bibinfo{author}{Matto, M.}, \bibinfo{author}{McNiel, D.~E.} \&
+  \bibinfo{author}{Binder, R.~L.}
+\newblock \bibinfo{title}{A systematic approach to the detection of false
+  ptsd.}
+\newblock \emph{\bibinfo{journal}{The journal of the American Academy of
+  Psychiatry and the Law}} \textbf{\bibinfo{volume}{47}},
+  \bibinfo{pages}{325--334} (\bibinfo{year}{2019}).
+
+\bibitem{DePaulo2003}
+\bibinfo{author}{DePaulo, B.~M.}, \bibinfo{author}{Lindsay, J.~J.},
+  \bibinfo{author}{Malone, B.~E.}, \bibinfo{author}{Muhlenbruck, L.} \&
+  \bibinfo{author}{Charlton, K.}
+\newblock \bibinfo{title}{Cues to deception}.
+\newblock \emph{\bibinfo{journal}{Psychological Bulletin}}
+  \textbf{\bibinfo{volume}{129}}, \bibinfo{pages}{74--118}
+  (\bibinfo{year}{2003}).
+
+\bibitem{walczyk2018review}
+\bibinfo{author}{Walczyk, J.~J.}, \bibinfo{author}{Sewell, N.} \&
+  \bibinfo{author}{DiBenedetto, M.~B.}
+\newblock \bibinfo{title}{A review of approaches to detecting malingering in
+  forensic contexts and promising cognitive load-inducing lie detection
+  techniques}.
+\newblock \emph{\bibinfo{journal}{Frontiers in psychiatry}}
+  \textbf{\bibinfo{volume}{9}}, \bibinfo{pages}{700} (\bibinfo{year}{2018}).
+
+\bibitem{rogers2008determinations}
+\bibinfo{author}{Rogers, R.} \& \bibinfo{author}{Correa, A.~A.}
+\newblock \bibinfo{title}{Determinations of malingering: Evolution from
+  case-based methods to detection strategies}.
+\newblock \emph{\bibinfo{journal}{Psychiatry, Psychology and Law}}
+  \textbf{\bibinfo{volume}{15}}, \bibinfo{pages}{213--223}
+  (\bibinfo{year}{2008}).
+
+\bibitem{vrij2001killed}
+\bibinfo{author}{Vrij, A.} \& \bibinfo{author}{Mann, S.}
+\newblock \bibinfo{title}{Who killed my relative? police officers' ability to
+  detect real-life high-stake lies}.
+\newblock \emph{\bibinfo{journal}{Psychology, Crime \& Law}}
+  \textbf{\bibinfo{volume}{7}}, \bibinfo{pages}{119--132}
+  (\bibinfo{year}{2001}).
+
+\bibitem{sartori2008accurately}
+\bibinfo{author}{Sartori, G.}, \bibinfo{author}{Agosta, S.},
+  \bibinfo{author}{Zogmaister, C.}, \bibinfo{author}{Ferrara, S.~D.} \&
+  \bibinfo{author}{Castiello, U.}
+\newblock \bibinfo{title}{How to accurately detect autobiographical events}.
+\newblock \emph{\bibinfo{journal}{Psychological science}}
+  \textbf{\bibinfo{volume}{19}}, \bibinfo{pages}{772--780}
+  (\bibinfo{year}{2008}).
+
+\bibitem{gregg2007vying}
+\bibinfo{author}{Gregg, A.~P.}
+\newblock \bibinfo{title}{When vying reveals lying: The timed antagonistic
+  response alethiometer}.
+\newblock \emph{\bibinfo{journal}{Applied Cognitive Psychology: The Official
+  Journal of the Society for Applied Research in Memory and Cognition}}
+  \textbf{\bibinfo{volume}{21}}, \bibinfo{pages}{621--647}
+  (\bibinfo{year}{2007}).
+
+\bibitem{monaro2017detection}
+\bibinfo{author}{Monaro, M.}, \bibinfo{author}{Gamberini, L.} \&
+  \bibinfo{author}{Sartori, G.}
+\newblock \bibinfo{title}{The detection of faked identity using unexpected
+  questions and mouse dynamics}.
+\newblock \emph{\bibinfo{journal}{PloS one}} \textbf{\bibinfo{volume}{12}},
+  \bibinfo{pages}{e0177851} (\bibinfo{year}{2017}).
 
 \bibitem{Chan2018}
 \bibinfo{author}{Chan, E.~Y.}, \bibinfo{author}{Danker-Hopfe, H.} \&
@@ -51,14 +360,6 @@
   \textbf{\bibinfo{volume}{50}}, \bibinfo{pages}{266--273}
   (\bibinfo{year}{2020}).
 
-\bibitem{Lee2019}
-\bibinfo{author}{Lee, J.~H.}, \bibinfo{author}{Kim, Y.} \&
-  \bibinfo{author}{Kim, J.}
-\newblock \bibinfo{title}{A machine learning approach to the detection of
-  malingering based on self-reported symptom checklists}.
-\newblock \emph{\bibinfo{journal}{PLoS ONE}} \textbf{\bibinfo{volume}{14}},
-  \bibinfo{pages}{e0213776} (\bibinfo{year}{2019}).
-
 \bibitem{Yu2018}
 \bibinfo{author}{Yu, H.}, \bibinfo{author}{Chen, Y.} \& \bibinfo{author}{Fu,
   X.}
@@ -77,67 +378,70 @@
   \textbf{\bibinfo{volume}{23}}, \bibinfo{pages}{875--895}
   (\bibinfo{year}{2017}).
 
-\bibitem{Wong2005}
-\bibinfo{author}{Wong, S.} \& \bibinfo{author}{O'Sullivan, M.}
-\newblock \bibinfo{title}{The structured interview of reported symptoms (sirs):
-  An overview}.
-\newblock \emph{\bibinfo{journal}{Assessment}} \textbf{\bibinfo{volume}{12}},
-  \bibinfo{pages}{289--307} (\bibinfo{year}{2005}).
+\bibitem{malhotra2008completion}
+\bibinfo{author}{Malhotra, N.}
+\newblock \bibinfo{title}{Completion time and response order effects in web
+  surveys}.
+\newblock \emph{\bibinfo{journal}{Public opinion quarterly}}
+  \textbf{\bibinfo{volume}{72}}, \bibinfo{pages}{914--934}
+  (\bibinfo{year}{2008}).
 
-\bibitem{Ekman1992}
-\bibinfo{author}{Ekman, P.} \& \bibinfo{author}{O'Sullivan, M.}
-\newblock \bibinfo{title}{Who can catch a liar?}
-\newblock \emph{\bibinfo{journal}{American Psychologist}}
-  \textbf{\bibinfo{volume}{46}}, \bibinfo{pages}{913--920}
-  (\bibinfo{year}{1991}).
+\bibitem{callegaro2009response}
+\bibinfo{author}{Callegaro, M.}, \bibinfo{author}{Yang, Y.},
+  \bibinfo{author}{Bhola, D.~S.}, \bibinfo{author}{Dillman, D.~A.} \&
+  \bibinfo{author}{Chin, T.-Y.}
+\newblock \bibinfo{title}{Response latency as an indicator of optimizing in
+  online questionnaires}.
+\newblock \emph{\bibinfo{journal}{Bulletin of Sociological Methodology/Bulletin
+  de M{\'e}thodologie Sociologique}} \textbf{\bibinfo{volume}{103}},
+  \bibinfo{pages}{5--25} (\bibinfo{year}{2009}).
 
-\bibitem{Eckman1969}
-\bibinfo{author}{Eckman, P.} \& \bibinfo{author}{Friesen, W.~V.}
-\newblock \bibinfo{title}{Nonverbal leakage and clues to deception}.
-\newblock \emph{\bibinfo{journal}{Psychiatry}} \textbf{\bibinfo{volume}{32}},
-  \bibinfo{pages}{88--106} (\bibinfo{year}{1969}).
+\bibitem{greszki2015exploring}
+\bibinfo{author}{Greszki, R.}, \bibinfo{author}{Meyer, M.} \&
+  \bibinfo{author}{Schoen, H.}
+\newblock \bibinfo{title}{Exploring the effects of removing “too fast”
+  responses and respondents from web surveys}.
+\newblock \emph{\bibinfo{journal}{Public Opinion Quarterly}}
+  \textbf{\bibinfo{volume}{79}}, \bibinfo{pages}{471--503}
+  (\bibinfo{year}{2015}).
 
-\bibitem{Lykken1959}
-\bibinfo{author}{Lykken, D.~T.}
-\newblock \bibinfo{title}{The gsr in the detection of guilt}.
-\newblock \emph{\bibinfo{journal}{Scientific American}}
-  \textbf{\bibinfo{volume}{200}}, \bibinfo{pages}{50--60}
-  (\bibinfo{year}{1959}).
+\bibitem{kennedy2020assessing}
+\bibinfo{author}{Kennedy, C.} \emph{et~al.}
+\newblock \bibinfo{title}{Assessing the risks to online polls from bogus
+  respondents}.
+\newblock \emph{\bibinfo{journal}{Pew Research Center}}
+  \textbf{\bibinfo{volume}{18}} (\bibinfo{year}{2020}).
 
-\bibitem{rogers2008}
-\bibinfo{author}{Rogers, R.}
-\newblock \bibinfo{title}{Detection strategies for malingering and
-  defensiveness}.
-\newblock In \bibinfo{editor}{Rogers, R.} (ed.)
-  \emph{\bibinfo{booktitle}{Clinical assessment of malingering and deception}},
-  \bibinfo{pages}{14--35} (\bibinfo{publisher}{Guilford Press},
-  \bibinfo{address}{New York, NY}, \bibinfo{year}{2008}), \bibinfo{edition}{3}
-  edn.
+\bibitem{sarda2017conditional}
+\bibinfo{author}{Sarda-Espinosa, A.}, \bibinfo{author}{Subbiah, S.} \&
+  \bibinfo{author}{Bartz-Beielstein, T.}
+\newblock \bibinfo{title}{Conditional inference trees for knowledge extraction
+  from motor health condition data}.
+\newblock \emph{\bibinfo{journal}{Engineering Applications of Artificial
+  Intelligence}} \textbf{\bibinfo{volume}{62}}, \bibinfo{pages}{26--37}
+  (\bibinfo{year}{2017}).
 
-\bibitem{merten2016}
-\bibinfo{author}{Merten, T.}, \bibinfo{author}{Merckelbach, H.},
-  \bibinfo{author}{Giger, P.} \& \bibinfo{author}{Stevens, A.}
-\newblock \bibinfo{title}{The self-report symptom inventory (srsi): A new
-  instrument for the assessment of distorted symptom endorsement}.
-\newblock \emph{\bibinfo{journal}{Psychological Injury and Law}}
-  \textbf{\bibinfo{volume}{9}}, \bibinfo{pages}{102--111}
-  (\bibinfo{year}{2016}).
+\bibitem{cover}
+\bibinfo{author}{Cover, T.~M.} \& \bibinfo{author}{Thomas, J.~A.}
+\newblock \emph{\bibinfo{title}{Elements of Information Theory (Wiley Series in
+  Telecommunications and Signal Processing)}}
+  (\bibinfo{publisher}{Wiley-Interscience}, \bibinfo{address}{New York, NY,
+  USA}, \bibinfo{year}{2006}).
 
-\bibitem{sollman2011}
-\bibinfo{author}{Sollman, M.~J.} \& \bibinfo{author}{Berry, D.~T.}
-\newblock \bibinfo{title}{Detection of inadequate effort on neuropsychological
-  testing: a meta-analytic update and extension}.
-\newblock \emph{\bibinfo{journal}{Archives of Clinical Neuropsychology}}
-  \textbf{\bibinfo{volume}{26}}, \bibinfo{pages}{774--789}
-  (\bibinfo{year}{2011}).
+\bibitem{fuglede2004jensen}
+\bibinfo{author}{Fuglede, B.} \& \bibinfo{author}{Topsoe, F.}
+\newblock \bibinfo{title}{Jensen-shannon divergence and hilbert space
+  embedding}.
+\newblock In \emph{\bibinfo{booktitle}{International Symposium onInformation
+  Theory, 2004. ISIT 2004. Proceedings.}}, \bibinfo{pages}{31}
+  (\bibinfo{organization}{IEEE}, \bibinfo{year}{2004}).
 
-\bibitem{vanimpelen2014}
-\bibinfo{author}{van Impelen, A.}, \bibinfo{author}{Merckelbach, H.},
-  \bibinfo{author}{Jelicic, M.} \& \bibinfo{author}{Merten, T.}
-\newblock \bibinfo{title}{The structured inventory of malingered symptomatology
-  (sims): a systematic review and meta-analysis}.
-\newblock \emph{\bibinfo{journal}{The Clinical Neuropsychologist}}
-  \textbf{\bibinfo{volume}{28}}, \bibinfo{pages}{1336--1365}
-  (\bibinfo{year}{2014}).
+\bibitem{fedotov2003refinements}
+\bibinfo{author}{Fedotov, A.~A.}, \bibinfo{author}{Harremo{\"e}s, P.} \&
+  \bibinfo{author}{Topsoe, F.}
+\newblock \bibinfo{title}{Refinements of pinsker's inequality}.
+\newblock \emph{\bibinfo{journal}{IEEE Transactions on Information Theory}}
+  \textbf{\bibinfo{volume}{49}}, \bibinfo{pages}{1491--1498}
+  (\bibinfo{year}{2003}).
 
 \end{thebibliography}
