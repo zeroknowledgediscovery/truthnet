@@ -1,580 +1,386 @@
-import os
-import contextlib
-import numpy as np
-import pandas as pd
-from scipy.stats import entropy, norm
-import multiprocessing as mp
-from pqdm.threads import pqdm
-
+from quasinet.qnet import load_qnet, save_qnet
+from quasinet.qnet import qdistance
 from quasinet.qsampling import qsample
-from dataFormatter import dataFormatter
-from model import model
+from quasinet.qnet import membership_degree
+import pandas as pd
+import numpy as np
+from tqdm import tqdm
+from quasinet.qnet import Qnet
+import dill as pickle 
+import gzip
+import shap
+from scipy.stats import t, lognorm
+from truthfinder import reveal, funcm, funcw, dissonance_distr_median
+from distfit import distfit
+from sklearn import metrics
+from zedstat import zedstat
+from concurrent.futures import ProcessPoolExecutor
+ 
+# VeRITAS
+# objewctive here is to train the veritas model which will be used to determine if a
+# subject is being adversarial in a strutured interview. Example of such
+# adversarial responses is when a subject is malingering in a
+# mental health diagnosis interview or autimated computed aided diatgnostic test
+#
+#datapath is the path to the survet or interveiew database where we have
+# a reasonable number of responses logged from which we will learn our model
+# typically we would have a "target label" columns which identifies the ground truth
+# on if the subject belonged to one ctaeofry or teh other (have a certain mental health condition, as
+# determined by a psychiatrist, or not). Note this column  in not ground truth on malingering, there is typically no ground truth available on that
 
+# index_present describes if the traininmg datafraem/dataset has an index column in teh first column
+# training fraction is teh fraction used as training data to learn the "cross-talk or Q-net" models. The reminaing or "test data" is used to infer the three decision thresholds
+# query limit is the number of features or items (columns is the data) that are used to dtermine the
+# malingering status in deployment. The decision-thresholds are dteremined using this many features, where the features are ordered from most predictive to least predictive using a SHAP analysis
+
+# There are three decision thresholds that the VeRITAS model
+#
+# QNETmodel
+# \Phi(x_{-i}) is a probability distribution of outcomes over the ith variable or question asked, given all other responses (notation for which is x_{-i}. In general we can also have othetr enties missing, and such missing data is interpreted as a distribution over all possible outcomes at that index of missing data. This qnet model allows us to define a metrix between two response vectors x, y denoted as \theta(x,y), and allows us to define the probability Pr(x \rightarrow x) 
+#
+# LOWER_DECISION THRESHOLD is an estimate of the negative loglikelihood -log Pr(x \rightsrrow x) for a given x per item with a non-missing response. Turns out that as we hav ethis estimate fall below 1, it becomes extreemy unkikley to be naturally generated.
+#
+# VERITAS THRESHOLD: catures what is teh average deviation of a response vector from what teh model says the responses should be.
+#
+# UPPER THRESHOLD, estimates a threshold on the ration of loglikelihhods of a response being produced by aqnet inferred fro the positive cases vs that inferred for negative cases
+# So for non-malingering response, one needs to be above UPPER threshold, below veritas threshold, and above the LOWER threshold.
+
+global_NSTR = None
+global_steps = None
+global_model = None
+
+def init_globals(model, steps, NSTR):
+    '''
+    global variable initialization necessary for 
+    getting maximum paralleization in calibration
+    '''
+    global global_model, global_steps,  global_NSTR
+    global_model = model
+    global_steps = steps
+    global_NSTR = NSTR
+
+def task(seed):
+    '''
+    Helper function for parallelization
+    '''
+    s=qsample(global_NSTR, global_model, steps=global_steps)
+    return funcm(s,global_model),dissonance_distr_median(s,global_model)
 
 class truthnet:
     """
+    The truthnet class is designed to train the Veritas model which is used to determine if a
+    subject is being adversarial in a structured interview. It is particularly focused on identifying
+    adversarial responses in contexts like mental health diagnosis interviews 
+    or automated computer-aided diagnostic tests.
+    
+    Attributes:
+        - datapath (str): Path to the survey or interview database with logged responses.
+        - target_label (str): Name of the column in the dataset that identifies the ground truth.
+        - index_present (bool): Specifies if the first column in the dataset is an index column.
+        - target_label_positive (int): Value indicating a positive case for the target condition.
+        - target_label_negative (int): Value indicating a negative case for the target condition.
+        - training_fraction (float): Fraction of data used as training data to learn the Q-net models.
+        - query_limit (int): Number of features used to determine malingering status in deployment.
+        - shap_index (list): Ordered list of indices based on SHAP values for feature importance.
+        - problem (str): A description or identifier for the type of problem being addressed.
+        - threshold_alpha (float): Significance level for lower decision threshold.
+        - threshold_alpha_veritas (float): Significance level for Veritas threshold.
     """
-
-    def __init__(self,
-                 qsteps=200,
-                 processes=11):
-
-        self.model_obj = model()
-        self.data_obj = None
-        self.features = None
-        self.samples = None
-        self.modelpath = None
-        self.MAX_PROCESSES = processes
-        self.cithreshold = {}
-        self.datapath = None
-        self.suspects = pd.DataFrame()
-        self.dissonance = None
-        self.QSTEPS = qsteps
-        self.suspects = None
-        self.coresamples = None
-        self.null_dissonance_df = None
-        self.null_dissonance_steps = None
-        self.year = None
-        self.n_jobs = 28
-        self.qnet = None
-        self.steps = 120
-        self.num_qsamples = None
-        self.all_samples = None
-        self.samples = None
-        self.samples_as_strings = None
-        self.features = []
-        self.cols = []
-        self.immutable_vars = []
-        self.mutable_vars = []
-        self.poles = None
-        self.polar_features = None
-        self.polar_indices = None
-        self.poles_dict = {}
-        self.d0 = None
-        self.s_null = None
-        self.D_null = None
-        self.mask_prob = 0.5
-        self.variation_weight = None
-        self.polar_matrix = None
-        self.nsamples = None
-        self.restricted = False
-
-        return
-
-    def load_data(self,
-                  datapath=None):
-        if datapath is not None:
-            self.datapath = datapath
-        self.data_obj = dataFormatter(samples=self.datapath)
-        self.features, self.samples = self.data_obj.Qnet_formatter()
-        return self.features, self.samples
-
+    def __init__(self, datapath,
+                 target_label,
+                 problem='',
+                 index_present=True,
+                 target_label_positive=1,
+                 target_label_negative=0,
+                 training_fraction=0.3,
+                 threshold_alpha=0.1,
+                 threshold_alpha_veritas=1-0.015,
+                 query_limit=None,
+                 VERBOSE=False,
+                 shap_index=None):
+        self.datapath = datapath
+        self.target_label = target_label
+        self.index_present = index_present
+        self.target_label_positive = target_label_positive
+        self.target_label_negative = target_label_negative
+        self.training_fraction = training_fraction
+        self.query_limit = query_limit
+        if query_limit is None:
+            self.query_limit = -1
+        self.shap_index = shap_index
+        self.data = None  # Placeholder for the data once loaded
+        self.veritas_model={}
+        self.data = None
+        self.problem = problem
+        self.training_index = None
+        self.threshold_alpha = threshold_alpha
+        self.threshold_alpha_veritas = threshold_alpha_veritas
+        self.VERBOSE = VERBOSE
+        
     def fit(self,
-            fit=True,
-            processes=None,
-            modelpath=None):
-        if modelpath is not None:
-            self.modelpath = modelpath
+            alpha=0.1,
+            shap_index=None,
+            shapnum=10,
+            nullsteps=100000,
+            veritas_version='0.0.1'):
+        """
+        Fits the Veritas model to the provided data. It involves training Q-net models
+        for both positive and negative cases and determining feature importance using SHAP values.
 
-        if processes is None:
-            processes = self.MAX_PROCESSES
+        Parameters:
+            - alpha (float): The significance level for Qnet.
+            - shap_index (list): Predefined list of SHAP indices if available.
+            - shapnum (int): Number of samples to calculate SHAP values for.
+            - nullsteps (int): Number of steps for q-sampling in the background distribution.
+            - veritas_version (str): Version identifier for the model.
+        """
+        
+        if self.index_present:
+            self.data = pd.read_csv(self.datapath,index_col=0, dtype=str, na_filter=False).fillna('').astype(str)
+        else:
+            self.data = pd.read_csv(self.datapath, dtype=str, na_filter=False).fillna('').astype(str)
 
-        if fit:
-            with open(os.devnull, "w") as f, contextlib.redirect_stdout(f):
-                data_ = dataFormatter(samples=self.datapath)
-                model_ = model()
-                model_.fit(data_obj=data_,
-                           min_samples_split=2,
-                           alpha=0.05,
-                           max_depth=-1,
-                           max_feats=-1,
-                           early_stopping=False,
-                           verbose=0,
-                           random_state=None,
-                           njobs=processes)
-                model_.save(self.modelpath, low_mem=True)
+        if self.VERBOSE:
+            print('data reading complete')
+            
+        self.data = self.synccols(self.data)
+        
+        if self.VERBOSE:
+            print(self.data)
+        
+        num_training=np.rint(self.training_fraction*self.data.index.size).astype(int)
+        training_index=np.random.choice(self.data.index.values,num_training, replace=False)
 
-        self.model_obj.load(self.modelpath)
-        self.load_from_model(self.model_obj,
-                             self.data_obj,
-                             'all')
+        self.training_index=training_index
+        df_training=self.data.loc[training_index,:]
+        df_training = self.synccols(df_training)
+        df_test = self.data.loc[[x for x in self.data.index.values
+                                 if x not in training_index],:][df_training.columns]
+
+        if self.target_label:
+        
+            df_training_pos=df_training[df_training[self.target_label]==str(self.target_label_positive)]
+            df_training_neg=df_training[df_training[self.target_label]==str(self.target_label_negative)]
+            Xpos_training=df_training_pos.drop(self.target_label,
+                                               axis=1)\
+                                         .values.astype(str)
+            Xneg_training=df_training_neg.drop(self.target_label,
+                                               axis=1)\
+                                         .values.astype(str)
+
+            featurenames = df_training_pos.drop(self.target_label,
+                                                axis=1).columns
+
+            if self.VERBOSE:
+                print("training qnets")
+            
+            modelneg=Qnet(feature_names=featurenames,alpha=alpha)
+            modelneg.fit(Xneg_training)
+            modelpos=Qnet(feature_names=featurenames,alpha=alpha)
+            modelpos.fit(Xpos_training)
+            modelneg.training_index=training_index
+            modelpos.training_index=training_index
+            
+        else:
+            featurenames = df_training.columns
+            X_training=df_training.values.astype(str)
+
+            model=Qnet(feature_names=featurenames,alpha=alpha)
+            model.fit(X_training)
+            model.training_index=training_index
+
+        
+        def funcw_(S):
+            return np.array([membership_degree(s,modelneg)
+                             /membership_degree(s,modelpos) for s in S])
+
+        def funcm_(S):
+            return funcm(S,model)
+
+        if self.target_label:
+            X=df_test.drop(self.target_label,
+                           axis=1).values.astype(str)
+        
+            NULLSTR=np.array(['']*len(modelneg.feature_names))
+            s_background=qsample(NULLSTR,modelneg,steps=nullsteps)
+            explainer = shap.KernelExplainer(funcw_,np.array([s_background]))
+            shap_values = explainer.shap_values(X[:shapnum])
+            
+            self.shap_index=pd.DataFrame(shap_values.mean(axis=0),
+                                         columns=['shap'])\
+                              .sort_values('shap',
+                                           ascending=False).index.values
+            
+            modelneg.shap_index=self.shap_index
+            modelpos.shap_index=self.shap_index
+
+            # save veritas model
+            self.veritas_model['version']=veritas_version
+            self.veritas_model['model']=modelpos
+            self.veritas_model['model_neg']=modelneg
+            self.veritas_model['problem']=self.problem
+
+        else:
+
+            X=df_test.values.astype(str)
+        
+            NULLSTR=np.array(['']*len(model.feature_names))
+            s_background=qsample(NULLSTR,model,steps=nullsteps)
+            explainer = shap.KernelExplainer(funcm_,np.array([s_background]))
+            shap_values = explainer.shap_values(X[:shapnum])
+            
+            self.shap_index=pd.DataFrame(shap_values.mean(axis=0),
+                                         columns=['shap'])\
+                              .sort_values('shap',
+                                           ascending=False).index.values
+            
+            model.shap_index=self.shap_index
+
+            self.veritas_model['version']=veritas_version
+            self.veritas_model['model']=model
+            self.veritas_model['problem']=self.problem
+        
         return
 
-    def getDissonance(self,
-                      processes=11,
-                      outfile=None):
-        with open(os.devnull, "w") as f, contextlib.redirect_stdout(f):
-            self.set_nsamples(len(self.samples),
-                              random=False,
-                              verbose=False)
-            self.MAX_PROCESSES = processes
-            return_dict = self.dissonance_matrix(
-                outfile=outfile, processes=self.MAX_PROCESSES)
-        self.dissonance = pd.DataFrame(return_dict.copy())
-        return
-
-    def generateRandomResponse(self,
-                               n=1,
-                               processes=None,
-                               samples=None,
-                               mode='prob',
-                               alpha=0.05,
-                               n_sided=1,
-                               getsuspects=True,
-                               steps=200):
-        """random sample from the underlying distributions by column.
-
-        Args:
-            type (str): Mode, can be "null", "uniform", or "prob" (Default)
-            df (pandas.DataFrame): Data. If None, qnet samples are used.
-            n (int): number of random samples to take. Defaults to 1.
-            steps (int): number of steps to qsample. Defaults to 1000
-
-        Returns:
-
+    def save(self, filepath):
+        '''
+        save veritas model
+        '''
+        with gzip.open(filepath, 'wb') as file:
+            M=self.veritas_model
+            pickle.dump(M, file)
+    
+    def calibrate(self,
+                  qsteps=1000,num_workers=11,
+                  calibration_num=10000):
         """
-        if processes is None:
-            processes = self.MAX_PROCESSES
-        usamples = self.random_sample(df=samples,
-                                      type=mode,
-                                      n=n,
-                                      steps=steps,
-                                      n_jobs=processes)
-        results = []
-        for s in range(len(usamples)):
-            results.append(
-                self.compute_dissonance(0, sample=usamples.iloc[s]))
-        if getsuspects:
-            self.urandom_dissonance_df = pd.DataFrame(results)
-        else:
-            self.null_dissonance_df = pd.DataFrame(results)
-            self.null_dissonance_steps = steps
+        Calibrates the decision thresholds for the Veritas model using the distribution of scores
+        from the trained model. It involves sampling, revealing, and fitting distributions 
+        to determine appropriate thresholds.
 
-        if getsuspects:
-            self.__cithreshold(alpha=alpha, n_sided=n_sided, mode='suspect')
-        else:
-            self.__cithreshold(alpha=alpha, n_sided=n_sided, mode='core')
-
-        return usamples
-
-    def __cithreshold(self,
-                      alpha,
-                      n_sided=1,
-                      mode='suspect'):
-        if mode == 'suspect':
-            qnet_mean = self.urandom_dissonance_df.mean(axis=1).mean()
-            qnet_std = self.urandom_dissonance_df.mean(axis=1).std(ddof=1)
-        if mode == 'core':
-            qnet_mean = self.null_dissonance_df.mean(axis=1).mean()
-            qnet_std = self.null_dissonance_df.mean(axis=1).std(ddof=1)
-
-        z_critL = norm.ppf(1 - alpha / n_sided)
-        z_critR = norm.ppf(1 - (1 - alpha) / n_sided)
-        self.cithreshold[(mode, alpha)] = ((-z_critL * qnet_std) + qnet_mean,
-                                           (-z_critR * qnet_std) + qnet_mean)
-        return
-
-    def getSuspects(self,
-                    samples=None,
-                    alpha=0.05,
-                    mode='uniform',
-                    return_samples=False,
-                    processes=None):
-        """get suspects at a specified significance level using trained Qnet.
-
-        Args:
-            samples (int): No. of random samples drawn (no. of samples used to construct QNet)
-            alpha (float): significance level (default=0.05).
-            processes (int): max number of parallel processes used (default=10).
-
-        Returns:
-            suspects (pandas.DataFrame)
+        Parameters:
+            - qsteps (int): Number of steps for q-sampling during calibration.
+            - calibration_num (int): Number of samples to use for calibration.
         """
 
-        self.suspects = None
-        if samples is None:
-            samples = len(self.samples)
-        if processes is None:
-            processes = self.MAX_PROCESSES
+        featurenames = self.veritas_model['model'].feature_names
+        NSTR = np.array([''] * len(featurenames)).astype('U100')
+        model = self.veritas_model['model']
 
-        usamples = self.generateRandomResponse(n=samples,
-                                               processes=processes,
-                                               steps=None,
-                                               mode=mode,
-                                               alpha=alpha)
+        if self.VERBOSE:
+            print('calibrating...')
 
-        if self.dissonance is not None:
-            mean_dissonance = pd.DataFrame(
-                data=self.dissonance.mean(axis=1), columns=["mean_dissonance"])
-        else:
-            raise ('dissonance values are None')
+        seed=0
+        init_globals(model, qsteps, NSTR)
+        with ProcessPoolExecutor(max_workers=num_workers,
+                                 initializer=init_globals,
+                                 initargs=(model, qsteps, NSTR)) as executor:
+            seeds = [seed for _ in range(calibration_num)]
+            results = list(tqdm(executor.map(task, seeds),
+                            total=calibration_num))
 
-        self.suspects = mean_dissonance[mean_dissonance.mean_dissonance
-                                        >= self.cithreshold[('suspect', alpha)][0]].copy()
 
-        self.suspects.drop_duplicates(inplace=True)
-        if return_samples:
-            return self.suspects.copy(), usamples
-        else:
-            return self.suspects.copy()
+        lower_ = np.array([x[0] for x in results])
+        veritas_ = np.array([x[1] for x in results])
+        
+        self.veritas_model['calibration_lower']=lower_
+        self.veritas_model['calibration_veritas']=veritas_
 
-    def getCoresamples(self,
-                       samples=None,
-                       alpha=0.05,
-                       steps=None,
-                       return_samples=False,
-                       processes=None):
-        """get samples in model-core at a specified significance level using trained Qnet.
+        # Fitting distributions to lower and veritas thresholds
+        dfit = distfit(distr='lognorm',verbose=None)
+        dfit.fit_transform(lower_)
+        df, loc, scale = dfit.model['params']
+        dist = lognorm(df, loc=loc, scale=scale)
+        self.veritas_model['dist_lower'] = dist        
+        self.veritas_model['LOWER_THRESHOLD'] = dist.ppf(self.threshold_alpha)
 
-        Args:
-            samples (int): No. of random samples drawn (no. of samples used to construct QNet)
-            alpha (float): significance level (default=0.05).
-            processes (int): max number of parallel processes used (default=10).
+        dfitv = distfit(smooth=10, distr='lognorm',verbose=None)
+        dfitv.fit_transform(veritas_)
+        dfv, locv, scalev = dfitv.model['params']
+        distv = lognorm(dfv, loc=locv, scale=scalev)
+        self.veritas_model['dist_veritas'] = distv        
+        self.veritas_model['VERITAS_THRESHOLD'] = distv.ppf(self.threshold_alpha_veritas)
 
-        Returns:
-            suspects (pandas.DataFrame)
-        """
-        # alpha=1-alpha
-        self.suspects = None
-        if samples is None:
-            samples = len(self.samples)
-        if processes is None:
-            processes = self.MAX_PROCESSES
-        if steps is None:
-            steps = self.QSTEPS
+        if self.VERBOSE:
+            print(self.veritas_model)
+        
+        # Using test data to infer the decision threshold for the upper threshold
+        if self.target_label:
+            df_test = self.data.loc[[x for x in self.data.index.values if x not in self.training_index], :]
+            featurenames = df_test.drop(self.target_label, axis=1, errors='ignore').columns
+            labels = df_test[self.target_label].values.astype(int)
 
-        usamples = self.generateRandomResponse(n=samples,
-                                               processes=processes,
-                                               steps=steps,
-                                               mode='null',
-                                               getsuspects=False,
-                                               alpha=alpha)
+            df_test = df_test.drop(self.target_label, axis=1, errors='ignore')
+            df_test = pd.concat([pd.DataFrame(columns=featurenames),
+                                  df_test[featurenames[self.shap_index[:self.query_limit]]]]).fillna('')
+            X= df_test.values.astype(str)
 
-        results = []
-        for s in range(len(usamples)):
-            results.append(
-                self.compute_dissonance(0, sample=usamples.iloc[s]))
-        if self.dissonance is not None:
-            mean_dissonance = pd.DataFrame(
-                data=self.dissonance.mean(axis=1), columns=["mean_dissonance"])
-        else:
-            raise ('dissonance values are None')
+            pred = np.array([funcw(s,
+                         self.veritas_model['model'],
+                         self.veritas_model['model_neg']) for s in X])
 
-        self.coresamples = mean_dissonance[mean_dissonance.mean_dissonance
-                                           <= self.cithreshold[('core', alpha)][1]].copy()
-
-        self.coresamples.drop_duplicates(inplace=True)
-        if return_samples:
-            return self.coresamples.copy(), usamples
-        else:
-            return self.coresamples.copy()
-
-    def load_from_model(self,
-                        model,
-                        data_obj,
-                        key,
-                        verbose=False):
-        """load parameters from model object
-
-        Args:
-          model (Class): model obj for loading parameters
-          data_obj (class): instance of dataformatter class
-          key (str): 'all', 'train', or 'test', corresponding to sample type
-          im_vars (list[str], optional): Not implemented yet. Defaults to None.
-          m_vars (list[str], optional): Not implemented yet. Defaults to None.
-          verbos (bool, optional): Whether or not to print out model state. Defaults to False.
-        """
-        if model is not None:
-            # inherit atrributes from model object
-            self.qnet = model.myQnet
-            featurenames, samples = data_obj.format_samples(key)
-            samples = pd.DataFrame(samples)
-            self.cols = np.array(featurenames)
-            self.features = pd.DataFrame(columns=np.array(featurenames))
-
-            # inherit mutable and immutable variables from model obj
-            if any(x is not None for x in [model.immutable_vars, model.mutable_vars]):
-                if model.immutable_vars is not None:
-                    self.immutable_vars = model.immutable_vars
-                    self.mutable_vars = [x for x in self.features if x not in self.immutable_vars]
-                elif model.mutable_vars is not None:
-                    self.mutable_vars = model.mutable_vars
-                    self.immutable_vars = [x for x in self.features if x not in self.mutable_vars]
+            # Calculating metrics and determining the upper threshold
+            fpr, tpr, thresholds = metrics.roc_curve(labels, pred, pos_label=1)
+            rf = pd.DataFrame(tpr, fpr, columns=['tpr']).assign(threshold=thresholds)
+            rf.index.name = 'fpr'
+            rf=rf.reset_index()
+            zt = zedstat.processRoc(df=rf, order=3, total_samples=2*calibration_num,
+                                    positive_samples=calibration_num, alpha=0.01, prevalence=0.5)
+            zt.smooth(STEP=0.001)
+            zt.allmeasures(interpolate=True)
+            zt.usample(precision=3)
+            Z = zt.get()
+            
+            if self.VERBOSE:
+                rf.to_csv('tmp.csv')
+                print(X,labels,pred,rf,Z)
+                
+            self.veritas_model['upper_scoretoprobability'] = zt.scoretoprobability
+            
+            if Z.ppv.values[0] > 0.85:
+                THR=0.85
             else:
-                self.mutable_vars = self.features
-
-            # inherit and set class attributes.
-            self.samples = pd.DataFrame(samples).replace("nan", "").fillna("")
-            self.samples.columns = np.array(featurenames)
-            self.all_samples = self.samples
-            self.samples_as_strings = self.samples.fillna('').values.astype(str)[:]
-            self.s_null = [''] * len(self.samples_as_strings[0])
-            self.D_null = self.qnet.predict_distributions(self.s_null)
-            variation_weight = []
-            for d in self.D_null:
-                v = []
-                for val in d.values():
-                    v = np.append(v, val)
-                variation_weight.append(entropy(v, base=len(v)))
-            variation_weight = np.nan_to_num(variation_weight)  # remove nans
-            self.variation_weight = variation_weight
-        if verbose:
-            print("total features: " + str(len(self.features.columns)) + "\n"
-                  + "mutable features: " + str(len(self.mutable_vars.columns)) + "\n"
-                  + "immutable features: " + str(len(self.immutable_vars)))
-
-    def set_nsamples(self,
-                     num_samples,
-                     random=False,
-                     verbose=True):
-        '''select a subset of the samples
-
-        Args:
-          num_samples (int): Set num of samples to subset, default to None, resets to all samples
-          random (bool): take random sample if true, ordered sample if false. Defaults to False
-          verbose (bool): whether or not to print out model state regarding samples. Defaults to True.
-        '''
-        # each time function is called, reset samples to use_all_samples
-        # this allows us to call nsamples numerous times
-        self.samples = self.all_samples
-        if self.samples is not None:
-            # if a greater number of sample is selected than available, raise error
-            if all(x is not None for x in [num_samples, self.samples]):
-                if num_samples > len(self.samples.index):
-                    string = 'The number of selected samples ({}) ' + \
-                             'is greater than the number of samples ({})!'
-                    string = string.format(num_samples, len(self.samples.index))
-                    raise ValueError(string)
-
-                # if the same number of samples is selected as available, print warning
-                if num_samples == len(self.samples.index):
-                    string = 'The number of selected samples ({}) ' + \
-                             'is equal to the number of samples ({})!'
-                    string = string.format(num_samples, len(self.samples.index))
-                    print(string)
-
-                # if random is true, return random sample, otherwise return an ordered slice
-                if random:
-                    self.samples = self.samples.sample(num_samples)
-                else:
-                    self.samples = self.samples.iloc[:num_samples]
-                self.nsamples = num_samples
-                self.samples_as_strings = self.samples[self.cols].fillna('').values.astype(str)[:]
-                if verbose:
-                    if random:
-                        print("The number of random samples have been set to " + str(num_samples))
-                    else:
-                        print("The number of samples have been set to " + str(num_samples))
-
-            elif self.samples is None:
-                raise ValueError("load_data first!")
-        return self.samples
-
-    def getBaseFrequency(self,
-                         sample):
-        '''get frequency of the variables
-        helper func for qsampling
-
-        Args:
-          sample (list[str]): vector of sample, must have the same num of features as the qnet
-        '''
-        # if variable is not mutable, set its base frequency to zero
-        MUTABLE = pd.DataFrame(np.zeros(len(self.cols)), index=self.cols).transpose()
-
-        for m in self.mutable_vars:
-            MUTABLE[m] = 1.0
-        mutable_x = MUTABLE.values[0]
-        base_frequency = mutable_x / mutable_x.sum()
-
-        # otherwise, set base frequency weighted by variation weight
-        for i in range(len(base_frequency)):
-            if base_frequency[i] > 0.0:
-                base_frequency[i] = self.variation_weight[i] * base_frequency[i]
-
-        return base_frequency / base_frequency.sum()
-
-    def qsampling(self,
-                  sample,
-                  steps,
-                  immutable=False):
-        '''perturb the sample based on the qnet distributions and number of steps
-
-        Args:
-          sample (1d array-like): sample vector, must have the same num of features as the qnet
-          steps (int): number of steps to qsample
-          immutable (bool): are there variables that are immutable?
-        '''
-        # immutable, check that mutable variables have been initialized
-        if immutable:
-            if all(x is not None for x in [self.mutable_vars, sample]):
-                return qsample(sample, self.qnet, steps, self.getBaseFrequency(self.samples))
-            elif self.mutable_vars is None:
-                raise ValueError("set mutable and immutable variables first!")
+                THR=Z.ppv.values[2]
+                
+            self.veritas_model['UPPER_THRESHOLD'] = Z[Z.ppv > THR].threshold.values[-1]
+            self.veritas_model['AUC'] = zt.auc()
+        return 
+    
+    def synccols(self, df_):
+        df=df_.copy()
+        if self.target_label:
+            df1 = df[df[self.target_label] ==  str(self.target_label_positive)]
+            df0 = df[df[self.target_label] ==  str(self.target_label_negative)]
+            col1 = df1.replace('', pd.NA).dropna(axis=1, how='all').columns
+            col0 = df0.replace('', pd.NA).dropna(axis=1, how='all').columns
+            col = [x for x in col0 if x in col1]
+            return df[col]
         else:
-            return qsample(sample, self.qnet, steps)
+            return remove_identical_columns(df_)    
+        
+def load_veritas_model(filepath):
+    '''
+    load veritas model
+    '''
+    with gzip.open(filepath, 'rb') as file:
+        model = pickle.load(file)
+    return model
 
-    def random_sample(self,
-                      type="prob",
-                      df=None,
-                      n=1,
-                      steps=200,
-                      n_jobs=3):
-        """compute a random sample from the underlying distributions of the dataset, by column.
+def remove_identical_columns(df):
+    columns_to_drop = [col for col in df.columns if df[col].nunique() == 1]
+    df_cleaned = df.drop(columns=columns_to_drop)
+    
+    return df_cleaned
+ 
 
-
-        Args:
-          type (str): How to randomly draw samples. Can take on "null", "uniform", or "prob". Deafults to "prob".
-          df (pandas.DataFrame): Desired data to take random sample of. Defaults to None, in which case qnet samples are used.
-          n (int): number of random samples to take. Defaults to 1.
-          steps (int): number of steps to qsample. Defaults to 1000
-
-        Returns:
-          return_df (pd.DataFrame): Drawn random sample.
-        """
-        # check if a new dataset was given
-        if df is None:
-            samples_ = self.samples
-        else:
-            samples_ = df
-
-        return_df = pd.DataFrame()
-        # take random sample from each of the columns based on their probability distribution
-        if type == "prob":
-            for col in samples_.columns:
-                return_df[col] = samples_[col].sample(n=n, replace=True).values
-
-        # random sampling using Qnet qsampling
-        elif type == "null":
-            null_array = np.array([''] * len(samples_.columns)).astype('U100')
-            args = [[null_array, steps] for i in range(n)]
-            qsamples = pqdm(args, self.qsampling, n_jobs=n_jobs, argument_type='args')
-
-            # for i in range(n):
-            #     qsamples.append(self.qsampling(null_array, steps))
-            return_df = pd.DataFrame(qsamples, columns=samples_.columns)
-
-        # random sampling using uniform distribution of values by Columns
-        elif type == "uniform":
-            for col in samples_.columns:
-                # get unqiue values for each column and draw n values randomly
-                values = samples_[col].unique().astype(str)
-                return_df[col] = np.random.choice(values, size=n, replace=True)
-        else:
-            raise ValueError("Type is not supported!")
-        return return_df
-
-    def compute_dissonance(self,
-                           sample_index=0,
-                           return_dict=None,
-                           MISSING_VAL=0.0,
-                           sample=None):
-        """compute dissonance for a single sample, helper function for all_dissonance
-
-        Args:
-          sample_index (int): index of the sample to compute dissonance. Defaults to 0.
-          return_dict (dict): dictionary containing multiprocessing results
-          MISSING_VAL (float): default dissonance value
-          sample (1D array): sample to compute dissonance of, instead of using sample index. Defaults to None.
-
-        Returns:
-          diss[self.polar_indices]: ndarray containing dissonance for sample
-        """
-        if all(x is not None for x in [self.samples, self.features]):
-            if sample is None:
-                s = self.samples_as_strings[sample_index]
-            else:
-                s = sample
-            if self.polar_indices is None:
-                self.polar_indices = range(len(s))
-
-            # init vars and calculate dissonance for sample
-            Ds = self.qnet.predict_distributions(s)
-            diss = np.ones(len(Ds)) * MISSING_VAL
-            for i in self.polar_indices:
-                if s[i] != '':
-                    if s[i] in Ds[i].keys():
-                        diss[i] = 1 - Ds[i][s[i]] / np.max(
-                            list(Ds[i].values()))
-                    else:
-                        diss[i] = 1.0
-            if return_dict is not None:
-                return_dict[sample_index] = diss[self.polar_indices]
-            return diss[self.polar_indices]
-        else:
-            raise ValueError("load_data first!")
-
-    def dissonance_matrix(self,
-                          outfile='/example_results/DISSONANCE_matrix.csv',
-                          processes=6):
-        """get the dissonance for all samples
-
-        Args:
-          output (str): directory and/or file for output
-          processes (int): max number of processes. Defaults to 6.
-
-        Returns:
-          result: pandas.DataFrame containing dissonances for each sample
-        """
-        # set columns
-        if self.polar_indices is not None:
-            polar_features = pd.concat([self.features, self.poles], axis=0)
-            cols = polar_features[self.cols].dropna(axis=1).columns
-        else:
-            cols = self.cols
-
-        result = mp_compute(self.samples,
-                            processes,
-                            self.compute_dissonance,
-                            cols,
-                            outfile)
-        return result
+def train(datapath,modelpath,
+          shapnum=10,target_label=None,
+          query_limit=20,calibration_num=5000):
+    TR=truthnet(datapath=datapath,
+                target_label=target_label,
+                query_limit=query_limit,VERBOSE=False)
+    TR.fit(shapnum=shapnum)
+    rf=TR.calibrate(calibration_num=calibration_num)
+    TR.save(modelpath)
 
 
-def mp_compute(samples,
-               max_processes,
-               func,
-               cols,
-               outfile,
-               args=[]):
-    """
-    Compute desired function through multiprocessing and save result to csv.
-
-    Args:
-        samples (2d array): 2 dimensional numpy array
-        max_processes (int): number of processes to use.
-        func (func): function to compute using multiprocessing
-        cols (list): column names of resulting csv
-        outfile (str)): filepath + filename for resulting csv
-        args (list): list containing arguments for desired function. Defaults to empty list.
-    """
-
-    # init mp.Manager and result dict
-    manager = mp.Manager()
-    return_dict = manager.dict()
-
-    num_processes = 0
-    process_list = []
-
-    # init mp.Processes for each individual sample
-    # run once collected processes hit max
-    for i in range(len(samples)):
-        params = tuple([i] + args + [return_dict])
-        num_processes += 1
-        p = mp.Process(target=func,
-                       args=params)
-        process_list.append(p)
-        if num_processes == max_processes:
-            [x.start() for x in process_list]
-            [x.join() for x in process_list]
-            process_list = []
-            num_processes = 0
-
-    # compute remaining processes
-    if num_processes != 0:
-        [x.start() for x in process_list]
-        [x.join() for x in process_list]
-
-    # format and save resulting dict
-    result = pd.DataFrame(return_dict.values(), columns=cols, index=return_dict.keys()).sort_index()
-    result.to_csv(outfile, index=None)
-    return result
