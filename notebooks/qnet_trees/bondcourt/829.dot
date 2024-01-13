@@ -1,8 +1,0 @@
-graph Tree {
-node [shape=box, style="filled, rounded",color="black",penwidth="3",fontcolor="black",                 fontname=helvetica] ;
-graph [ranksep="0 equally", splines=straight,                 bgcolor=transparent, dpi=200] ;
-edge [fontname=helvetica, fontweight=bold,fontcolor=grey14,color=black] ;
-0 [label="4
-Prob: 1:0.2 2:0.3 3:0.2 4:0.3 5:0.1
-Frac: 1.0", fillcolor="#9eb4af"] ;
-{rank = same;}}
