@@ -1,6 +1,6 @@
 import argparse
-from truthnet import *
-from truthfinder import *
+from .truthnet import *
+from .truthfinder import *
 import gzip
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import pylab as plt

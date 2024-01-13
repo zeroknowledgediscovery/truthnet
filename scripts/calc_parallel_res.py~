@@ -1,23 +1,9 @@
 #!/usr/bin/python
 import argparse
-from truthnet import *
-from truthfinder import *
+from .truthnet import *
+from .truthfinder import *
 import gzip
 from concurrent.futures import ThreadPoolExecutor, as_completed
-
-#-----------------------------------------------------------------
-#responsedictpath='./response_jsons/validation_index20.pkl.gz'
-#responsedictpath='./response_jsons/experiment.pkl.gz'
-#Veritas_model_path='./veritas_models/veritas_ptsd.pkl.gz'
-#Veritas_model_path='./veritas_models/veritas_002.pkl.gz'
-#outfilepath='res_exp_model2.csv'
-#with gzip.open('../response_jsons/validation_ptsd_full.pkl.gz', 'rb') as #filepath:
-#    fulldata = pickle.load(filepath)
-#with gzip.open('../response_jsons/validation_cat.pkl.gz', 'rb') as filepath:
-#    catadata = pickle.load(filepath)
-
-# Setting up argparse to handle command line arguments
-#-----------------------------------------------------------------
 
 parser = argparse.ArgumentParser(description="Calculate response dataframe from response json in parallel")
 parser.add_argument("--responsedictpath", type=str, required=True, help="Path to the response dictionary")

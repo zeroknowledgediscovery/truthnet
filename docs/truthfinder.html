@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>truthnet.truthfinder API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#666666;background-color:black;//mix-blend-mode:difference;color:#bbbbbb;z-index:3}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#66bb66;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#66FF66}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:transparent;padding:1px 4px;color:#FFA500;overflow-wrap:break-word}h1 code{background:transparent}pre{overflow-wrap:break-word;background:#111111;word-wrap:break-word;border:0;border-top:1px solid #666;border-bottom:1px solid #666;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#333333;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#aaeeaa;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;color:#bbbbbb;background-color:black;overflow-wrap:break-word}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS_CHTML" integrity="sha256-kZafAc6mZvK3W3v1pHOcUix30OHQN6pU/NO2oFkqZVw=" crossorigin></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>truthnet.truthfinder</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import gzip
+import dill as pickle
+import pandas as pd
+from quasinet.qnet import load_qnet
+from quasinet.qnet import qdistance
+from quasinet.qsampling import qsample
+from quasinet.qnet import membership_degree
+import numpy as np
+
+
+DIAGNOSIS_THRESHOLD=1.35
+VERITAS_THRESHOLD=0.76
+LOWER_FABRICATION_THREHOLD=1
+
+
+def check_json_format(json_data):
+    &#34;&#34;&#34;
+    Checks if the given JSON data follows the specified format:
+    - JSON is a list
+    - Each item in the list is an object with a string or int key (patient ID)
+    - Each value corresponding to a patient ID is an object with string or int keys (question IDs) and integer values (answers)
+    &#34;&#34;&#34;
+    # Check if the data is a list
+    if not isinstance(json_data, (np.ndarray,list)):
+        print(&#39;not nd.array or list&#39;)
+        return False
+
+    for item in json_data:
+        # Each item in the list should be a dictionary (object)
+        if not isinstance(item, dict):
+            print(&#39;items not dict&#39;)
+            return False
+
+        for patient_id, questions in item.items():
+            # Patient ID should be a string or int
+            if not isinstance(patient_id, (str, int)):
+                print(&#39;pid not str or int&#39;)
+                return False
+
+            # Questions should be a dictionary (object)
+            if not isinstance(questions, dict):
+                print(&#39;questions not dict&#39;)
+                return False
+
+            for question_id, answer in questions.items():
+                # Question ID should be a string or int
+                if not isinstance(question_id, (str, int)):
+                    print(&#39;question id not str or int&#39;)
+                    return False
+
+                # Answer should be an integer
+                if not isinstance(answer, (str,int)):
+                    print(&#39;question response not str or int&#39;)
+                    return False
+
+    print(&#39;ckeck passed&#39;)
+    return True
+    
+    
+def make_str_format(resp_json):
+    # check format
+    if check_json_format(resp_json):
+        return [
+            {
+                patient_id: {
+                    question_id: str(int(response)) if response != &#39;&#39; else response
+                    for question_id, response in patient_responses.items()
+                }
+                for patient_id, patient_responses in patient.items()
+            }
+            for patient in resp_json
+        ]
+
+
+def load_from_pkl_gz(filename):
+    &#34;&#34;&#34;
+    Unpickles and loads the contents of a .pkl.gz file.
+
+    :param filename: The path to the .pkl.gz file.
+    :return: The unpickled data.
+    &#34;&#34;&#34;
+    with gzip.open(filename, &#39;rb&#39;) as f:
+        data = pickle.load(f)
+    return data
+
+
+def dissonance(pos,seq,model):
+    if seq[pos]==&#39;&#39;:
+        return np.nan
+    D=model.predict_distributions(seq) 
+    return 1-D[pos].get(str(seq[pos]),0)
+
+def dissonance_distr(seq,model):
+    return np.array([dissonance(pos,seq,model) for pos in range(len(seq))])
+
+def dissonance_distr_median(seq,model):
+    a=dissonance_distr(seq,model)
+    return np.median(a[~np.isnan(a)])
+
+
+# Function to read the JSON file and extract the top-level keys
+# as subject ID and the associated dictionary as responses
+def extract_ptsd_items(jsondata):
+        data=jsondata
+        subjects = []
+        for entry in data:
+            for subject_id, responses in entry.items():
+                subjects.append({&#34;subject_id&#34;: subject_id,
+                                 &#34;responses&#34;: responses})
+        return subjects
+
+def funcw(s,model_pos,model_neg):
+    &#39;&#39;&#39;
+    funcw should be greater than DIAGNOSIS_THRESHOLD
+    &#39;&#39;&#39;
+    neg=membership_degree(s,model_neg)
+    pos=membership_degree(s,model_pos)
+    
+    return neg/pos
+
+def funcm(array,model_pos,model_neg=None):
+    &#39;&#39;&#39;
+    funcm should be greater than LOWER_FABRICATION_THREHOLD=1. Lower values indicate fabrication
+    &#39;&#39;&#39;
+    if isinstance(array, np.ndarray):
+        if isinstance(array[0], str):
+            return -membership_degree(array,model_pos)/(array!=&#39;&#39;).sum() 
+        if isinstance(array[0],np.ndarray):
+            if isinstance(array[0][0], str):
+                return np.array([-membership_degree(s,model_pos)/(s!=&#39;&#39;).sum()  for s in array])
+    raise(&#39;incorrect datatype. must be 2d numpy array of strings&#39;)
+    return
+
+
+    
+def reveal(resp_json,
+           veritas_model_path,
+           perturb=3,
+           score=True,
+           ci=True,
+           model_path=True):
+    patients_responses = make_str_format(resp_json)
+    
+    list_response_dict = extract_ptsd_items(patients_responses)
+
+    if model_path:
+        veritas_model = load_from_pkl_gz(veritas_model_path)
+    else:
+        veritas_model = veritas_model_path
+
+    message=[]
+    for i in list_response_dict:
+        subjectid=i[&#39;subject_id&#39;]
+        resp = i[&#39;responses&#39;]
+        s=pd.concat([pd.DataFrame(columns=veritas_model[&#39;model&#39;].feature_names),
+                   pd.DataFrame(resp,index=[&#39;response&#39;])])\
+                        .fillna(&#39;&#39;).values[0].astype(str)
+
+        if perturb &gt; 0:
+            s=qsample(s,veritas_model[&#39;model&#39;],steps=perturb)
+            
+        i[&#39;veritas&#39;] = dissonance_distr_median(s,veritas_model[&#39;model&#39;])
+
+        if score:
+            i[&#39;score&#39;]=funcw(s,
+                         veritas_model[&#39;model&#39;], 
+                         veritas_model[&#39;model_neg&#39;])
+        else:
+            i[&#39;score&#39;]=0
+            
+        i[&#39;lower_threshold&#39;]=funcm(s,
+                         veritas_model[&#39;model&#39;])
+        if ci:
+            i[&#39;veritas_prob&#39;] = veritas_model[&#39;dist_veritas&#39;].cdf(i[&#39;veritas&#39;])
+            i[&#39;lower_prob&#39;] = veritas_model[&#39;dist_lower&#39;].cdf(i[&#39;lower_threshold&#39;])
+
+        message = message + [interpret(i)]
+    return list_response_dict, message
+
+
+def interpret(calculated_score):
+    lower_threshold=calculated_score.get(&#39;lower_threshold&#39;,None)
+    score=calculated_score.get(&#39;score&#39;,None)
+    veritas=calculated_score.get(&#39;veritas&#39;,None)
+    veritas_prob=calculated_score.get(&#39;veritas_prob&#39;,None)
+
+
+    MESSAGE={-1:&#39;No PTSD indicated. Malingering test unnecessary&#39;,
+             0:&#39;No Malingering detected. True PTSD indicated&#39;,
+             1:&#39;Fabrication detected&#39;,
+             2:&#39;Maligering detected. You are likely lying with probability &gt; &#39;+ str(veritas_prob)[:5]}
+
+    if lower_threshold &lt; LOWER_FABRICATION_THREHOLD:
+        malingering_class=1
+    else:
+        if score &gt; DIAGNOSIS_THRESHOLD:
+            if veritas &gt; VERITAS_THRESHOLD:
+                malingering_class=2
+            else:
+                malingering_class=0
+        else:
+             malingering_class=-1
+                
+    return MESSAGE[malingering_class]</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="truthnet.truthfinder.check_json_format"><code class="name flex">
+<span>def <span class="ident">check_json_format</span></span>(<span>json_data)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Checks if the given JSON data follows the specified format:
+- JSON is a list
+- Each item in the list is an object with a string or int key (patient ID)
+- Each value corresponding to a patient ID is an object with string or int keys (question IDs) and integer values (answers)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def check_json_format(json_data):
+    &#34;&#34;&#34;
+    Checks if the given JSON data follows the specified format:
+    - JSON is a list
+    - Each item in the list is an object with a string or int key (patient ID)
+    - Each value corresponding to a patient ID is an object with string or int keys (question IDs) and integer values (answers)
+    &#34;&#34;&#34;
+    # Check if the data is a list
+    if not isinstance(json_data, (np.ndarray,list)):
+        print(&#39;not nd.array or list&#39;)
+        return False
+
+    for item in json_data:
+        # Each item in the list should be a dictionary (object)
+        if not isinstance(item, dict):
+            print(&#39;items not dict&#39;)
+            return False
+
+        for patient_id, questions in item.items():
+            # Patient ID should be a string or int
+            if not isinstance(patient_id, (str, int)):
+                print(&#39;pid not str or int&#39;)
+                return False
+
+            # Questions should be a dictionary (object)
+            if not isinstance(questions, dict):
+                print(&#39;questions not dict&#39;)
+                return False
+
+            for question_id, answer in questions.items():
+                # Question ID should be a string or int
+                if not isinstance(question_id, (str, int)):
+                    print(&#39;question id not str or int&#39;)
+                    return False
+
+                # Answer should be an integer
+                if not isinstance(answer, (str,int)):
+                    print(&#39;question response not str or int&#39;)
+                    return False
+
+    print(&#39;ckeck passed&#39;)
+    return True</code></pre>
+</details>
+</dd>
+<dt id="truthnet.truthfinder.dissonance"><code class="name flex">
+<span>def <span class="ident">dissonance</span></span>(<span>pos, seq, model)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def dissonance(pos,seq,model):
+    if seq[pos]==&#39;&#39;:
+        return np.nan
+    D=model.predict_distributions(seq) 
+    return 1-D[pos].get(str(seq[pos]),0)</code></pre>
+</details>
+</dd>
+<dt id="truthnet.truthfinder.dissonance_distr"><code class="name flex">
+<span>def <span class="ident">dissonance_distr</span></span>(<span>seq, model)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def dissonance_distr(seq,model):
+    return np.array([dissonance(pos,seq,model) for pos in range(len(seq))])</code></pre>
+</details>
+</dd>
+<dt id="truthnet.truthfinder.dissonance_distr_median"><code class="name flex">
+<span>def <span class="ident">dissonance_distr_median</span></span>(<span>seq, model)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def dissonance_distr_median(seq,model):
+    a=dissonance_distr(seq,model)
+    return np.median(a[~np.isnan(a)])</code></pre>
+</details>
+</dd>
+<dt id="truthnet.truthfinder.extract_ptsd_items"><code class="name flex">
+<span>def <span class="ident">extract_ptsd_items</span></span>(<span>jsondata)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def extract_ptsd_items(jsondata):
+        data=jsondata
+        subjects = []
+        for entry in data:
+            for subject_id, responses in entry.items():
+                subjects.append({&#34;subject_id&#34;: subject_id,
+                                 &#34;responses&#34;: responses})
+        return subjects</code></pre>
+</details>
+</dd>
+<dt id="truthnet.truthfinder.funcm"><code class="name flex">
+<span>def <span class="ident">funcm</span></span>(<span>array, model_pos, model_neg=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>funcm should be greater than LOWER_FABRICATION_THREHOLD=1. Lower values indicate fabrication</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def funcm(array,model_pos,model_neg=None):
+    &#39;&#39;&#39;
+    funcm should be greater than LOWER_FABRICATION_THREHOLD=1. Lower values indicate fabrication
+    &#39;&#39;&#39;
+    if isinstance(array, np.ndarray):
+        if isinstance(array[0], str):
+            return -membership_degree(array,model_pos)/(array!=&#39;&#39;).sum() 
+        if isinstance(array[0],np.ndarray):
+            if isinstance(array[0][0], str):
+                return np.array([-membership_degree(s,model_pos)/(s!=&#39;&#39;).sum()  for s in array])
+    raise(&#39;incorrect datatype. must be 2d numpy array of strings&#39;)
+    return</code></pre>
+</details>
+</dd>
+<dt id="truthnet.truthfinder.funcw"><code class="name flex">
+<span>def <span class="ident">funcw</span></span>(<span>s, model_pos, model_neg)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>funcw should be greater than DIAGNOSIS_THRESHOLD</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def funcw(s,model_pos,model_neg):
+    &#39;&#39;&#39;
+    funcw should be greater than DIAGNOSIS_THRESHOLD
+    &#39;&#39;&#39;
+    neg=membership_degree(s,model_neg)
+    pos=membership_degree(s,model_pos)
+    
+    return neg/pos</code></pre>
+</details>
+</dd>
+<dt id="truthnet.truthfinder.interpret"><code class="name flex">
+<span>def <span class="ident">interpret</span></span>(<span>calculated_score)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def interpret(calculated_score):
+    lower_threshold=calculated_score.get(&#39;lower_threshold&#39;,None)
+    score=calculated_score.get(&#39;score&#39;,None)
+    veritas=calculated_score.get(&#39;veritas&#39;,None)
+    veritas_prob=calculated_score.get(&#39;veritas_prob&#39;,None)
+
+
+    MESSAGE={-1:&#39;No PTSD indicated. Malingering test unnecessary&#39;,
+             0:&#39;No Malingering detected. True PTSD indicated&#39;,
+             1:&#39;Fabrication detected&#39;,
+             2:&#39;Maligering detected. You are likely lying with probability &gt; &#39;+ str(veritas_prob)[:5]}
+
+    if lower_threshold &lt; LOWER_FABRICATION_THREHOLD:
+        malingering_class=1
+    else:
+        if score &gt; DIAGNOSIS_THRESHOLD:
+            if veritas &gt; VERITAS_THRESHOLD:
+                malingering_class=2
+            else:
+                malingering_class=0
+        else:
+             malingering_class=-1
+                
+    return MESSAGE[malingering_class]</code></pre>
+</details>
+</dd>
+<dt id="truthnet.truthfinder.load_from_pkl_gz"><code class="name flex">
+<span>def <span class="ident">load_from_pkl_gz</span></span>(<span>filename)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Unpickles and loads the contents of a .pkl.gz file.</p>
+<p>:param filename: The path to the .pkl.gz file.
+:return: The unpickled data.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def load_from_pkl_gz(filename):
+    &#34;&#34;&#34;
+    Unpickles and loads the contents of a .pkl.gz file.
+
+    :param filename: The path to the .pkl.gz file.
+    :return: The unpickled data.
+    &#34;&#34;&#34;
+    with gzip.open(filename, &#39;rb&#39;) as f:
+        data = pickle.load(f)
+    return data</code></pre>
+</details>
+</dd>
+<dt id="truthnet.truthfinder.make_str_format"><code class="name flex">
+<span>def <span class="ident">make_str_format</span></span>(<span>resp_json)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def make_str_format(resp_json):
+    # check format
+    if check_json_format(resp_json):
+        return [
+            {
+                patient_id: {
+                    question_id: str(int(response)) if response != &#39;&#39; else response
+                    for question_id, response in patient_responses.items()
+                }
+                for patient_id, patient_responses in patient.items()
+            }
+            for patient in resp_json
+        ]</code></pre>
+</details>
+</dd>
+<dt id="truthnet.truthfinder.reveal"><code class="name flex">
+<span>def <span class="ident">reveal</span></span>(<span>resp_json, veritas_model_path, perturb=3, score=True, ci=True, model_path=True)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def reveal(resp_json,
+           veritas_model_path,
+           perturb=3,
+           score=True,
+           ci=True,
+           model_path=True):
+    patients_responses = make_str_format(resp_json)
+    
+    list_response_dict = extract_ptsd_items(patients_responses)
+
+    if model_path:
+        veritas_model = load_from_pkl_gz(veritas_model_path)
+    else:
+        veritas_model = veritas_model_path
+
+    message=[]
+    for i in list_response_dict:
+        subjectid=i[&#39;subject_id&#39;]
+        resp = i[&#39;responses&#39;]
+        s=pd.concat([pd.DataFrame(columns=veritas_model[&#39;model&#39;].feature_names),
+                   pd.DataFrame(resp,index=[&#39;response&#39;])])\
+                        .fillna(&#39;&#39;).values[0].astype(str)
+
+        if perturb &gt; 0:
+            s=qsample(s,veritas_model[&#39;model&#39;],steps=perturb)
+            
+        i[&#39;veritas&#39;] = dissonance_distr_median(s,veritas_model[&#39;model&#39;])
+
+        if score:
+            i[&#39;score&#39;]=funcw(s,
+                         veritas_model[&#39;model&#39;], 
+                         veritas_model[&#39;model_neg&#39;])
+        else:
+            i[&#39;score&#39;]=0
+            
+        i[&#39;lower_threshold&#39;]=funcm(s,
+                         veritas_model[&#39;model&#39;])
+        if ci:
+            i[&#39;veritas_prob&#39;] = veritas_model[&#39;dist_veritas&#39;].cdf(i[&#39;veritas&#39;])
+            i[&#39;lower_prob&#39;] = veritas_model[&#39;dist_lower&#39;].cdf(i[&#39;lower_threshold&#39;])
+
+        message = message + [interpret(i)]
+    return list_response_dict, message</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<img src="logozed_nowhite.png" alt="drawing" style="width:400px;"/>
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="truthnet" href="index.html">truthnet</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="truthnet.truthfinder.check_json_format" href="#truthnet.truthfinder.check_json_format">check_json_format</a></code></li>
+<li><code><a title="truthnet.truthfinder.dissonance" href="#truthnet.truthfinder.dissonance">dissonance</a></code></li>
+<li><code><a title="truthnet.truthfinder.dissonance_distr" href="#truthnet.truthfinder.dissonance_distr">dissonance_distr</a></code></li>
+<li><code><a title="truthnet.truthfinder.dissonance_distr_median" href="#truthnet.truthfinder.dissonance_distr_median">dissonance_distr_median</a></code></li>
+<li><code><a title="truthnet.truthfinder.extract_ptsd_items" href="#truthnet.truthfinder.extract_ptsd_items">extract_ptsd_items</a></code></li>
+<li><code><a title="truthnet.truthfinder.funcm" href="#truthnet.truthfinder.funcm">funcm</a></code></li>
+<li><code><a title="truthnet.truthfinder.funcw" href="#truthnet.truthfinder.funcw">funcw</a></code></li>
+<li><code><a title="truthnet.truthfinder.interpret" href="#truthnet.truthfinder.interpret">interpret</a></code></li>
+<li><code><a title="truthnet.truthfinder.load_from_pkl_gz" href="#truthnet.truthfinder.load_from_pkl_gz">load_from_pkl_gz</a></code></li>
+<li><code><a title="truthnet.truthfinder.make_str_format" href="#truthnet.truthfinder.make_str_format">make_str_format</a></code></li>
+<li><code><a title="truthnet.truthfinder.reveal" href="#truthnet.truthfinder.reveal">reveal</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+Author: <a href="https://zed.uchicago.edu"> Zero Knowledge Discovery, University of Chicago</a>. Email: ishanu@uchicago.edu
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>
