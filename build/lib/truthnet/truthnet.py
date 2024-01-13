@@ -10,7 +10,7 @@ import dill as pickle
 import gzip
 import shap
 from scipy.stats import t, lognorm
-from truthfinder import reveal, funcm, funcw, dissonance_distr_median
+from .truthfinder import reveal, funcm, funcw, dissonance_distr_median
 from distfit import distfit
 from sklearn import metrics
 from zedstat import zedstat
