@@ -125,6 +125,8 @@ def validate(response_dataframe,C0,C1,C2,
 
 
     if validation_type == "withdx":
+        mratio=(response_dataframe[(response_dataframe.mg==-1) & (response_dataframe.dx==1)].index.size)/response_dataframe.dx.sum()
+        fullauc=zt.auc()
         if plots:
             plt.style.use('seaborn-dark-palette')
 
@@ -146,7 +148,7 @@ def validate(response_dataframe,C0,C1,C2,
             cf=response_dataframe.corr()
             plt.subplot(234)
             sns.heatmap(cf,cmap='jet',alpha=.5)
-            mratio=(response_dataframe[(response_dataframe.mg==-1) & (response_dataframe.dx==1)].index.size)/response_dataframe.dx.sum()
+            
 
 
             plt.subplot(235)
@@ -166,6 +168,7 @@ def validate(response_dataframe,C0,C1,C2,
             return {'auc':fullauc,'mratio':mratio}
 
     if validation_type == "fnrexpt":
+        fnr=response_dataframe[(response_dataframe.mg==1)].index.size/response_dataframe.index.size
         if plots:
             plt.style.use('seaborn-dark-palette')
 
@@ -187,7 +190,7 @@ def validate(response_dataframe,C0,C1,C2,
             cf=response_dataframe.corr()
             plt.subplot(234)
             sns.heatmap(cf,cmap='jet',alpha=.5)
-            fnr=response_dataframe[(response_dataframe.mg==1)].index.size/response_dataframe.index.size
+            
 
             ax = plt.subplot(236)
             ax.text(0.5, 0.6, f'FNR in EXPT: {fnr:.2f}', fontsize=16, ha='center')
@@ -199,6 +202,7 @@ def validate(response_dataframe,C0,C1,C2,
 
 
     if validation_type == "noscore":
+        mrate=response_dataframe[response_dataframe.mg==-1].index.size/response_dataframe.index.size
         if plots:
             plt.style.use('seaborn-dark-palette')
 
@@ -211,7 +215,7 @@ def validate(response_dataframe,C0,C1,C2,
 
             ax = plt.gca()
 
-            mrate=response_dataframe[response_dataframe.mg==-1].index.size/response_dataframe.index.size
+            
             ax.text(0.65, 0.8, f'mrate: {mrate:.2f}', fontsize=16, ha='center')
         else:
             return {'mrate':mrate}

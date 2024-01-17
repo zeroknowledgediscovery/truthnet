@@ -154,6 +154,8 @@ def validate(response_dataframe,C0,C1,C2,
 
 
     if validation_type == &#34;withdx&#34;:
+        mratio=(response_dataframe[(response_dataframe.mg==-1) &amp; (response_dataframe.dx==1)].index.size)/response_dataframe.dx.sum()
+        fullauc=zt.auc()
         if plots:
             plt.style.use(&#39;seaborn-dark-palette&#39;)
 
@@ -175,7 +177,7 @@ def validate(response_dataframe,C0,C1,C2,
             cf=response_dataframe.corr()
             plt.subplot(234)
             sns.heatmap(cf,cmap=&#39;jet&#39;,alpha=.5)
-            mratio=(response_dataframe[(response_dataframe.mg==-1) &amp; (response_dataframe.dx==1)].index.size)/response_dataframe.dx.sum()
+            
 
 
             plt.subplot(235)
@@ -195,6 +197,7 @@ def validate(response_dataframe,C0,C1,C2,
             return {&#39;auc&#39;:fullauc,&#39;mratio&#39;:mratio}
 
     if validation_type == &#34;fnrexpt&#34;:
+        fnr=response_dataframe[(response_dataframe.mg==1)].index.size/response_dataframe.index.size
         if plots:
             plt.style.use(&#39;seaborn-dark-palette&#39;)
 
@@ -216,7 +219,7 @@ def validate(response_dataframe,C0,C1,C2,
             cf=response_dataframe.corr()
             plt.subplot(234)
             sns.heatmap(cf,cmap=&#39;jet&#39;,alpha=.5)
-            fnr=response_dataframe[(response_dataframe.mg==1)].index.size/response_dataframe.index.size
+            
 
             ax = plt.subplot(236)
             ax.text(0.5, 0.6, f&#39;FNR in EXPT: {fnr:.2f}&#39;, fontsize=16, ha=&#39;center&#39;)
@@ -228,6 +231,7 @@ def validate(response_dataframe,C0,C1,C2,
 
 
     if validation_type == &#34;noscore&#34;:
+        mrate=response_dataframe[response_dataframe.mg==-1].index.size/response_dataframe.index.size
         if plots:
             plt.style.use(&#39;seaborn-dark-palette&#39;)
 
@@ -240,7 +244,7 @@ def validate(response_dataframe,C0,C1,C2,
 
             ax = plt.gca()
 
-            mrate=response_dataframe[response_dataframe.mg==-1].index.size/response_dataframe.index.size
+            
             ax.text(0.65, 0.8, f&#39;mrate: {mrate:.2f}&#39;, fontsize=16, ha=&#39;center&#39;)
         else:
             return {&#39;mrate&#39;:mrate}
@@ -436,6 +440,8 @@ was available in training</p></div>
 
 
     if validation_type == &#34;withdx&#34;:
+        mratio=(response_dataframe[(response_dataframe.mg==-1) &amp; (response_dataframe.dx==1)].index.size)/response_dataframe.dx.sum()
+        fullauc=zt.auc()
         if plots:
             plt.style.use(&#39;seaborn-dark-palette&#39;)
 
@@ -457,7 +463,7 @@ was available in training</p></div>
             cf=response_dataframe.corr()
             plt.subplot(234)
             sns.heatmap(cf,cmap=&#39;jet&#39;,alpha=.5)
-            mratio=(response_dataframe[(response_dataframe.mg==-1) &amp; (response_dataframe.dx==1)].index.size)/response_dataframe.dx.sum()
+            
 
 
             plt.subplot(235)
@@ -477,6 +483,7 @@ was available in training</p></div>
             return {&#39;auc&#39;:fullauc,&#39;mratio&#39;:mratio}
 
     if validation_type == &#34;fnrexpt&#34;:
+        fnr=response_dataframe[(response_dataframe.mg==1)].index.size/response_dataframe.index.size
         if plots:
             plt.style.use(&#39;seaborn-dark-palette&#39;)
 
@@ -498,7 +505,7 @@ was available in training</p></div>
             cf=response_dataframe.corr()
             plt.subplot(234)
             sns.heatmap(cf,cmap=&#39;jet&#39;,alpha=.5)
-            fnr=response_dataframe[(response_dataframe.mg==1)].index.size/response_dataframe.index.size
+            
 
             ax = plt.subplot(236)
             ax.text(0.5, 0.6, f&#39;FNR in EXPT: {fnr:.2f}&#39;, fontsize=16, ha=&#39;center&#39;)
@@ -510,6 +517,7 @@ was available in training</p></div>
 
 
     if validation_type == &#34;noscore&#34;:
+        mrate=response_dataframe[response_dataframe.mg==-1].index.size/response_dataframe.index.size
         if plots:
             plt.style.use(&#39;seaborn-dark-palette&#39;)
 
@@ -522,7 +530,7 @@ was available in training</p></div>
 
             ax = plt.gca()
 
-            mrate=response_dataframe[response_dataframe.mg==-1].index.size/response_dataframe.index.size
+            
             ax.text(0.65, 0.8, f&#39;mrate: {mrate:.2f}&#39;, fontsize=16, ha=&#39;center&#39;)
         else:
             return {&#39;mrate&#39;:mrate}
