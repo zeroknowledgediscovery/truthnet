@@ -1,0 +1,44 @@
+\def\TITLE{[Ve]tting  [R]esponse [I]ntegrity via  \\cross-[T]alk  dependency in [A]dversarial [S]urveys: \\ \itshape ``Who can catch a liar?''}
+
+\title{\TITLE}
+
+\def\x{\bm{\mathrm{x}}} 
+\def\y{\bm{\mathrm{y}}}
+
+\author{\sffamily  \fontsize{10}{12}\selectfont Robert Gibbons,       Ishanu Chattopadhyay$^{1,4,5,7\bigstar}$\\ 
+\vspace{10pt}
+
+\sffamily  \fontsize{10}{12}\selectfont
+$^{1}$Department of Medicine, University of Chicago, Chicago, IL 60637, USA\\ 
+$^{4}$Committee on Quantitative Methods in Social, Behavioral, and Health Sciences, University of Chicago, Chicago, IL 60637, USA\\
+$^{5}$Committee on Genetics, Genomics \& Systems Biology, University of Chicago, Chicago, IL 60637, USA
+\vskip 1em
+$^\bigstar$To whom correspondence should be addressed: e-mail: \href{mailto:ishanu@uchicago.edu}{\texttt{ishanu@uchicago.edu}}.}
+\title{\TITLE}
+
+
+\def\TEXTCOL{gray}
+
+
+
+\def\J{\mathds{J}}
+\def\M{\omega}
+%\newcommand{\mem}[1]{\M_{#1}}
+\def\cognet{CogNet\xspace}
+\def\qnet{Q-net\xspace}
+\def\qdist{q-distance\xspace}
+\def\qbiome{Qbiome\xspace}
+\def\qsamp{q-sampling\xspace}
+
+\def\x{\bm{\mathrm{x}}}
+\def\y{\bm{\mathrm{y}}}
+\def\erisk{$M_\delta$\xspace}
+\def\RHO{A_\delta}
+\def\bact{Bacteroidia\xspace}
+\def\actn{Actinobacteria\xspace}
+\def\gamm{Gammaproteobacteria\xspace}
+\def\ubac{unclassified Bacteria\xspace}
+\def\bacl{Bacilli\xspace}
+\def\clsd{Clostridia\xspace}
+\def\corb{Coriobacteriia\xspace}
+\def\verru{Verrucomicrobia\xspace}

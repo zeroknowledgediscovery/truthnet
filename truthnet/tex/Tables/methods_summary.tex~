@@ -1,0 +1,21 @@
+ {\RaggedRight
+\def\arraystretch{1.5}\tabcolsep=10pt
+\begin{longtable}{L{1.5in} L{2.5in} L{2in}}
+\caption{Summary of malingering/lie detection methods.}
+\label{tbl:methods_summary}\\
+\toprule
+\textbf{Approach/Tool} & \textbf{Description} & \textbf{Noted Accuracy/Performance} \\ \midrule
+Structures Interview of Reported Symptoms (SIRS)\cite{Wong2005} & An interview-based measure with multiple detection strategies. & No specific accuracy rate mentioned, but noted as a robust instrument. \\ \midrule
+Structured Inventory of Malingered Symptomology (SIMS)\cite{smith1997detection} & A paper-and-pencil screening device for detecting malingering with a sensitivity for detecting malingering of 95.6\% in a study with college students. & 95.6\% sensitivity in a specific study context. \\ \midrule
+Minnesota Multiphasic Personality Inventory-2 (MMPI-2)\cite{ben2012interpreting} & A self-report measure assessing personality and psychopathology. Certain validity scales were developed to uncover malingering. & Not specified, but noted flaws and potential for false positives. \\ \midrule
+Millon Clinical Multiaxial Inventory MCMI-III & A self-report scale focusing on personality disorders. & No specific accuracy rate mentioned. \\ \midrule
+Miller Forensic Assessment of Symptoms (M-FAST) & A brief screening measure for malingered mental illness in forensic settings. & Noted issues with low internal consistency on some scales. \\ \midrule
+Human Lie Detectors & Not a specific tool, but the general method of humans attempting to discern lies from truth. & People are generally poor lie detectors. \\ \midrule
+Arousal-Based Approaches (like the Polygraph) & Techniques that rely on physiological responses. & Criticized for poor validity and high rate of false positives. \\ \midrule
+Cognitive Load-Inducing Approaches & Techniques that view deception as a cognitive act that generally imposes greater cognitive load on respondents than honesty does. & No specific accuracy rate mentioned. \\ \midrule
+Autobiographical Implicit Association Test (aIAT)\cite{sartori2008accurately} & Designed to determine whether respondents possess actual autobiographical memories. & 91\% accuracy rate in identifying genuine autobiographical memories. \\ \midrule
+Timed Antagonistic Response Alethiometer (TARA)\cite{gregg2007vying} & A computer-administered, response time-based method of lie detection. & 85\% accuracy rate. \\ \midrule
+Detecting Faked Identities With Unexpected Questions and Mouse Movements & Technique using computer mouse movements in conjunction with unexpected questions to uncover faked identities\cite{monaro2017detection} & 95\% accuracy rate. \\ \midrule
+Time-Restricted Integrity Confirmation (TRI-Con) & A cognitive load-inducing technique with potential to uncover different kinds of deception including malingering. & Up to 89\% accuracy rate. \\ \midrule 
+Activation-Decision-Construction-Action Theory (ADCAT) & A theory of high-stakes deception. & No specific accuracy rate mentioned, but this is more of a theoretical foundation rather than a specific tool or method. \\ \bottomrule
+\end{longtable}}
