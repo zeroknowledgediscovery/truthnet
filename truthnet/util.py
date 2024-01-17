@@ -87,7 +87,7 @@ def get_malinger_func(C0,C1,C2,score=True):
 
 
 def validate(response_dataframe,C0,C1,C2,
-             DX=True,score=True, plots=True,
+             DX=True,score=True, plots=True,verbose=True,
              validation_type='withdx',outfile='report.png'):
     '''
     response dataframe should look like:
@@ -121,7 +121,8 @@ def validate(response_dataframe,C0,C1,C2,
         zt.allmeasures(interpolate=True)
         zt.usample(precision=3)
         Z=zt.get()
-        print(Z[Z.ppv>.875].tail(10))
+        if verbose:
+            print(Z[Z.ppv>.875].tail(10))
 
 
     if validation_type == "withdx":
