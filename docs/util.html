@@ -116,7 +116,7 @@ def get_malinger_func(C0,C1,C2,score=True):
 
 
 def validate(response_dataframe,C0,C1,C2,
-             DX=True,score=True,
+             DX=True,score=True, plots=True,
              validation_type=&#39;withdx&#39;,outfile=&#39;report.png&#39;):
     &#39;&#39;&#39;
     response dataframe should look like:
@@ -154,90 +154,96 @@ def validate(response_dataframe,C0,C1,C2,
 
 
     if validation_type == &#34;withdx&#34;:
+        if plots:
+            plt.style.use(&#39;seaborn-dark-palette&#39;)
 
-        plt.style.use(&#39;seaborn-dark-palette&#39;)
+            plt.figure(figsize=[20,12])
+            plt.subplot(231)
+            sns.scatterplot(data=response_dataframe,x=&#39;lower_threshold&#39;,y=&#39;veritas&#39;,hue=&#39;mg&#39;,size=&#39;dx&#39;)
+            plt.plot([.5,2.5],[.76,.76],&#39;-r&#39;)
+            plt.plot([C0,C0],[.5,.95],&#39;-r&#39;)
 
-        plt.figure(figsize=[20,12])
-        plt.subplot(231)
-        sns.scatterplot(data=response_dataframe,x=&#39;lower_threshold&#39;,y=&#39;veritas&#39;,hue=&#39;mg&#39;,size=&#39;dx&#39;)
-        plt.plot([.5,2.5],[.76,.76],&#39;-r&#39;)
-        plt.plot([C0,C0],[.5,.95],&#39;-r&#39;)
+            plt.subplot(232)
+            ax=sns.scatterplot(data=response_dataframe,x=&#39;score&#39;,y=&#39;veritas&#39;,hue=&#39;dx&#39;)
+            plt.plot([.2,2.5],[C1,C1],&#39;-r&#39;)
+            plt.plot([C2,C2],[.5,.95],&#39;-r&#39;)
 
-        plt.subplot(232)
-        ax=sns.scatterplot(data=response_dataframe,x=&#39;score&#39;,y=&#39;veritas&#39;,hue=&#39;dx&#39;)
-        plt.plot([.2,2.5],[C1,C1],&#39;-r&#39;)
-        plt.plot([C2,C2],[.5,.95],&#39;-r&#39;)
+            plt.subplot(233)
+            sns.scatterplot(data=response_dataframe,x=&#39;score&#39;,y=&#39;lower_threshold&#39;,hue=&#39;dx&#39;)
+            plt.subplots_adjust(wspace=0.23)  # Adjust this value as needed
 
-        plt.subplot(233)
-        sns.scatterplot(data=response_dataframe,x=&#39;score&#39;,y=&#39;lower_threshold&#39;,hue=&#39;dx&#39;)
-        plt.subplots_adjust(wspace=0.23)  # Adjust this value as needed
-
-        cf=response_dataframe.corr()
-        plt.subplot(234)
-        sns.heatmap(cf,cmap=&#39;jet&#39;,alpha=.5)
-        mratio=(response_dataframe[(response_dataframe.mg==-1) &amp; (response_dataframe.dx==1)].index.size)/response_dataframe.dx.sum()
+            cf=response_dataframe.corr()
+            plt.subplot(234)
+            sns.heatmap(cf,cmap=&#39;jet&#39;,alpha=.5)
+            mratio=(response_dataframe[(response_dataframe.mg==-1) &amp; (response_dataframe.dx==1)].index.size)/response_dataframe.dx.sum()
 
 
-        plt.subplot(235)
+            plt.subplot(235)
 
-        plt.plot(fpr,tpr,&#39;g&#39;,lw=2)
-        plt.gca().legend([&#39;R20&#39;])
-        zt.get().tpr.plot(style=&#39;-b&#39;,lw=2)
-        fullauc=zt.auc()
+            plt.plot(fpr,tpr,&#39;g&#39;,lw=2)
+            plt.gca().legend([&#39;R20&#39;])
+            zt.get().tpr.plot(style=&#39;-b&#39;,lw=2)
+            fullauc=zt.auc()
 
-        ax = plt.subplot(236)
-        ax.text(0.5, 0.6, f&#39;malinger prevalenec in DX: {mratio:.2f}&#39;, fontsize=16, ha=&#39;center&#39;)
-        ax.text(0.5, 0.4, f&#39;AUC: {fullauc[0]:.2f} $\pm$ {fullauc[1]-fullauc[0]:.2f}&#39;, fontsize=16, ha=&#39;center&#39;)
-        ax.set_xticks([])
-        ax.set_yticks([])
-        ax.set_frame_on(False)
+            ax = plt.subplot(236)
+            ax.text(0.5, 0.6, f&#39;malinger prevalenec in DX: {mratio:.2f}&#39;, fontsize=16, ha=&#39;center&#39;)
+            ax.text(0.5, 0.4, f&#39;AUC: {fullauc[0]:.2f} $\pm$ {fullauc[1]-fullauc[0]:.2f}&#39;, fontsize=16, ha=&#39;center&#39;)
+            ax.set_xticks([])
+            ax.set_yticks([])
+            ax.set_frame_on(False)
+        else:
+            return {&#39;auc&#39;:fullauc,&#39;mratio&#39;:mratio}
 
     if validation_type == &#34;fnrexpt&#34;:
+        if plots:
+            plt.style.use(&#39;seaborn-dark-palette&#39;)
 
-        plt.style.use(&#39;seaborn-dark-palette&#39;)
+            plt.figure(figsize=[20,12])
+            plt.subplot(231)
+            sns.scatterplot(data=response_dataframe,x=&#39;lower_threshold&#39;,y=&#39;veritas&#39;,hue=&#39;mg&#39;,size=&#39;dx&#39;)
+            plt.plot([.5,2.5],[.76,.76],&#39;-r&#39;)
+            plt.plot([C0,C0],[.5,.95],&#39;-r&#39;)
 
-        plt.figure(figsize=[20,12])
-        plt.subplot(231)
-        sns.scatterplot(data=response_dataframe,x=&#39;lower_threshold&#39;,y=&#39;veritas&#39;,hue=&#39;mg&#39;,size=&#39;dx&#39;)
-        plt.plot([.5,2.5],[.76,.76],&#39;-r&#39;)
-        plt.plot([C0,C0],[.5,.95],&#39;-r&#39;)
+            plt.subplot(232)
+            ax=sns.scatterplot(data=response_dataframe,x=&#39;score&#39;,y=&#39;veritas&#39;,hue=&#39;dx&#39;)
+            plt.plot([.2,2.5],[C1,C1],&#39;-r&#39;)
+            plt.plot([C2,C2],[.5,.95],&#39;-r&#39;)
 
-        plt.subplot(232)
-        ax=sns.scatterplot(data=response_dataframe,x=&#39;score&#39;,y=&#39;veritas&#39;,hue=&#39;dx&#39;)
-        plt.plot([.2,2.5],[C1,C1],&#39;-r&#39;)
-        plt.plot([C2,C2],[.5,.95],&#39;-r&#39;)
+            plt.subplot(233)
+            sns.scatterplot(data=response_dataframe,x=&#39;score&#39;,y=&#39;lower_threshold&#39;,hue=&#39;dx&#39;)
+            plt.subplots_adjust(wspace=0.23)  # Adjust this value as needed
 
-        plt.subplot(233)
-        sns.scatterplot(data=response_dataframe,x=&#39;score&#39;,y=&#39;lower_threshold&#39;,hue=&#39;dx&#39;)
-        plt.subplots_adjust(wspace=0.23)  # Adjust this value as needed
+            cf=response_dataframe.corr()
+            plt.subplot(234)
+            sns.heatmap(cf,cmap=&#39;jet&#39;,alpha=.5)
+            fnr=response_dataframe[(response_dataframe.mg==1)].index.size/response_dataframe.index.size
 
-        cf=response_dataframe.corr()
-        plt.subplot(234)
-        sns.heatmap(cf,cmap=&#39;jet&#39;,alpha=.5)
-        fnr=response_dataframe[(response_dataframe.mg==1)].index.size/response_dataframe.index.size
-
-        ax = plt.subplot(236)
-        ax.text(0.5, 0.6, f&#39;FNR in EXPT: {fnr:.2f}&#39;, fontsize=16, ha=&#39;center&#39;)
-        ax.set_xticks([])
-        ax.set_yticks([])
-        ax.set_frame_on(False)
+            ax = plt.subplot(236)
+            ax.text(0.5, 0.6, f&#39;FNR in EXPT: {fnr:.2f}&#39;, fontsize=16, ha=&#39;center&#39;)
+            ax.set_xticks([])
+            ax.set_yticks([])
+            ax.set_frame_on(False)
+        else:
+            return {&#39;fnr&#39;:fnr}
 
 
     if validation_type == &#34;noscore&#34;:
-        
-        plt.style.use(&#39;seaborn-dark-palette&#39;)
+        if plots:
+            plt.style.use(&#39;seaborn-dark-palette&#39;)
 
-        plt.figure(figsize=[8,8])
-        plt.subplot(111)
-        sns.scatterplot(data=response_dataframe,x=&#39;lower_threshold&#39;,y=&#39;veritas&#39;,hue=&#39;mg&#39;)
-        plt.plot([.1,2.5],[C1,C1],&#39;-r&#39;)
-        plt.plot([C0,C0],[.1,.95],&#39;-r&#39;)
-        plt.plot([C2,C2],[.1,.95],&#39;-r&#39;)
+            plt.figure(figsize=[8,8])
+            plt.subplot(111)
+            sns.scatterplot(data=response_dataframe,x=&#39;lower_threshold&#39;,y=&#39;veritas&#39;,hue=&#39;mg&#39;)
+            plt.plot([.1,2.5],[C1,C1],&#39;-r&#39;)
+            plt.plot([C0,C0],[.1,.95],&#39;-r&#39;)
+            plt.plot([C2,C2],[.1,.95],&#39;-r&#39;)
 
-        ax = plt.gca()
+            ax = plt.gca()
 
-        mrate=response_dataframe[response_dataframe.mg==-1].index.size/response_dataframe.index.size
-        ax.text(0.65, 0.8, f&#39;mrate: {mrate:.2f}&#39;, fontsize=16, ha=&#39;center&#39;)
+            mrate=response_dataframe[response_dataframe.mg==-1].index.size/response_dataframe.index.size
+            ax.text(0.65, 0.8, f&#39;mrate: {mrate:.2f}&#39;, fontsize=16, ha=&#39;center&#39;)
+        else:
+            return {&#39;mrate&#39;:mrate}
 
     plt.savefig(outfile,dpi=300,bbox_inches=&#39;tight&#39;,transparent=True)   
 
@@ -371,7 +377,7 @@ def drop_empty_string_keys(input_dict):
 </details>
 </dd>
 <dt id="truthnet.util.validate"><code class="name flex">
-<span>def <span class="ident">validate</span></span>(<span>response_dataframe, C0, C1, C2, DX=True, score=True, validation_type='withdx', outfile='report.png')</span>
+<span>def <span class="ident">validate</span></span>(<span>response_dataframe, C0, C1, C2, DX=True, score=True, plots=True, validation_type='withdx', outfile='report.png')</span>
 </code></dt>
 <dd>
 <div class="desc"><p>response dataframe should look like:
@@ -392,7 +398,7 @@ was available in training</p></div>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def validate(response_dataframe,C0,C1,C2,
-             DX=True,score=True,
+             DX=True,score=True, plots=True,
              validation_type=&#39;withdx&#39;,outfile=&#39;report.png&#39;):
     &#39;&#39;&#39;
     response dataframe should look like:
@@ -430,90 +436,96 @@ was available in training</p></div>
 
 
     if validation_type == &#34;withdx&#34;:
+        if plots:
+            plt.style.use(&#39;seaborn-dark-palette&#39;)
 
-        plt.style.use(&#39;seaborn-dark-palette&#39;)
+            plt.figure(figsize=[20,12])
+            plt.subplot(231)
+            sns.scatterplot(data=response_dataframe,x=&#39;lower_threshold&#39;,y=&#39;veritas&#39;,hue=&#39;mg&#39;,size=&#39;dx&#39;)
+            plt.plot([.5,2.5],[.76,.76],&#39;-r&#39;)
+            plt.plot([C0,C0],[.5,.95],&#39;-r&#39;)
 
-        plt.figure(figsize=[20,12])
-        plt.subplot(231)
-        sns.scatterplot(data=response_dataframe,x=&#39;lower_threshold&#39;,y=&#39;veritas&#39;,hue=&#39;mg&#39;,size=&#39;dx&#39;)
-        plt.plot([.5,2.5],[.76,.76],&#39;-r&#39;)
-        plt.plot([C0,C0],[.5,.95],&#39;-r&#39;)
+            plt.subplot(232)
+            ax=sns.scatterplot(data=response_dataframe,x=&#39;score&#39;,y=&#39;veritas&#39;,hue=&#39;dx&#39;)
+            plt.plot([.2,2.5],[C1,C1],&#39;-r&#39;)
+            plt.plot([C2,C2],[.5,.95],&#39;-r&#39;)
 
-        plt.subplot(232)
-        ax=sns.scatterplot(data=response_dataframe,x=&#39;score&#39;,y=&#39;veritas&#39;,hue=&#39;dx&#39;)
-        plt.plot([.2,2.5],[C1,C1],&#39;-r&#39;)
-        plt.plot([C2,C2],[.5,.95],&#39;-r&#39;)
+            plt.subplot(233)
+            sns.scatterplot(data=response_dataframe,x=&#39;score&#39;,y=&#39;lower_threshold&#39;,hue=&#39;dx&#39;)
+            plt.subplots_adjust(wspace=0.23)  # Adjust this value as needed
 
-        plt.subplot(233)
-        sns.scatterplot(data=response_dataframe,x=&#39;score&#39;,y=&#39;lower_threshold&#39;,hue=&#39;dx&#39;)
-        plt.subplots_adjust(wspace=0.23)  # Adjust this value as needed
-
-        cf=response_dataframe.corr()
-        plt.subplot(234)
-        sns.heatmap(cf,cmap=&#39;jet&#39;,alpha=.5)
-        mratio=(response_dataframe[(response_dataframe.mg==-1) &amp; (response_dataframe.dx==1)].index.size)/response_dataframe.dx.sum()
+            cf=response_dataframe.corr()
+            plt.subplot(234)
+            sns.heatmap(cf,cmap=&#39;jet&#39;,alpha=.5)
+            mratio=(response_dataframe[(response_dataframe.mg==-1) &amp; (response_dataframe.dx==1)].index.size)/response_dataframe.dx.sum()
 
 
-        plt.subplot(235)
+            plt.subplot(235)
 
-        plt.plot(fpr,tpr,&#39;g&#39;,lw=2)
-        plt.gca().legend([&#39;R20&#39;])
-        zt.get().tpr.plot(style=&#39;-b&#39;,lw=2)
-        fullauc=zt.auc()
+            plt.plot(fpr,tpr,&#39;g&#39;,lw=2)
+            plt.gca().legend([&#39;R20&#39;])
+            zt.get().tpr.plot(style=&#39;-b&#39;,lw=2)
+            fullauc=zt.auc()
 
-        ax = plt.subplot(236)
-        ax.text(0.5, 0.6, f&#39;malinger prevalenec in DX: {mratio:.2f}&#39;, fontsize=16, ha=&#39;center&#39;)
-        ax.text(0.5, 0.4, f&#39;AUC: {fullauc[0]:.2f} $\pm$ {fullauc[1]-fullauc[0]:.2f}&#39;, fontsize=16, ha=&#39;center&#39;)
-        ax.set_xticks([])
-        ax.set_yticks([])
-        ax.set_frame_on(False)
+            ax = plt.subplot(236)
+            ax.text(0.5, 0.6, f&#39;malinger prevalenec in DX: {mratio:.2f}&#39;, fontsize=16, ha=&#39;center&#39;)
+            ax.text(0.5, 0.4, f&#39;AUC: {fullauc[0]:.2f} $\pm$ {fullauc[1]-fullauc[0]:.2f}&#39;, fontsize=16, ha=&#39;center&#39;)
+            ax.set_xticks([])
+            ax.set_yticks([])
+            ax.set_frame_on(False)
+        else:
+            return {&#39;auc&#39;:fullauc,&#39;mratio&#39;:mratio}
 
     if validation_type == &#34;fnrexpt&#34;:
+        if plots:
+            plt.style.use(&#39;seaborn-dark-palette&#39;)
 
-        plt.style.use(&#39;seaborn-dark-palette&#39;)
+            plt.figure(figsize=[20,12])
+            plt.subplot(231)
+            sns.scatterplot(data=response_dataframe,x=&#39;lower_threshold&#39;,y=&#39;veritas&#39;,hue=&#39;mg&#39;,size=&#39;dx&#39;)
+            plt.plot([.5,2.5],[.76,.76],&#39;-r&#39;)
+            plt.plot([C0,C0],[.5,.95],&#39;-r&#39;)
 
-        plt.figure(figsize=[20,12])
-        plt.subplot(231)
-        sns.scatterplot(data=response_dataframe,x=&#39;lower_threshold&#39;,y=&#39;veritas&#39;,hue=&#39;mg&#39;,size=&#39;dx&#39;)
-        plt.plot([.5,2.5],[.76,.76],&#39;-r&#39;)
-        plt.plot([C0,C0],[.5,.95],&#39;-r&#39;)
+            plt.subplot(232)
+            ax=sns.scatterplot(data=response_dataframe,x=&#39;score&#39;,y=&#39;veritas&#39;,hue=&#39;dx&#39;)
+            plt.plot([.2,2.5],[C1,C1],&#39;-r&#39;)
+            plt.plot([C2,C2],[.5,.95],&#39;-r&#39;)
 
-        plt.subplot(232)
-        ax=sns.scatterplot(data=response_dataframe,x=&#39;score&#39;,y=&#39;veritas&#39;,hue=&#39;dx&#39;)
-        plt.plot([.2,2.5],[C1,C1],&#39;-r&#39;)
-        plt.plot([C2,C2],[.5,.95],&#39;-r&#39;)
+            plt.subplot(233)
+            sns.scatterplot(data=response_dataframe,x=&#39;score&#39;,y=&#39;lower_threshold&#39;,hue=&#39;dx&#39;)
+            plt.subplots_adjust(wspace=0.23)  # Adjust this value as needed
 
-        plt.subplot(233)
-        sns.scatterplot(data=response_dataframe,x=&#39;score&#39;,y=&#39;lower_threshold&#39;,hue=&#39;dx&#39;)
-        plt.subplots_adjust(wspace=0.23)  # Adjust this value as needed
+            cf=response_dataframe.corr()
+            plt.subplot(234)
+            sns.heatmap(cf,cmap=&#39;jet&#39;,alpha=.5)
+            fnr=response_dataframe[(response_dataframe.mg==1)].index.size/response_dataframe.index.size
 
-        cf=response_dataframe.corr()
-        plt.subplot(234)
-        sns.heatmap(cf,cmap=&#39;jet&#39;,alpha=.5)
-        fnr=response_dataframe[(response_dataframe.mg==1)].index.size/response_dataframe.index.size
-
-        ax = plt.subplot(236)
-        ax.text(0.5, 0.6, f&#39;FNR in EXPT: {fnr:.2f}&#39;, fontsize=16, ha=&#39;center&#39;)
-        ax.set_xticks([])
-        ax.set_yticks([])
-        ax.set_frame_on(False)
+            ax = plt.subplot(236)
+            ax.text(0.5, 0.6, f&#39;FNR in EXPT: {fnr:.2f}&#39;, fontsize=16, ha=&#39;center&#39;)
+            ax.set_xticks([])
+            ax.set_yticks([])
+            ax.set_frame_on(False)
+        else:
+            return {&#39;fnr&#39;:fnr}
 
 
     if validation_type == &#34;noscore&#34;:
-        
-        plt.style.use(&#39;seaborn-dark-palette&#39;)
+        if plots:
+            plt.style.use(&#39;seaborn-dark-palette&#39;)
 
-        plt.figure(figsize=[8,8])
-        plt.subplot(111)
-        sns.scatterplot(data=response_dataframe,x=&#39;lower_threshold&#39;,y=&#39;veritas&#39;,hue=&#39;mg&#39;)
-        plt.plot([.1,2.5],[C1,C1],&#39;-r&#39;)
-        plt.plot([C0,C0],[.1,.95],&#39;-r&#39;)
-        plt.plot([C2,C2],[.1,.95],&#39;-r&#39;)
+            plt.figure(figsize=[8,8])
+            plt.subplot(111)
+            sns.scatterplot(data=response_dataframe,x=&#39;lower_threshold&#39;,y=&#39;veritas&#39;,hue=&#39;mg&#39;)
+            plt.plot([.1,2.5],[C1,C1],&#39;-r&#39;)
+            plt.plot([C0,C0],[.1,.95],&#39;-r&#39;)
+            plt.plot([C2,C2],[.1,.95],&#39;-r&#39;)
 
-        ax = plt.gca()
+            ax = plt.gca()
 
-        mrate=response_dataframe[response_dataframe.mg==-1].index.size/response_dataframe.index.size
-        ax.text(0.65, 0.8, f&#39;mrate: {mrate:.2f}&#39;, fontsize=16, ha=&#39;center&#39;)
+            mrate=response_dataframe[response_dataframe.mg==-1].index.size/response_dataframe.index.size
+            ax.text(0.65, 0.8, f&#39;mrate: {mrate:.2f}&#39;, fontsize=16, ha=&#39;center&#39;)
+        else:
+            return {&#39;mrate&#39;:mrate}
 
     plt.savefig(outfile,dpi=300,bbox_inches=&#39;tight&#39;,transparent=True)   </code></pre>
 </details>
