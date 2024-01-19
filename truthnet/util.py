@@ -87,7 +87,7 @@ def get_malinger_func(C0,C1,C2,score=True):
 
 
 def validate(response_dataframe,C0,C1,C2,
-             DX=True,score=True, plots=True,
+             DX=True,score=True, plots=True,verbose=True,
              validation_type='withdx',outfile='report.png'):
     '''
     response dataframe should look like:
@@ -121,10 +121,15 @@ def validate(response_dataframe,C0,C1,C2,
         zt.allmeasures(interpolate=True)
         zt.usample(precision=3)
         Z=zt.get()
-        print(Z[Z.ppv>.875].tail(10))
+        if verbose:
+            print(Z[Z.ppv>.875].tail(10))
 
 
     if validation_type == "withdx":
+        mratio=(response_dataframe[(response_dataframe.mg==-1)
+                                   & (response_dataframe.dx==1)].index.size)/response_dataframe.dx.sum()
+        fullauc=zt.auc()
+        
         if plots:
             #plt.style.use('seaborn-dark-palette')
 
@@ -146,8 +151,6 @@ def validate(response_dataframe,C0,C1,C2,
             cf=response_dataframe.corr()
             plt.subplot(234)
             sns.heatmap(cf,cmap='jet',alpha=.5)
-            mratio=(response_dataframe[(response_dataframe.mg==-1)
-                                       & (response_dataframe.dx==1)].index.size)/response_dataframe.dx.sum()
 
 
             plt.subplot(235)
@@ -155,7 +158,6 @@ def validate(response_dataframe,C0,C1,C2,
             plt.plot(fpr,tpr,'g',lw=2)
             plt.gca().legend(['R20'])
             zt.get().tpr.plot(style='-b',lw=2)
-            fullauc=zt.auc()
 
             ax = plt.subplot(236)
             ax.text(0.5, 0.6, f'malinger prevalenec in DX: {mratio:.2f}', fontsize=16, ha='center')
@@ -164,9 +166,10 @@ def validate(response_dataframe,C0,C1,C2,
             ax.set_yticks([])
             ax.set_frame_on(False)
             
-        return {'auc':fullauc,'mratio':mratio}, response_dataframe
+        return {'auc':fullauc,'mratio':mratio}, response_dataframe, zt
 
     if validation_type == "fnrexpt":
+        fnr=response_dataframe[(response_dataframe.mg==1)].index.size/response_dataframe.index.size
         if plots:
             #plt.style.use('seaborn-dark-palette')
 
@@ -188,7 +191,6 @@ def validate(response_dataframe,C0,C1,C2,
             cf=response_dataframe.corr()
             plt.subplot(234)
             sns.heatmap(cf,cmap='jet',alpha=.5)
-            fnr=response_dataframe[(response_dataframe.mg==1)].index.size/response_dataframe.index.size
 
             ax = plt.subplot(236)
             ax.text(0.5, 0.6, f'FNR in EXPT: {fnr:.2f}', fontsize=16, ha='center')
@@ -200,6 +202,7 @@ def validate(response_dataframe,C0,C1,C2,
 
 
     if validation_type == "noscore":
+        mrate=response_dataframe[response_dataframe.mg==-1].index.size/response_dataframe.index.size
         if plots:
             #plt.style.use('seaborn-dark-palette')
 
@@ -212,7 +215,6 @@ def validate(response_dataframe,C0,C1,C2,
 
             ax = plt.gca()
 
-            mrate=response_dataframe[response_dataframe.mg==-1].index.size/response_dataframe.index.size
             ax.text(0.65, 0.8, f'mrate: {mrate:.2f}', fontsize=16, ha='center')
 
         return {'mrate':mrate}, response_dataframe

@@ -44,7 +44,7 @@ zt.allmeasures(interpolate=True)
 zt.usample(precision=2)
 print(zt.auc())
 
-#import pylab as plt
-#rf.plot(x='maxspecificity',y='sensitivity')
-#plt.show()
+import pylab as plt
+rf.plot(x='maxspecificity',y='sensitivity')
+plt.show()
 

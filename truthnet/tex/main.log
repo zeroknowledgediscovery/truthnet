@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2022.6.20)  16 JAN 2024 17:59
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2022.6.20)  18 JAN 2024 20:28
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -3201,36 +3201,42 @@ Overfull \hbox (6.66586pt too wide) in paragraph at lines 1--7
  [][] 
  []
 
-) [2 <./Figures/External/scheme.pdf>] [3]
+) [2 <./Figures/External/scheme.pdf>]
+<Figures/fig2.pdf, id=173, 796.5321pt x 501.00174pt>
+File: Figures/fig2.pdf Graphic file (type pdf)
+<use Figures/fig2.pdf>
+Package pdftex.def Info: Figures/fig2.pdf  used on input line 84.
+(pdftex.def)             Requested size: 496.33034pt x 312.19266pt.
+ [3 <./Figures/fig2.pdf>]
 
-Package natbib Warning: Citation `Lee2019' on page 4 undefined on input line 10
-7.
+Package natbib Warning: Citation `Lee2019' on page 4 undefined on input line 11
+4.
 
 [4]
 LaTeX Font Info:    Font shape `OT1/ccr/bx/n' in size <10> not available
-(Font)              Font shape `OT1/cmr/bx/n' tried instead on input line 139.
+(Font)              Font shape `OT1/cmr/bx/n' tried instead on input line 146.
 LaTeX Font Info:    Font shape `OT1/ccr/bx/n' in size <7> not available
-(Font)              Font shape `OT1/cmr/bx/n' tried instead on input line 139.
+(Font)              Font shape `OT1/cmr/bx/n' tried instead on input line 146.
 LaTeX Font Info:    Font shape `OT1/ccr/bx/n' in size <5> not available
-(Font)              Font shape `OT1/cmr/bx/n' tried instead on input line 139.
+(Font)              Font shape `OT1/cmr/bx/n' tried instead on input line 146.
 LaTeX Font Info:    Font shape `OML/ccm/b/it' in size <10> not available
-(Font)              Font shape `OML/cmm/b/it' tried instead on input line 139.
+(Font)              Font shape `OML/cmm/b/it' tried instead on input line 146.
 LaTeX Font Info:    Font shape `OML/ccm/b/it' in size <7> not available
-(Font)              Font shape `OML/cmm/b/it' tried instead on input line 139.
+(Font)              Font shape `OML/cmm/b/it' tried instead on input line 146.
 LaTeX Font Info:    Font shape `OML/ccm/b/it' in size <5> not available
-(Font)              Font shape `OML/cmm/b/it' tried instead on input line 139.
+(Font)              Font shape `OML/cmm/b/it' tried instead on input line 146.
 LaTeX Font Info:    Font shape `OMS/ccsy/b/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/b/n' tried instead on input line 139.
+(Font)              Font shape `OMS/cmsy/b/n' tried instead on input line 146.
 LaTeX Font Info:    Font shape `OMS/ccsy/b/n' in size <7> not available
-(Font)              Font shape `OMS/cmsy/b/n' tried instead on input line 139.
+(Font)              Font shape `OMS/cmsy/b/n' tried instead on input line 146.
 LaTeX Font Info:    Font shape `OMS/ccsy/b/n' in size <5> not available
-(Font)              Font shape `OMS/cmsy/b/n' tried instead on input line 139.
+(Font)              Font shape `OMS/cmsy/b/n' tried instead on input line 146.
 
 
-LaTeX Warning: Reference `figcartoon' on page 5 undefined on input line 161.
+LaTeX Warning: Reference `figcartoon' on page 5 undefined on input line 168.
 
-[5]
-Overfull \hbox (4.2074pt too wide) in paragraph at lines 252--256
+[5] [6]
+Overfull \hbox (4.2074pt too wide) in paragraph at lines 259--263
 []\OT1/phv/m/n/10 Denoting $\OT1/ccr/m/n/10 ^^H[](\OML/ccm/m/it/10 x[]\OT1/ccr/
 m/n/10 )\OMS/ccsy/m/n/10 j[]$ \OT1/phv/m/n/10 as $\OML/ccm/m/it/10 a[]$\OT1/phv
 /m/n/10 , we note that $\OML/ccm/m/it/10 ![]$ \OT1/phv/m/n/10 is the ge-o-met-r
@@ -3238,15 +3244,14 @@ ic mean of the vec-tor of $\OML/ccm/m/it/10 a[]$\OT1/phv/m/n/10 s, while $\OT1/
 cmr/bx/n/10 E[] []$
  []
 
-[6]
 
-LaTeX Warning: Reference `defmem' on page 7 undefined on input line 276.
+LaTeX Warning: Reference `defmem' on page 7 undefined on input line 283.
 
-(./Tables/methods_summary.tex [7]) (./main.bbl [8] [9])
+[7] (./Tables/methods_summary.tex [8]) (./main.bbl [9] [10])
 
 Package natbib Warning: There were undefined citations.
 
-[10] (./main.aux)
+[11] (./main.aux)
 
 LaTeX Warning: There were undefined references.
 
@@ -3254,13 +3259,13 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 4DDA76E34F59CEB25F4DE18AD40BB3D9;430.
  ) 
 Here is how much of TeX's memory you used:
- 53129 strings out of 478862
- 1197712 string characters out of 5858945
- 1918138 words of memory out of 8000000
- 69651 multiletter control sequences out of 15000+600000
+ 53141 strings out of 478862
+ 1197937 string characters out of 5858945
+ 1915191 words of memory out of 8000000
+ 69660 multiletter control sequences out of 15000+600000
  484492 words of font info for 192 fonts, out of 8000000 for 9000
  1137 hyphenation exceptions out of 8191
- 89i,14n,86p,1604b,998s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 89i,14n,86p,1604b,1040s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc} </home/ishanu/.te
 xlive2020/texmf-var/fonts/pk/ljfour/public/concmath-fonts/xccsy7.600pk> </home/
 ishanu/.texlive2020/texmf-var/fonts/pk/ljfour/public/concmath-fonts/xccmi5.600p
@@ -3283,10 +3288,10 @@ st/fonts/type1/urw/courier/ucrb8a.pfb></usr/share/texlive/texmf-dist/fonts/type
 1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helveti
 c/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb
 ></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on main.pdf (10 pages, 1333704 bytes).
+Output written on main.pdf (11 pages, 1405772 bytes).
 PDF statistics:
- 565 PDF objects out of 1000 (max. 8388607)
- 375 compressed objects within 4 object streams
- 118 named destinations out of 1000 (max. 500000)
- 150 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 605 PDF objects out of 1000 (max. 8388607)
+ 389 compressed objects within 4 object streams
+ 120 named destinations out of 1000 (max. 500000)
+ 155 words of extra memory for PDF output out of 10000 (max. 10000000)
 
