@@ -5,36 +5,6 @@
 \providecommand{\bibinfo}[2]{#2}
 \providecommand{\eprint}[2][]{\url{#2}}
 
-\bibitem{shao2017evolution}
-\bibinfo{author}{Shao, W.}, \bibinfo{author}{Li, X.}, \bibinfo{author}{Goraya,
-  M.~U.}, \bibinfo{author}{Wang, S.} \& \bibinfo{author}{Chen, J.-L.}
-\newblock \bibinfo{title}{Evolution of influenza a virus by mutation and
-  re-assortment}.
-\newblock \emph{\bibinfo{journal}{International journal of molecular sciences}}
-  \textbf{\bibinfo{volume}{18}}, \bibinfo{pages}{1650} (\bibinfo{year}{2017}).
-
-\bibitem{mills2004transmissibility}
-\bibinfo{author}{Mills, C.~E.}, \bibinfo{author}{Robins, J.~M.} \&
-  \bibinfo{author}{Lipsitch, M.}
-\newblock \bibinfo{title}{Transmissibility of 1918 pandemic influenza}.
-\newblock \emph{\bibinfo{journal}{Nature}} \textbf{\bibinfo{volume}{432}},
-  \bibinfo{pages}{904--906} (\bibinfo{year}{2004}).
-
-\bibitem{reid2003origin}
-\bibinfo{author}{Reid, A.~H.} \& \bibinfo{author}{Taubenberger, J.~K.}
-\newblock \bibinfo{title}{The origin of the 1918 pandemic influenza virus: a
-  continuing enigma}.
-\newblock \emph{\bibinfo{journal}{Journal of general virology}}
-  \textbf{\bibinfo{volume}{84}}, \bibinfo{pages}{2285--2292}
-  (\bibinfo{year}{2003}).
-
-\bibitem{landolt2007up}
-\bibinfo{author}{Landolt, G.~A.} \& \bibinfo{author}{Olsen, C.~W.}
-\newblock \bibinfo{title}{Up to new tricks--a review of cross-species
-  transmission of influenza a viruses}.
-\newblock \emph{\bibinfo{journal}{Animal Health Research Reviews}}
-  \textbf{\bibinfo{volume}{8}}, \bibinfo{pages}{1--21} (\bibinfo{year}{2007}).
-
 \bibitem{ali2015multimodal}
 \bibinfo{author}{Ali, S.}, \bibinfo{author}{Jabeen, S.} \&
   \bibinfo{author}{Alam, F.}
@@ -54,6 +24,13 @@
 \bibinfo{author}{Rogers, R.~E.}
 \newblock \emph{\bibinfo{title}{Clinical assessment of malingering and
   deception}} (\bibinfo{publisher}{Guilford Press}, \bibinfo{year}{2008}).
+
+\bibitem{Ekman1992}
+\bibinfo{author}{Ekman, P.} \& \bibinfo{author}{O'Sullivan, M.}
+\newblock \bibinfo{title}{Who can catch a liar?}
+\newblock \emph{\bibinfo{journal}{American Psychologist}}
+  \textbf{\bibinfo{volume}{46}}, \bibinfo{pages}{913--920}
+  (\bibinfo{year}{1991}).
 
 \bibitem{frueh2007us}
 \bibinfo{author}{Frueh, B.}, \bibinfo{author}{Grubaugh, A.},
@@ -179,6 +156,25 @@
   \textbf{\bibinfo{volume}{53}}, \bibinfo{pages}{745--55}
   (\bibinfo{year}{1997}).
 
+\bibitem{park2021race}
+\bibinfo{author}{Park, L.}, \bibinfo{author}{Costello, S.},
+  \bibinfo{author}{Li, J.}, \bibinfo{author}{Lee, R.} \&
+  \bibinfo{author}{Jacobson, K.~C.}
+\newblock \bibinfo{title}{Race, health, and socioeconomic disparities
+  associated with malingering in psychiatric patients at an urban emergency
+  department}.
+\newblock \emph{\bibinfo{journal}{General Hospital Psychiatry}}
+  \textbf{\bibinfo{volume}{71}}, \bibinfo{pages}{121--127}
+  (\bibinfo{year}{2021}).
+
+\bibitem{muntaner2004socioeconomic}
+\bibinfo{author}{Muntaner, C.}, \bibinfo{author}{Eaton, W.~W.},
+  \bibinfo{author}{Miech, R.} \& \bibinfo{author}{O’campo, P.}
+\newblock \bibinfo{title}{Socioeconomic position and major mental disorders}.
+\newblock \emph{\bibinfo{journal}{Epidemiologic reviews}}
+  \textbf{\bibinfo{volume}{26}}, \bibinfo{pages}{53--62}
+  (\bibinfo{year}{2004}).
+
 \bibitem{Wong2005}
 \bibinfo{author}{Wong, S.} \& \bibinfo{author}{O'Sullivan, M.}
 \newblock \bibinfo{title}{The structured interview of reported symptoms (sirs):
@@ -229,13 +225,6 @@
 \newblock \emph{\bibinfo{journal}{Group Decision and Negotiation}}
   \textbf{\bibinfo{volume}{13}}, \bibinfo{pages}{81--106}
   (\bibinfo{year}{2004}).
-
-\bibitem{Ekman1992}
-\bibinfo{author}{Ekman, P.} \& \bibinfo{author}{O'Sullivan, M.}
-\newblock \bibinfo{title}{Who can catch a liar?}
-\newblock \emph{\bibinfo{journal}{American Psychologist}}
-  \textbf{\bibinfo{volume}{46}}, \bibinfo{pages}{913--920}
-  (\bibinfo{year}{1991}).
 
 \bibitem{brenner2021development}
 \bibinfo{author}{Brenner, L.~A.} \emph{et~al.}

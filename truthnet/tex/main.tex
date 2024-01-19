@@ -3,11 +3,11 @@
 \usepackage{enumitem}
 \input{preamble.tex}
 \usepackage{float}
-%\usetikzlibrary{decorations.pathreplacing,calligraphy}
+% \usetikzlibrary{decorations.pathreplacing,calligraphy}
 \input{customdef}
 \renewcommand{\baselinestretch}{.97}
-%\externaldocument[SI-]{SI}
-%\externaldocument[main-]{main}
+% \externaldocument[SI-]{SI}
+% \externaldocument[main-]{main}
 % \externaldocument[EXT-]{exfig}
 \newif\iftikzX
 \tikzXtrue
@@ -32,44 +32,42 @@
 
 \begin{document}
 \maketitle
- 
+
 
 {\bf \sffamily \fontsize{10}{12}\selectfont \noindent   
-  {\normalfont \itshape Abstract:} Animal influenza  viruses emerging into humans % are suspected to
-  have triggered devastating  pandemics in the past~\cite{shao2017evolution,mills2004transmissibility,reid2003origin,landolt2007up}. Yet, our ability to evaluate the pandemic potential of individual strains that do not yet circulate in humans, remains limited. In this study we introduce the \qnet, to computationally learn how new variants emerge, shaped by evolutionary constraints using only observed genomic sequences  of key viral proteins. }
-  
+  {\normalfont \itshape Abstract:} Faking  symptoms of a mental health disorder or \textit{malingering} can confound diagnostic interviews and hinder clinical psychiatric assessment.  We introduce an  artificial intelligence (AI) framework for detecting malingering in Post-Traumatic Stress Disorder (PTSD) diagnoses. Traditional psychiatric diagnoses methods, predominantly structured interviews, are susceptible  to fabrication, which is especially problematic in the context of PTSD  due to  subjective stressors, presentation similarity, and  potential of secondary financial gain from positive diagnoses. Algorithm \vrts employs a generative AI to infer statistical dependencies inherent in true response patterns, and flags  responses which violate such subtle  constraints. These emergent response patterns are challenging to mimic even  with psychiatric training, providing a robust mechanism for recognizing fabrications. With a study sample of $n=624$ patients, \vrts is estimated to have a minimum  Area Under the Curve (AUC) of 95.0\%, with one sensitivity and specificity pair  of 92\% and 95\% respectively. Thus our tool   offers a  objective, disease-specific, rapid ($\leqq 2$ min)  approach to detect fake  PTSD, and if adopted, can  ensure that healthcare resources reach  those genuinely in need,  and maintain the integrity of clinical data. Moreover, the ability to diagnose patients who might be malingering due to other mental health conditions, poverty or   socio-economic compulsions can substantially improve outcomes  in low SES communities.
+}
+
 \vspace{10pt} 
 
 \section*{Introduction}
-Diagnosis of mental health disorders typically  rely  on structured interviews~\cite{ali2015multimodal} susceptible to  intentional fabrication of  symptoms~\cite{Rogers1997,rogers2008clinical} referred to as ``malingering''. In the specific context of clinically diagnosing Post-Traumatic Stress Disorder (PTSD),  subjective stressors, a high degree of similarity in presentation,  the realtively easy access to  information on  how to fake PTSD,  and financial  incentives from a positive diagnosis  in  legal procedures or   disability claims, hinders   accurate   assessments.
+Diagnosis of mental health disorders typically  rely  on structured interviews~\cite{ali2015multimodal} susceptible to  intentional fabrication of  symptoms~\cite{Rogers1997,rogers2008clinical}, often referred to as ``malingering''. In the specific context of clinically diagnosing Post-Traumatic Stress Disorder (PTSD),  subjective stressors, a high degree of similarity in presentation,  the realtively easy access to  information on  how to fake PTSD,  and financial  incentives from a positive diagnosis  in  legal procedures or   disability claims, is known to hinder   accurate   assessments. Here, we present an approach based on a  generative model to flag malingering suspects rapidly, efficiently and accurately; essentially demonstrating a generative artificial intelligence (AI) framework that, paraphrasing Ekman~\cite{Ekman1992},  ``\textit{can catch a liar}''. 
 
-Broadly, the problem of determining the veracity of responses in a structured interview is  highly relevant in diverse contexts ranging from the  diganoses of mental disorders to non-trivial implications in the legal system. We present an approach based on a  generative model to flag malingering suspects efficiently and accurately; an generative AI framework that can catch a lie.
-While our principles are broadly applicable, we present results in the context of PTSD malingering here.
-
-Clinically, PTSD is an anxiety disorder that can develop after experiencing a traumatic event. In the United States,  substantial disability compensation may be  available for  those with mental disorders including PTSD, which while being an crucial resource for the truely afflicted, incentivizes malingering behavior~\cite{frueh2007us,taylor2007detection}.  Some might also fake PTSD to access medical treatment, commit insurance, personal injury and other frauds,  or in an attempt to evade criminal liability and penalties~\cite{guriel2003assessing,salloway1990opiate,resnick2008malingering,burkett1998stolen}. Thus, while on one hand, PTSD is a serious mental health condition  associated with comorbid substance use disorder, mood disorder, anxiety disorder,  personality disorder, increased morbidity,  and possibly with increased  mortality~\cite{goldstein2016epidemiology,schnurr2009posttraumatic}, false  diagnoses cause substantial financial drain~\cite{lopiccolo1999current} to the healthcare system, and  the VA~\cite{oboler2000disability}, diverts crucial resources from where they are needed~\cite{taylor2006clinician}, and interfere with study outcomes by introducing inaccuracies in clinical data~\cite{rosen2006dsm}. Accurate disambiguation of true and fake PTSD is therefore  of high importance, especially with sources suggesting that over 20\% of  personal injury cases, as well as  20\%  of the Veterans seeking combat compensation could be  fabricating their condition~\cite{marx2011ptsd,rogers1994explanatory,leeshaley1997mmpi2,frueh2007us}.
-
-Briefly state the medical side of things, that people might be faking PTSD for other clinical reasons.
-
-Multiple standardized tests~\cite{Wong2005,smith1997detection} and  validity assessment tools~\cite{ben2012interpreting} have been explored  for malingering detection with limited success. These tools typically aim to incorporate patterns observed in diagnostic populations that might disambiguate faked symptoms from real ones. However,  existing approaches  do not target specific disorders, require expert interpretation, are often subjective, and by design are  unlikely to be effective against a malingerer with psychiatric training (See Table~\ref{tbl:methods_summary}). Other  strategies that incorporate diverse physiological monitoring and linguistic analysis~\cite{ekman1991who,mihalcea2009lie,burgoon2008cognitive,zhou2004automating}  cannot be easily  adopted  in the present context of structured or semi-structured interviews.
-
-Here we introduce an AI-driven approach to flag malingering participants in structured interviews, demonstrated in the context of PTSD diagnosis. We leverage the fact that
-responses to  items  in a structured interview have emergent statistical dependencies  arising from the nature of the questions, and are modulated by the presence of the trait we are aiming to detect $e.g.$, PTSD pathology. These dependencies are too
-complex to easily preempt and replicate on-the-fly, even with knowledge about how such patients tend to respond $i.e.$ with training in the mental health services. We find that an ``algorithmic lie detector'' that exploits this structure inferred from historical response databases, is  difficult to defeat, and offers a robust generalizable approach to verifying response validity. Algorithm \vrts can be tuned to target malingering in specific disorders, can be rapidly trained from historical data, can be administered easily, and require subtantially less subjective interpretation, and presents a generative AI's take on Ekman's paper ``Who Can Catch a Liar?''~\cite{Ekman1992}.
-
-
+Clinically, PTSD is an anxiety disorder that can develop after experiencing a traumatic event. In the United States,  substantial disability compensation may be  available for  those with mental disorders, which while being an crucial resource for the truely afflicted, incentivizes malingering~\cite{frueh2007us,taylor2007detection}.  Thus,  faking PTSD to access medical treatment, commit insurance, personal injury and other frauds,  or in an attempt to evade criminal liability and penalties~\cite{guriel2003assessing,salloway1990opiate,resnick2008malingering,burkett1998stolen} is unfortunately not rare. While  PTSD is a serious mental health condition  associated with  substance use disorder, mood disorder, anxiety disorder,  personality disorder, increased morbidity,  and possibly with increased  mortality~\cite{goldstein2016epidemiology,schnurr2009posttraumatic}, false  diagnoses can cause substantial financial drain~\cite{lopiccolo1999current, oboler2000disability} to  healthcare systems, divert crucial resources from where they are needed~\cite{taylor2006clinician}, and interfere with study outcomes by introducing inaccuracies in clinical data~\cite{rosen2006dsm}. Accurate disambiguation of true and fake PTSD is therefore  of high importance, especially with sources suggesting that over 20\% of  personal injury cases, as well as  20\%  of the Veterans seeking combat compensation could be  fabricating their condition~\cite{marx2011ptsd,rogers1994explanatory,leeshaley1997mmpi2,frueh2007us}.
+In addition to curbing  financial fraud, ability to flag such incongruities can help address the myriad of  complex factors that drive malingering behavior, including other mental health conditions, poverty, a lack of access to healthcare~\cite{park2021race,muntaner2004socioeconomic} and  a limited ability to seek help for mental health conditions.
 
 \begin{figure}
   \tikzexternalenable
   \tikzsetnextfilename{scheme}
-    \centering
-\tikzXtrue
- \iftikzX  
+  \centering
+  % \tikzXtrue
+  \iftikzX  
   \input{Figures/scheme}
- \else
-  \includegraphics[width=\textwidth]{Figures/External/scheme}
+  \else
+  \includegraphics[width=.92\textwidth]{Figures/External/scheme}
   \fi
-                                              \captionN{}\label{qnet}
-                                                                  \end{figure}
+
+  \vspace{-12pt}
+  
+  \captionN{\textbf{Conceptual framework.} Using a  dataset of responses to a validated structured interview for PTSD diagnoses, along with physician-validated clinical diagnoses, we infer generative models for responses for PTSD patients. In our framework for detecting  malingering, we flag responses as those which are highly ``surprising'' (defined as violating infered cross-dependencies between  individual response items) or are too simple (lacking complexity in the response patterns typical of non-malingered responses). The precise ``malingering condition'' shown above is validated from theoretical considerations as well as field experimental data.}\label{qnet}
+\end{figure}
+
+Multiple standardized tests~\cite{Wong2005,smith1997detection} and  validity assessment tools~\cite{ben2012interpreting} have been explored  for detecting malingering  with limited success. These tools typically aim to incorporate patterns observed in diagnostic populations that might disambiguate faked symptoms from real ones, or ask similar or related questions multiple times to verify consistency. However,  existing approaches  do not target specific disorders, require expert interpretation, are almost always  subjective, and by design are  unlikely to be effective against a malingerer with psychiatric training (See Table~\ref{tbl:methods_summary}). Other  strategies that incorporate diverse physiological monitoring and linguistic analysis~\cite{ekman1991who,mihalcea2009lie,burgoon2008cognitive,zhou2004automating}  cannot be easily  adopted  in the present context of structured or semi-structured interviews.
+
+In algorithm \vrts we leverage the fact that
+responses  in a structured interview have emergent statistical dependencies  arising from the nature of the questions themselves, and are modulated by the trait we are aiming to detect $e.g.$, PTSD pathology. These dependencies are too
+complex to easily mimic on-the-fly, even with knowledge about how such patients tend to respond $i.e.$ with training in the mental health services.   We find that \vrts offers a robust generalizable approach to verifying response validity, can be trained to target specific disorders,  can be administered in less that $2$ minutes, and require little or no subjective interpretation.
+
 
 \section*{Results} 
 
@@ -114,7 +112,7 @@ The classification results obtained further demonstrate the ability of this fram
 In general, data-driven methods for detection of malingering are not as ubiquitous as in other domains; however, the increasing availability of modern sensory data collection has allowed for implementation of machine learning algorithms and computer vision techniques~\cite{Chan2018, Wang2020, Lee2019} for detecting deception based on patterns in language, facial expressions, body movements, and eye movements~\cite{Yu2018, Ducharme2017}. These methods have been shown to outperform traditional lie detection methods in some cases, obtaining accuracy rates of over 90\% for lie detection from patterns in facial expressions and body movements~\cite{Ekman1992,Yu2018} and 60-80\% using analysis of gaze direction and pupil dilation~\cite{Ducharme2017}%\cite{Granziero2019}.
 . However, in many instances it is not feasible to collect detailed sensory data, possibly limiting the general applicability of these kinds of methods. By exclusively utilizing response data, our dissonance-based approach is not subject to such limitations.
 
-%The basis of our algorithmic approach is a detailed model of the complex probabilistic dependencies present between an individual's responses to an interview question. Given that a response to a question is truthful, probabilities of subsequent responses to other related questions are changed. A priori, such dependencies are present amongst all possible questions in a given interview, which yields a combinatorial explosion of interactions to consider. For the PTSD data set, we have $211$ questions, which means that each individual's responses may be identified with a point in a $211$-dimensional space where the response to each question in principle depends on the other $210$ questions.
+% The basis of our algorithmic approach is a detailed model of the complex probabilistic dependencies present between an individual's responses to an interview question. Given that a response to a question is truthful, probabilities of subsequent responses to other related questions are changed. A priori, such dependencies are present amongst all possible questions in a given interview, which yields a combinatorial explosion of interactions to consider. For the PTSD data set, we have $211$ questions, which means that each individual's responses may be identified with a point in a $211$-dimensional space where the response to each question in principle depends on the other $210$ questions.
 
 In contexts such as these, where malingerers seek to obtain a target diagnosis, training data from past respondents often includes a clinical phenotype for each respondent. However, this is not always available (as was observed for the CCHHS data set). Nonetheless, in the absence of the underlying diagnostic phenotypes, our approach still appears to perform well under a scenario in which expert malingerers are also unsure of ground-truth diagnoses. 
 
@@ -125,32 +123,32 @@ In other types of structured interviews, such as internet surveys and opinion po
 \section{Definitions \& Notation}
 
 \begin{defn}[Survey]
-A survey for the purpose of this work is a structured interview, consisting of a finite number of questions (items) posed to a set of participants, with these items drawn from a finite item bank, and  whose responses must be one froma pre-specified set fo choices, $e.g.$, the Likert scale, with missing values for the responses allowed. 
+  A survey for the purpose of this work is a structured interview, consisting of a finite number of questions (items) posed to a set of participants, with these items drawn from a finite item bank, and  whose responses must be one froma pre-specified set fo choices, $e.g.$, the Likert scale, with missing values for the responses allowed. 
 \end{defn}
 
 
 \begin{defn}[Response vector]
-A response vector is the set of responses to a survey from a single participant, typically assuming that not all items are posed, and allows for the possibility that some responses are missing.
+  A response vector is the set of responses to a survey from a single participant, typically assuming that not all items are posed, and allows for the possibility that some responses are missing.
 \end{defn}
 
 
 A \qnet, as described here, is a model of the response dependency  structure for questions (items) posed to participants in a survey.  The \qnet explicitly estimates individual conditional distributions of each item response, which collectively serve as a model of the full joint distribution of the responses. 
 
 \begin{defn}[\qnet]
-\label{def:qnet}
-Let $X \sim P$ be an $n$-dimensional discrete random vector supported on a finite set $\Sigma$ and following distribution $P$, i.e. \[X = (X_1, \ldots, X_n) \sim P, \hspace{0.25in} \operatorname{supp}(X) =  \Sigma = \displaystyle\prod_{i=1}^n \Sigma_i \hspace{.1in} \text{with } |\Sigma| < \infty.\] For $i = 1, \ldots, n$, let $P_i := P(X_i\,|\,X_j=x_j \text{ for } j \neq i)$ denote the conditional distribution of $X_i$ given the values of the other components of $X$.  Finally, for each $i = 1, \ldots, n$, let $\Phi^P_i$ denote an estimate of the distribution $P_i$.  Then the set $\Phi^P := \{\Phi^P_i\}_{i=1}^n$ is called a \emph{Quasinet (\qnet)}. Identifying the true distribution $P$ as the one describing the joint statistics of the responses from a survey with $n$ items, we also refer to  $\Phi^P$ as the \qnet for the survey $P$.
+  \label{def:qnet}
+  Let $X \sim P$ be an $n$-dimensional discrete random vector supported on a finite set $\Sigma$ and following distribution $P$, i.e. \[X = (X_1, \ldots, X_n) \sim P, \hspace{0.25in} \operatorname{supp}(X) =  \Sigma = \displaystyle\prod_{i=1}^n \Sigma_i \hspace{.1in} \text{with } |\Sigma| < \infty.\] For $i = 1, \ldots, n$, let $P_i := P(X_i\,|\,X_j=x_j \text{ for } j \neq i)$ denote the conditional distribution of $X_i$ given the values of the other components of $X$.  Finally, for each $i = 1, \ldots, n$, let $\Phi^P_i$ denote an estimate of the distribution $P_i$.  Then the set $\Phi^P := \{\Phi^P_i\}_{i=1}^n$ is called a \emph{Quasinet (\qnet)}. Identifying the true distribution $P$ as the one describing the joint statistics of the responses from a survey with $n$ items, we also refer to  $\Phi^P$ as the \qnet for the survey $P$.
 \end{defn}
 
 When $P$ is clear from context, we may omit the superscript and simply write $\Phi = \{\Phi_i\}$ to denote the \qnet. The motivation for Definition \ref{def:qnet} is that the collection of all estimators $\Phi = \{ \Phi_i \}$ contained in a \qnet represents the set of all inferred dependencies from the observed ecosystem.  While the definition allows for arbitrary method of algorithm to construct the estimators $\Phi_i$, the utility of a \qnet clearly depends primarily on the properties of the $\Phi_i$.  In this study, we aim to minimize the set of a priori assumptions on the overall model structure to allow the complex dependencies present in $P$ to emerge. To that end, throughout this work all {\qnet}s are computed using conditional inference trees~\cite{sarda2017conditional} (a variant of classification and regression trees) to compute each $\Phi_i$. In general each \qnet component $\Phi_i$ is computed independently from the other $\Phi_j$, which allows a network structure to emerge amongst these estimators.
 
 An important quantity for an inferred \qnet is the persistence function $\mem{\x}$.
 
-%
+% 
 \begin{defn}[Persistence Function]\label{def:mem}
-Given a survey $P$ inducing the \qnet $\Phi^P$ and a response  vector $\x = (x_1, \ldots, x_n)$, the persistence $\mem{\x}$ of  $\x$ in the population modeled  by the \qnet:
-\cgather{
-\mem{\x}^P := \operatorname{Pr}(\x \in P) = \prod_{i=1}^n  \Phi^P_i(X_i = x_i\,|\,X_j = x_j, j \neq i) %
-}%
+  Given a survey $P$ inducing the \qnet $\Phi^P$ and a response  vector $\x = (x_1, \ldots, x_n)$, the persistence $\mem{\x}$ of  $\x$ in the population modeled  by the \qnet:
+  \cgather{
+    \mem{\x}^P := \operatorname{Pr}(\x \in P) = \prod_{i=1}^n  \Phi^P_i(X_i = x_i\,|\,X_j = x_j, j \neq i) %
+  }%
 \end{defn}
 The persistence function $\mem{\x}^P$, as the name suggests,  is the probability that $\x$ persists, $i.e.$,  $Pr(\x \rightarrow \x)$ for the population modeled by the \qnet $P$, with $1-\mem{\x}^P$ being the probability that $\x$ is altered by a  random perturbation.
 
@@ -161,56 +159,56 @@ score parameter in Defn.~\ref{defvrts}.
 %   \centering
 
 %   \vspace{-17pt}
-  
+
 %   \includegraphics[width=1.65in]{Figures/responsecartoon.pdf}
 %   \captionN{Why response vectors might change spontaneously: if  response to an item is a   sample from a  distribution over the possible responses, two responses with similar probabilities  can switch easily, thus making a spontaneous perturbation possible. }\label{figcartoon}
 % \end{wrapfigure}
 The \qnet allows us to rigorously compute  bounds on  the probability of a spontaneous change from one response vector to another, induced by spontaneous chance variations (Fig~\ref{figcartoon}). Not all perturbations in a vector are either likely or contextually meaningful. With an exponentially exploding number of possibilities in which a vector over a large set of items can vary, it is computationally intractable to directly model all possible dependecies; nevertheless, we can constrain the possibilities using the patterns we uncover via the \qnet construction.  A key piece of this approach is to design  an intrinsic distance between response vectors, which is reflective of this underlying  dependency structure.  
 
 \begin{defn}[\qdist]
-\label{defqdistance} 
-Let $\Phi^P = \{\Phi_i^P\}_{i=1}^n$ and $\Phi^Q = \{\Phi_i^Q\}_{i=1}^n$ denote {\qnet}s on populations $P$ and $Q$, and suppose $\x=(x_1, \ldots, x_n)$ and $\y =(y_1, \ldots, y_n)$ are samples of $X \sim P$ and $Y \sim Q$ respectively. Then the \qdist $\theta_{P,Q}(\x,\y)$ between $\x$ and $\y$ is\[\theta_{P,Q}(\x,\y) := \frac{1}{n}\sum_{i=1}^n \left[ \mathbb{J}^{\frac{1}{2}} \left(\Phi_i^P(X_i |X_j = x_j, j \neq i) \,\|\, \Phi_i^Q(Y_i|Y_j = y_j, j \neq i\right ) \right]\]%
-where $\mathbb{J}$ denotes the Jensen-Shannon divergence~\cite{cover}.
+  \label{defqdistance} 
+  Let $\Phi^P = \{\Phi_i^P\}_{i=1}^n$ and $\Phi^Q = \{\Phi_i^Q\}_{i=1}^n$ denote {\qnet}s on populations $P$ and $Q$, and suppose $\x=(x_1, \ldots, x_n)$ and $\y =(y_1, \ldots, y_n)$ are samples of $X \sim P$ and $Y \sim Q$ respectively. Then the \qdist $\theta_{P,Q}(\x,\y)$ between $\x$ and $\y$ is\[\theta_{P,Q}(\x,\y) := \frac{1}{n}\sum_{i=1}^n \left[ \mathbb{J}^{\frac{1}{2}} \left(\Phi_i^P(X_i |X_j = x_j, j \neq i) \,\|\, \Phi_i^Q(Y_i|Y_j = y_j, j \neq i\right ) \right]\]%
+  where $\mathbb{J}$ denotes the Jensen-Shannon divergence~\cite{cover}.
 \end{defn}
 
 For brevity, we may write simply $\theta$ (dropping the suffixes) if the populations are clear from context.  Since the Jensen-Shannon distance $\mathbb{J}$ is a legitimate metric~\cite{fuglede2004jensen} on the set of probability distributions (unlike KL-divergence), $\theta$ inherits nonnegativity, symmetry, and respects the triangle inequality; it follows that \qdist is a (pseudo)-metric on $\Sigma$. Note that, being a pseudo-metric implies that  we may have $\theta(\x, \y) = 0$ for $\x \neq \y$, i.e. distinct vectors can induce the same distributions over each index, and thus have zero distance. This is in fact desirable, since we do  not want  our distance to be sensitive to changes that are not meaningful.  The intuition is that not all variations are equally important or likely.    Moreover, we show in Theorem \ref{thm:probbnd} that the log-likelihood of a vector $\x$ transitioning to $\y$ scales with $\theta(\x,\y)$, allowing us to directly estimate the probability of spontaneous (or sequential) jumps between abundance profiles.
 
 \begin{thm}[Probability Bound]\label{thm:probbnd}
-Given a vector $\x$ of length $n$ from $P$ that transitions to $\y$ from $Q$, we have the following bounds at significance level $\alpha$.
-\cgather{
-\mem{y} e^{ \frac{\sqrt{8}N^2}{1-\alpha}\theta(\x,\y)} \geqq Pr(\x \rightarrow \y) \geqq \mem{\y} e^{-\frac{\sqrt{8}N^2}{1-\alpha}\theta(\x,\y)}
+  Given a vector $\x$ of length $n$ from $P$ that transitions to $\y$ from $Q$, we have the following bounds at significance level $\alpha$.
+  \cgather{
+    \mem{y} e^{ \frac{\sqrt{8}N^2}{1-\alpha}\theta(\x,\y)} \geqq Pr(\x \rightarrow \y) \geqq \mem{\y} e^{-\frac{\sqrt{8}N^2}{1-\alpha}\theta(\x,\y)}
   }%
   where $\mem{\y}$ is the persistence of  $\y$  (Def.~\ref{def:mem}), and $\theta(\x,\y)$ is the q-distance between $\x,\y$ (Def.~\ref{defqdistance}).
 \end{thm}
 
 \begin{proof}
   See later in Section~\ref{secproof}.
-  \end{proof}
+\end{proof}
 
 Theorem 1 gives theoretical backing to the claim that samples generated by the \qnet indeed reflect likely perturbation possibilities from the current state.  Thus we can use the \qnet to draw contextually realistic samples that respect the  cross dependencies and reduce surprise  (that is, the \qnet-inferred conditional distributions can be used to  generate approximate samples from the population $P$).  This has several implications, such as the ability to easily handle missing/incomplete data. 
 
 
 \begin{rem}[Neighborhood Structure]\label{rem:neighborhood}
-It follows from Th.~\ref{thm:probbnd} that we have for some constant $C$,
-\cgather{
-\ln \left \vert \frac{Pr(x \rightarrow y)}{Pr( y \rightarrow y)} \right \vert \leqq C \theta(x,y)
+  It follows from Th.~\ref{thm:probbnd} that we have for some constant $C$,
+  \cgather{
+    \ln \left \vert \frac{Pr(x \rightarrow y)}{Pr( y \rightarrow y)} \right \vert \leqq C \theta(x,y)
   }
- implying for all response vectors $y$ within a small neighborhood of $x$ (small in metric $\theta$), we
+  implying for all response vectors $y$ within a small neighborhood of $x$ (small in metric $\theta$), we
   have:
   \cgather{
-Pr(y \rightarrow x ) \approx Pr(x \rightarrow x)
-    }
-which reveals an important special structure on local neighborhoods.
-  \end{rem}
+    Pr(y \rightarrow x ) \approx Pr(x \rightarrow x)
+  }
+  which reveals an important special structure on local neighborhoods.
+\end{rem}
 
-  \section{\vrts Analysis}
+\section{\vrts Analysis}
 
-  \begin{defn}[Algorithm \vrts Parameters]\label{defvrts}
+\begin{defn}[Algorithm \vrts Parameters]\label{defvrts}
   We introduce three parameters referred tro as teh complexity, surprise and score parameters ($\kappa,\nu,\mu$ respectively) for a given response vector $x$:
   \calign{
     \textrm{complexity: } \ \kappa &\triangleq - \frac{1}{\abs{x}} \ln Pr(x \rightarrow x \vert M^+) = - \frac{\ln \mem{x}^{M^+}}{\abs{x}} \\
-  \textrm{surprise: } \   \nu &\triangleq \mathbf{E}_i \left (  1 - \Phi_i^{M^+} (x_{-i}) \vert_{x_i}   \right ) \\
-   \textrm{score: } \   \mu &\triangleq \frac{\ln Pr(x \rightarrow x \vert M^+)}{\ln  Pr(x \rightarrow x \vert M^0)} = \frac{\ln \mem{x}^{M^+}}{\ln \mem{x}^{M^0}}
+    \textrm{surprise: } \   \nu &\triangleq \mathbf{E}_i \left (  1 - \Phi_i^{M^+} (x_{-i}) \vert_{x_i}   \right ) \\
+    \textrm{score: } \   \mu &\triangleq \frac{\ln Pr(x \rightarrow x \vert M^+)}{\ln  Pr(x \rightarrow x \vert M^0)} = \frac{\ln \mem{x}^{M^+}}{\ln \mem{x}^{M^0}}
   }
   where $M^+$ indicates the sub-population exhibiting  a particular trait of interest $e.g.$ a mental health disorder such as PTSD, and $M^0$ is the control sub-population where this trait is absent.
 \end{defn}
@@ -221,11 +219,11 @@ We
 
 
 
-  \begin{defn}[Malingering property]
- A response vector $x$  is defined to have the malingering property if:
+\begin{defn}[Malingering property]
+  A response vector $x$  is defined to have the malingering property if:
   \cgather{
-\big (  \mu(x)  \geqq \mu_0 \big ) \bigwedge \bigg ( \big  (\kappa(x) \leqq \kappa_0\big ) \vee \big (\nu(x) \geqq \nu_0\big )   \bigg ) 
-} Set of malingering responses is denoted as $\mathscr{M}$. 
+    \big (  \mu(x)  \geqq \mu_0 \big ) \bigwedge \bigg ( \big  (\kappa(x) \leqq \kappa_0\big ) \vee \big (\nu(x) \geqq \nu_0\big )   \bigg ) 
+  } Set of malingering responses is denoted as $\mathscr{M}$. 
 \end{defn}
 The decision thresholds $\kappa_0,\nu_0,\mu_0$ are  inferred  from  survey data.
 \begin{lem}[Complexity]\label{thm-complexity}
@@ -235,36 +233,36 @@ The decision thresholds $\kappa_0,\nu_0,\mu_0$ are  inferred  from  survey data.
 
 \begin{proof} Let $\kappa(x) \leqq \kappa'$. From Def.~\ref{defvrts},   we have for a response vector $x$, 
   \cgather{
--\frac{1}{n} \ln \mem{x} \leqq \kappa' \Rightarrow  \mem{x} \geqq e^{ -n \kappa' }
-}
-Summing on both sides over all responses $x $ with $\kappa(x)\leqq \kappa'$ (assume there are $N_x$ such sequences), we have:
-\cgather{
-1 \geqq \sum_x \mem{x} \geqq \sum_x e^{ -n \kappa' }
-}
-where the first inequality follows from observing that responses very close to $x$ in the \qdist metric have a specific structure, namely $\mem{x} \approx Pr(y \rightarrow x)$ (See Remark~\ref{rem:neighborhood}) and responses further away have smaller jump probabilities, which then  implies:
-\cgather{
-N_x \sum_x e^{ -n \kappa' } \leqq 1 \Rightarrow N_x \leqq e^{ n \kappa' } 
-}
-The result then follows from noting that the complete set of possible responses has the size $L^n$.
+    -\frac{1}{n} \ln \mem{x} \leqq \kappa' \Rightarrow  \mem{x} \geqq e^{ -n \kappa' }
+  }
+  Summing on both sides over all responses $x $ with $\kappa(x)\leqq \kappa'$ (assume there are $N_x$ such sequences), we have:
+  \cgather{
+    1 \geqq \sum_x \mem{x} \geqq \sum_x e^{ -n \kappa' }
+  }
+  where the first inequality follows from observing that responses very close to $x$ in the \qdist metric have a specific structure, namely $\mem{x} \approx Pr(y \rightarrow x)$ (See Remark~\ref{rem:neighborhood}) and responses further away have smaller jump probabilities, which then  implies:
+  \cgather{
+    N_x \sum_x e^{ -n \kappa' } \leqq 1 \Rightarrow N_x \leqq e^{ n \kappa' } 
+  }
+  The result then follows from noting that the complete set of possible responses has the size $L^n$.
 \end{proof}
-%
+% 
 Lemma~\ref{thm-complexity} justifies why a low value of $\kappa$ implies the possibility of an un-natural response, because the odds of generating such a response is remarkably small.
-%
+% 
 \begin{lem}[Surprise]\label{thm-xtalk}
   For any response vector $x$, we have:
   \cgather{ \nu(x) \leqq 1 - e^{-\kappa(x)}}
 \end{lem}
-%
+% 
 \begin{proof}
   Denoting $\Phi_i (x_{-i}) \vert_{x_i}$ as $a_i$, we note that $\mem{x}^{1/n} $ is the geometric mean of the vector of $a_i$s, while $\mathbf{E}_i \left (   \Phi_i (x_{-i}) \vert_{x_i}   \right )$ is the arithmetic mean of the same vector, which then completes the proof by noting:
   \cgather{
     -\mathbf{E}_i \left (   \Phi_i (x_{-i}) \vert_{x_i}   \right ) \leqq -\mem{x}^{1/n} \Rightarrow 
     \nu(x) \leqq 1 - \mem{x}^{1/n} 
-    }
-  \end{proof}
-%
+  }
+\end{proof}
+% 
 \subsection*{Why the Defined Property Identifies Malingering}
-  
+
 Lemma~\ref{thm-xtalk} indicates that the requirement of  an upper bound on the surprise  and a lower bound on the complexity  are  both aiming to flag responses which are   unlikely to appear when the data (responses) are being generated by the  underlying process  corresponding to the phenotype of interest (PTSD).   When such unlikely responses do appear appear nevertheless, it is likely that they  are not being generated by the correct underlying process.  Can it correspond to another ``natural'' process, $e.g.$ a different mental disorder that is not intentional fabrication? If the score is higher than 
 
 
@@ -276,52 +274,52 @@ Note that the remaining condition $\mu(x) \geqq \mu_0$ is a diagnosis criterion 
 
 
 \begin{thm}[Probability bound]\label{thmbnd}
-Given a sequence  $x$ of length $N$ that transitions  to a strain $y\in Q$, we have the following bounds at significance level $\alpha$.
-\cgather{
-\mem{y}^Q e^{ \frac{\sqrt{8}N^2}{1-\alpha}\theta(x,y)} \geqq Pr(x \rightarrow y) \geqq \mem{y}^Q e^{-\frac{\sqrt{8}N^2}{1-\alpha}\theta(x,y)}
+  Given a sequence  $x$ of length $N$ that transitions  to a strain $y\in Q$, we have the following bounds at significance level $\alpha$.
+  \cgather{
+    \mem{y}^Q e^{ \frac{\sqrt{8}N^2}{1-\alpha}\theta(x,y)} \geqq Pr(x \rightarrow y) \geqq \mem{y}^Q e^{-\frac{\sqrt{8}N^2}{1-\alpha}\theta(x,y)}
   }%
   where $\mem{y}^Q$ is the membership probability of strain $y$ in the target population $Q$ (See Def.~\ref{defmem}), and $\theta(x,y)$ is the q-distance between $x,y$ (See Def.~\ref{defqdistance}).
 \end{thm}
 \begin{proof}
-Using Sanov's theorem~\cite{cover} on large deviations, we conclude that the probability of spontaneous jump from strain $x\in P$ to strain $y\in Q$, with the possibility $P \neq Q$, is given by:
-\cgather{\label{eq29}
-  Pr(x\rightarrow y) =\prod_{i=1}^N \left ( \Phi^P_i(x_{-i}) \vert_{y_i} \right )
-}
-Writing the factors on the right hand side as:
-\cgather{
- \Phi^P_i(x_{-i}) \vert_{y_i} =  \Phi^Q_i(y_{-i}) \vert_{y_i} \left (  \frac{\Phi^P_i(x_{-i}) \vert_{y_i}}{\Phi^Q_i(y_{-i}) \vert_{y_i}}  \right )
-}%
-we note that $\Phi^P_i(x_{-i})$, $\Phi^Q_i(y_{-i})$ are distributions on the same index $i$, and hence:
+  Using Sanov's theorem~\cite{cover} on large deviations, we conclude that the probability of spontaneous jump from strain $x\in P$ to strain $y\in Q$, with the possibility $P \neq Q$, is given by:
+  \cgather{\label{eq29}
+    Pr(x\rightarrow y) =\prod_{i=1}^N \left ( \Phi^P_i(x_{-i}) \vert_{y_i} \right )
+  }
+  Writing the factors on the right hand side as:
   \cgather{
-\vert  \Phi^P_i(x_{-i})_{y_i} - \Phi^Q_i(y_{-i})_{y_i}\vert \leqq \sum_{y_i \in \Sigma_i} \vert  \Phi^P_i(x_{-i})_{y_i} - \Phi^Q_i(y_{-i})_{y_i}\vert 
-}%
-Using a standard refinement of Pinsker's inequality~\cite{fedotov2003refinements}, and the relationship of Jensen-Shannon divergence with  total variation, we get:
-\cgather{
-  \theta_i \geqq \frac{1}{8} \vert  \Phi^P_i(x_{-i})_{y_i} - \Phi^Q_i(y_{-i})_{y_i}\vert^2
-\Rightarrow \left   \lvert  1  - \frac{\Phi^Q_i(y_{-i})_{y_i}}{\Phi^P_i(x_{-i})_{y_i}} \right \rvert \leqq \frac{1}{a_0}\sqrt{8 \theta_i}
-}%
-where $a_0$ is the smallest non-zero probability value of generating the entry at any index. We will see that this parameter is related to statistical significance of our bounds. First, we can formulate a lower bound as follows:
-\cgather{\label{eqLB}
- \log \left  ( \prod_{i=1}^N   \frac{\Phi^P_i(x_{-i}) \vert_{y_i}}{\Phi^Q_i(y_{-i}) \vert_{y_i}}  \right )
-  = \sum_i \log  \left  (  \frac{\Phi^P_i(x_{-i}) \vert_{y_i}}{\Phi^Q_i(y_{-i}) \vert_{y_i}}  \right )
-\geqq \sum_i \left  ( 1- \frac{\Phi^Q_i(y_{-i})_{y_i}}{\Phi^P_i(x_{-i})_{y_i}} \right ) \geqq  \frac{\sqrt{8}}{a_0}\sum_i\theta_i^{1/2} = -\frac{\sqrt{8}N}{a_0}\theta
-}%
-Similarly,  the upper bound may be derived as:
-\cgather{\label{eqUB}
-\log \left  ( \prod_{i=1}^N   \frac{\Phi^P_i(x_{-i}) \vert_{y_i}}{\Phi^Q_i(y_{-i}) \vert_{y_i}}  \right )
-  = \sum_i \log  \left  (  \frac{\Phi^P_i(x_{-i}) \vert_{y_i}}{\Phi^Q_i(y_{-i}) \vert_{y_i}}  \right ) \leqq \sum_i \left  ( \frac{\Phi^Q_i(y_{-i})_{y_i}}{\Phi^P_i(x_{-i})_{y_i}} - 1 \right ) \leqq \frac{\sqrt{8}N}{a_0}\theta
-}%
-Combining Eqs.~\ref{eqLB} and \ref{eqUB}, we conclude:
-\cgather{
-\mem{y}^Q e^{ \frac{\sqrt{8}N}{a_0}\theta} \geqq Pr(x \rightarrow y) \geqq \mem{y}^Q e^{-\frac{\sqrt{8}N}{a_0}\theta}
-}%
-Now, interpreting $a_0$ as the probability of generating an unlikely event below our desired threshold ($i.e.$ a ``failure''), we note that the probability of generating at least one such event is given by $1-(1-a_0)^N$. Hence if $\alpha$ is the pre-specified significance level, we have for $N >> 1 $:
-\cgather{
- a_0 \approx (1 -\alpha)/N
-}%
-Hence, we conclude, that at significance level $\geqq \alpha$, we have the bounds:
-\cgather{
-\mem{y}^Q e^{ \frac{\sqrt{8}N^2}{1-\alpha}\theta} \geqq Pr(x \rightarrow y) \geqq \mem{y}^Q e^{-\frac{\sqrt{8}N^2}{1-\alpha}\theta}
+    \Phi^P_i(x_{-i}) \vert_{y_i} =  \Phi^Q_i(y_{-i}) \vert_{y_i} \left (  \frac{\Phi^P_i(x_{-i}) \vert_{y_i}}{\Phi^Q_i(y_{-i}) \vert_{y_i}}  \right )
+  }%
+  we note that $\Phi^P_i(x_{-i})$, $\Phi^Q_i(y_{-i})$ are distributions on the same index $i$, and hence:
+  \cgather{
+    \vert  \Phi^P_i(x_{-i})_{y_i} - \Phi^Q_i(y_{-i})_{y_i}\vert \leqq \sum_{y_i \in \Sigma_i} \vert  \Phi^P_i(x_{-i})_{y_i} - \Phi^Q_i(y_{-i})_{y_i}\vert 
+  }%
+  Using a standard refinement of Pinsker's inequality~\cite{fedotov2003refinements}, and the relationship of Jensen-Shannon divergence with  total variation, we get:
+  \cgather{
+    \theta_i \geqq \frac{1}{8} \vert  \Phi^P_i(x_{-i})_{y_i} - \Phi^Q_i(y_{-i})_{y_i}\vert^2
+    \Rightarrow \left   \lvert  1  - \frac{\Phi^Q_i(y_{-i})_{y_i}}{\Phi^P_i(x_{-i})_{y_i}} \right \rvert \leqq \frac{1}{a_0}\sqrt{8 \theta_i}
+  }%
+  where $a_0$ is the smallest non-zero probability value of generating the entry at any index. We will see that this parameter is related to statistical significance of our bounds. First, we can formulate a lower bound as follows:
+  \cgather{\label{eqLB}
+    \log \left  ( \prod_{i=1}^N   \frac{\Phi^P_i(x_{-i}) \vert_{y_i}}{\Phi^Q_i(y_{-i}) \vert_{y_i}}  \right )
+    = \sum_i \log  \left  (  \frac{\Phi^P_i(x_{-i}) \vert_{y_i}}{\Phi^Q_i(y_{-i}) \vert_{y_i}}  \right )
+    \geqq \sum_i \left  ( 1- \frac{\Phi^Q_i(y_{-i})_{y_i}}{\Phi^P_i(x_{-i})_{y_i}} \right ) \geqq  \frac{\sqrt{8}}{a_0}\sum_i\theta_i^{1/2} = -\frac{\sqrt{8}N}{a_0}\theta
+  }%
+  Similarly,  the upper bound may be derived as:
+  \cgather{\label{eqUB}
+    \log \left  ( \prod_{i=1}^N   \frac{\Phi^P_i(x_{-i}) \vert_{y_i}}{\Phi^Q_i(y_{-i}) \vert_{y_i}}  \right )
+    = \sum_i \log  \left  (  \frac{\Phi^P_i(x_{-i}) \vert_{y_i}}{\Phi^Q_i(y_{-i}) \vert_{y_i}}  \right ) \leqq \sum_i \left  ( \frac{\Phi^Q_i(y_{-i})_{y_i}}{\Phi^P_i(x_{-i})_{y_i}} - 1 \right ) \leqq \frac{\sqrt{8}N}{a_0}\theta
+  }%
+  Combining Eqs.~\ref{eqLB} and \ref{eqUB}, we conclude:
+  \cgather{
+    \mem{y}^Q e^{ \frac{\sqrt{8}N}{a_0}\theta} \geqq Pr(x \rightarrow y) \geqq \mem{y}^Q e^{-\frac{\sqrt{8}N}{a_0}\theta}
+  }%
+  Now, interpreting $a_0$ as the probability of generating an unlikely event below our desired threshold ($i.e.$ a ``failure''), we note that the probability of generating at least one such event is given by $1-(1-a_0)^N$. Hence if $\alpha$ is the pre-specified significance level, we have for $N >> 1 $:
+  \cgather{
+    a_0 \approx (1 -\alpha)/N
+  }%
+  Hence, we conclude, that at significance level $\geqq \alpha$, we have the bounds:
+  \cgather{
+    \mem{y}^Q e^{ \frac{\sqrt{8}N^2}{1-\alpha}\theta} \geqq Pr(x \rightarrow y) \geqq \mem{y}^Q e^{-\frac{\sqrt{8}N^2}{1-\alpha}\theta}
   }%
 \end{proof}
 
@@ -331,7 +329,7 @@ Hence, we conclude, that at significance level $\geqq \alpha$, we have the bound
 \bibliography{qbiome,allbib,tnet} 
 
 
- 
+
 
 \end{document}
 
@@ -373,7 +371,7 @@ Hence, we conclude, that at significance level $\geqq \alpha$, we have the bound
 % Malingering can lead to a decline in research and subsequent treatment for PTSD as it interferes with true studies. Insurance fraud may also come about through malingering, which hurts the economy~\cite{ali2015multimodal}. False PTSD diagnoses can adversely affect treatment planning, resource management, and research. The subjective nature of stressors, stereotypic presentation of symptoms, wealth of resources detailing how to malinger PTSD, and the high stakes for individuals involved in criminal, civil, and disability evaluations create challenges for making an accurate diagnosis. 
 
 
-%  Because of the substantial benefits available to individuals with a confirmed PTSD diagnosis, which causes occupational impairment, the distinct possibility of false diagnoses exist, some of which are due to malingering of PTSD. Malingering of PTSD consists of one feigning the disorder.
+% Because of the substantial benefits available to individuals with a confirmed PTSD diagnosis, which causes occupational impairment, the distinct possibility of false diagnoses exist, some of which are due to malingering of PTSD. Malingering of PTSD consists of one feigning the disorder.
 
 
 % Posttraumatic stress disorder (PTSD) can occur after a traumatic experience and can cause severe symptoms that interfere with a person's psychological, physical, interpersonal, occupational, and social functioning. It is important to accurately identify genuine cases of PTSD and, as part of the differential diagnosis, to rule out instances of false PTSD. False PTSD diagnoses can adversely affect treatment planning, resource management, and research. The subjective nature of stressors, stereotypic presentation of symptoms, wealth of resources detailing how to malinger PTSD, and the high stakes for individuals involved in criminal, civil, and disability evaluations create challenges for making an accurate diagnosis. T
@@ -385,5 +383,5 @@ Hence, we conclude, that at significance level $\geqq \alpha$, we have the bound
 
 % Here, we implement a fundamentally novel  data-driven method for detecting deceptive or untruthful responses in structured interviews.  Conjecturing that response patterns generated from malingering and other forms of deception are probabilistically distinct from responses that are subversive or trying to mimic a mental disorder, we claim that deception may be detectable solely on the basis of responses themselves. The key insight here is that the responses themselves (and not the respondent's behavior when answering) are capable of signaling deception, even in cases where the respondent might possesses expert knowledge of how to answer the question. 
 
-%Our algorithmic approach addresses limitations that may be present in other state-of-the-art methods while achieving performance at or beyond what has been reported to date. As an entirely response-driven method, we require no additional tests or resources to develop and deploy. Merging techniques from machine learning and information theory, we directly model the high-dimensional space of responses from all respondents, from which we are able to rigorously estimate the consistency of an individual respondent’s answers. % Our model-derived consistency measure - known as dissonance - gives a precise, quantitative method for identifying individuals whose responses may be reflective of malingering.
-%Our findings suggest that this measure can reliably distinguish between actual and deceptive (even adversarial) responses on both population and individual levels, allowing us to identify subjects whose responses are inconsistent and indicative of possible deception.
+% Our algorithmic approach addresses limitations that may be present in other state-of-the-art methods while achieving performance at or beyond what has been reported to date. As an entirely response-driven method, we require no additional tests or resources to develop and deploy. Merging techniques from machine learning and information theory, we directly model the high-dimensional space of responses from all respondents, from which we are able to rigorously estimate the consistency of an individual respondent’s answers. % Our model-derived consistency measure - known as dissonance - gives a precise, quantitative method for identifying individuals whose responses may be reflective of malingering.
+% Our findings suggest that this measure can reliably distinguish between actual and deceptive (even adversarial) responses on both population and individual levels, allowing us to identify subjects whose responses are inconsistent and indicative of possible deception.
