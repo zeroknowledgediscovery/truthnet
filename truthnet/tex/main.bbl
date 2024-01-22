@@ -5,14 +5,6 @@
 \providecommand{\bibinfo}[2]{#2}
 \providecommand{\eprint}[2][]{\url{#2}}
 
-\bibitem{ali2015multimodal}
-\bibinfo{author}{Ali, S.}, \bibinfo{author}{Jabeen, S.} \&
-  \bibinfo{author}{Alam, F.}
-\newblock \bibinfo{title}{Multimodal approach to identifying malingered
-  posttraumatic stress disorder: A review}.
-\newblock \emph{\bibinfo{journal}{Innovations in Clinical Neuroscience}}
-  \textbf{\bibinfo{volume}{12}}, \bibinfo{pages}{12} (\bibinfo{year}{2015}).
-
 \bibitem{Rogers1997}
 \bibinfo{author}{Rogers, R.}
 \newblock \bibinfo{title}{An overview of malingering and its assessment}.
@@ -24,13 +16,6 @@
 \bibinfo{author}{Rogers, R.~E.}
 \newblock \emph{\bibinfo{title}{Clinical assessment of malingering and
   deception}} (\bibinfo{publisher}{Guilford Press}, \bibinfo{year}{2008}).
-
-\bibitem{Ekman1992}
-\bibinfo{author}{Ekman, P.} \& \bibinfo{author}{O'Sullivan, M.}
-\newblock \bibinfo{title}{Who can catch a liar?}
-\newblock \emph{\bibinfo{journal}{American Psychologist}}
-  \textbf{\bibinfo{volume}{46}}, \bibinfo{pages}{913--920}
-  (\bibinfo{year}{1991}).
 
 \bibitem{frueh2007us}
 \bibinfo{author}{Frueh, B.}, \bibinfo{author}{Grubaugh, A.},
@@ -51,6 +36,21 @@
 \newblock \emph{\bibinfo{journal}{Journal of Anxiety Disorders}}
   \textbf{\bibinfo{volume}{21}}, \bibinfo{pages}{22--41}
   (\bibinfo{year}{2007}).
+
+\bibitem{ali2015multimodal}
+\bibinfo{author}{Ali, S.}, \bibinfo{author}{Jabeen, S.} \&
+  \bibinfo{author}{Alam, F.}
+\newblock \bibinfo{title}{Multimodal approach to identifying malingered
+  posttraumatic stress disorder: A review}.
+\newblock \emph{\bibinfo{journal}{Innovations in Clinical Neuroscience}}
+  \textbf{\bibinfo{volume}{12}}, \bibinfo{pages}{12} (\bibinfo{year}{2015}).
+
+\bibitem{Ekman1992}
+\bibinfo{author}{Ekman, P.} \& \bibinfo{author}{O'Sullivan, M.}
+\newblock \bibinfo{title}{Who can catch a liar?}
+\newblock \emph{\bibinfo{journal}{American Psychologist}}
+  \textbf{\bibinfo{volume}{46}}, \bibinfo{pages}{913--920}
+  (\bibinfo{year}{1991}).
 
 \bibitem{guriel2003assessing}
 \bibinfo{author}{Guriel, J.} \& \bibinfo{author}{Fremouw, W.}
@@ -175,6 +175,15 @@
   \textbf{\bibinfo{volume}{26}}, \bibinfo{pages}{53--62}
   (\bibinfo{year}{2004}).
 
+\bibitem{drob2009clinical}
+\bibinfo{author}{Drob, S.~L.}, \bibinfo{author}{Meehan, K.~B.} \&
+  \bibinfo{author}{Waxman, S.~E.}
+\newblock \bibinfo{title}{Clinical and conceptual problems in the attribution
+  of malingering in forensic evaluations.}
+\newblock \emph{\bibinfo{journal}{The journal of the American Academy of
+  Psychiatry and the Law}} \textbf{\bibinfo{volume}{37}},
+  \bibinfo{pages}{98--106} (\bibinfo{year}{2009}).
+
 \bibitem{Wong2005}
 \bibinfo{author}{Wong, S.} \& \bibinfo{author}{O'Sullivan, M.}
 \newblock \bibinfo{title}{The structured interview of reported symptoms (sirs):
@@ -242,6 +251,16 @@
 \newblock \emph{\bibinfo{journal}{Archives of general psychiatry}}
   \textbf{\bibinfo{volume}{69}}, \bibinfo{pages}{1104--1112}
   (\bibinfo{year}{2012}).
+
+\bibitem{Brenner_2021}
+\bibinfo{author}{Brenner, L.~A.} \emph{et~al.}
+\newblock \bibinfo{title}{Development and validation of computerized adaptive
+  assessment tools for the measurement of posttraumatic stress disorder among
+  us military veterans}.
+\newblock \emph{\bibinfo{journal}{JAMA Network Open}}
+  \textbf{\bibinfo{volume}{4}}, \bibinfo{pages}{e2115707}
+  (\bibinfo{year}{2021}).
+\newblock \urlprefix\url{https://doi.org/10.1001/jamanetworkopen.2021.15707}.
 
 \bibitem{mcdermott2013malingering}
 \bibinfo{author}{McDermott, B.}, \bibinfo{author}{Dualan, I.} \&

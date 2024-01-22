@@ -1,66 +1,66 @@
-This is BibTeX, Version 0.99d (TeX Live 2018)
-Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+This is BibTeX, Version 0.99d (TeX Live 2021)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: main.aux
 The style file: naturemag.bst
 Database file #1: qbiome.bib
 Database file #2: allbib.bib
 Database file #3: tnet.bib
-Repeated entry---line 305 of file tnet.bib
+Repeated entry---line 330 of file tnet.bib
  : @article{frueh2007us
  :                     ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 642 of file tnet.bib
+Repeated entry---line 667 of file tnet.bib
  : @article{sarda2017conditional
  :                              ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 662 of file tnet.bib
+Repeated entry---line 687 of file tnet.bib
  : @inproceedings{fuglede2004jensen
  :                                 ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 745 of file tnet.bib
+Repeated entry---line 770 of file tnet.bib
  : @article{mcdermott2013malingering
  :                                  ,
 I'm skipping whatever remains of this entry
 Warning--I didn't find a database entry for "Lee2019"
-You've used 52 entries,
+You've used 54 entries,
             2348 wiz_defined-function locations,
-            1318 strings with 18917 characters,
-and the built_in function-call counts, 21228 in all, are:
-= -- 1497
-> -- 556
+            1330 strings with 19524 characters,
+and the built_in function-call counts, 22062 in all, are:
+= -- 1558
+> -- 576
 < -- 0
-+ -- 276
-- -- 139
-* -- 2674
-:= -- 2304
-add.period$ -- 151
-call.type$ -- 52
-change.case$ -- 56
++ -- 286
+- -- 144
+* -- 2781
+:= -- 2398
+add.period$ -- 158
+call.type$ -- 54
+change.case$ -- 58
 chr.to.int$ -- 0
-cite$ -- 52
-duplicate$ -- 1862
-empty$ -- 1979
-format.name$ -- 183
-if$ -- 4261
+cite$ -- 54
+duplicate$ -- 1935
+empty$ -- 2055
+format.name$ -- 190
+if$ -- 4426
 int.to.chr$ -- 0
-int.to.str$ -- 52
-missing$ -- 449
-newline$ -- 263
-num.names$ -- 56
-pop$ -- 348
+int.to.str$ -- 54
+missing$ -- 466
+newline$ -- 274
+num.names$ -- 58
+pop$ -- 357
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 342
+skip$ -- 353
 stack$ -- 0
-substring$ -- 1025
-swap$ -- 1899
+substring$ -- 1071
+swap$ -- 1973
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 0
-while$ -- 133
-width$ -- 54
-write$ -- 564
+while$ -- 138
+width$ -- 56
+write$ -- 588
 (There were 4 error messages)

@@ -11,7 +11,7 @@
 % \externaldocument[EXT-]{exfig}
 \newif\iftikzX
 \tikzXtrue
-\tikzXfalse
+\tikzXfalse 
 \newif\ifFIGS  
 \FIGSfalse  
 \FIGStrue
@@ -27,6 +27,7 @@
 
 \pgfplotsset{compat=1.16}
 
+\def\Methods{Methods\xspace}
 
 \def\vrts{\texttt{VeRITAS}\xspace}
 
@@ -35,8 +36,14 @@
 
 
 {\bf \sffamily \fontsize{10}{12}\selectfont \noindent   
-  {\normalfont \itshape Abstract:} Faking  symptoms of a mental health disorder or \textit{malingering} can confound diagnostic interviews and hinder clinical psychiatric assessment.  We introduce an  artificial intelligence (AI) framework for detecting malingering in Post-Traumatic Stress Disorder (PTSD) diagnoses. Traditional psychiatric diagnoses methods, predominantly structured interviews, are susceptible  to fabrication, which is especially problematic in the context of PTSD  due to  subjective stressors, presentation similarity, and  potential of secondary financial gain from positive diagnoses. Algorithm \vrts employs a generative AI to infer statistical dependencies inherent in true response patterns, and flags  responses which violate such subtle  constraints. These emergent response patterns are challenging to mimic even  with psychiatric training, providing a robust mechanism for recognizing fabrications. With a study sample of $n=624$ patients, \vrts is estimated to have a minimum  Area Under the Curve (AUC) of 95.0\%, with one sensitivity and specificity pair  of 92\% and 95\% respectively. Thus our tool   offers a  objective, disease-specific, rapid ($\leqq 2$ min)  approach to detect fake  PTSD, and if adopted, can  ensure that healthcare resources reach  those genuinely in need,  and maintain the integrity of clinical data. Moreover, the ability to diagnose patients who might be malingering due to other mental health conditions, poverty or   socio-economic compulsions can substantially improve outcomes  in low SES communities.
+  {\normalfont \itshape Abstract:} Malingering~\cite{Rogers1997,rogers2008clinical} or faking  the symptoms of a mental health disorder  can confound structured diagnostic interviews and hinder clinical psychiatric assessments.  We introduce an  artificial intelligence (AI) framework for detecting symptom fabrication in Post-Traumatic Stress Disorder (PTSD) diagnoses, for which malingering is a known problem~\cite{frueh2007us,taylor2007detection}, partially ascribable to the  potential for secondary financial gain from positive diagnoses.  Algorithm \vrts employs novel generative AI to infer statistical dependencies inherent in true response patterns, and flags  responses which violate these subtle  constraints. Mimicing these  emergent  patterns is difficult  even  with psychiatric training, resulting in a robust mechanism for recognizing fabrications. With a study sample of $n=624$ patients, \vrts is estimated to have a   Area Under the Curve (AUC) of $\geqq 95.0\%$, with one sensitivity/specificity pair  of 92\% and 95\% respectively. Our tool   offers an  objective, disease-specific, fast (average time $\leqq 2$ min)  approach to detect fake  PTSD, and if adopted, can  ensure that healthcare resources and disability concessions reach  those genuinely in need,  while  helping to maintain  integrity of clinical data. Moreover, the ability to identify and help  patients who might be malingering due to other mental health conditions, poverty or   socio-economic compulsions can  improve general health outcomes  in disadvantaged communities.  
 }
+
+
+
+
+
+
 
 \vspace{10pt} 
 
@@ -44,7 +51,7 @@
 Diagnosis of mental health disorders typically  rely  on structured interviews~\cite{ali2015multimodal} susceptible to  intentional fabrication of  symptoms~\cite{Rogers1997,rogers2008clinical}, often referred to as ``malingering''. In the specific context of clinically diagnosing Post-Traumatic Stress Disorder (PTSD),  subjective stressors, a high degree of similarity in presentation,  the realtively easy access to  information on  how to fake PTSD,  and financial  incentives from a positive diagnosis  in  legal procedures or   disability claims, is known to hinder   accurate   assessments. Here, we present an approach based on a  generative model to flag malingering suspects rapidly, efficiently and accurately; essentially demonstrating a generative artificial intelligence (AI) framework that, paraphrasing Ekman~\cite{Ekman1992},  ``\textit{can catch a liar}''. 
 
 Clinically, PTSD is an anxiety disorder that can develop after experiencing a traumatic event. In the United States,  substantial disability compensation may be  available for  those with mental disorders, which while being an crucial resource for the truely afflicted, incentivizes malingering~\cite{frueh2007us,taylor2007detection}.  Thus,  faking PTSD to access medical treatment, commit insurance, personal injury and other frauds,  or in an attempt to evade criminal liability and penalties~\cite{guriel2003assessing,salloway1990opiate,resnick2008malingering,burkett1998stolen} is unfortunately not rare. While  PTSD is a serious mental health condition  associated with  substance use disorder, mood disorder, anxiety disorder,  personality disorder, increased morbidity,  and possibly with increased  mortality~\cite{goldstein2016epidemiology,schnurr2009posttraumatic}, false  diagnoses can cause substantial financial drain~\cite{lopiccolo1999current, oboler2000disability} to  healthcare systems, divert crucial resources from where they are needed~\cite{taylor2006clinician}, and interfere with study outcomes by introducing inaccuracies in clinical data~\cite{rosen2006dsm}. Accurate disambiguation of true and fake PTSD is therefore  of high importance, especially with sources suggesting that over 20\% of  personal injury cases, as well as  20\%  of the Veterans seeking combat compensation could be  fabricating their condition~\cite{marx2011ptsd,rogers1994explanatory,leeshaley1997mmpi2,frueh2007us}.
-In addition to curbing  financial fraud, ability to flag such incongruities can help address the myriad of  complex factors that drive malingering behavior, including other mental health conditions, poverty, a lack of access to healthcare~\cite{park2021race,muntaner2004socioeconomic} and  a limited ability to seek help for mental health conditions.
+In addition to curbing  financial fraud, ability to flag such incongruities can help address the myriad of   factors that can  drive malingering behavior, including other mental health conditions, a lack of access to healthcare~\cite{park2021race,muntaner2004socioeconomic} and  an inability to seek help arising from poverty and other broad-ranging socio-economic conditions.
 
 \begin{figure}
   \tikzexternalenable
@@ -56,32 +63,68 @@ In addition to curbing  financial fraud, ability to flag such incongruities can 
   \else
   \includegraphics[width=.92\textwidth]{Figures/External/scheme}
   \fi
-
+ 
   \vspace{-12pt}
   
   \captionN{\textbf{Conceptual framework.} Using a  dataset of responses to a validated structured interview for PTSD diagnoses, along with physician-validated clinical diagnoses, we infer generative models for responses for PTSD patients. In our framework for detecting  malingering, we flag responses as those which are highly ``surprising'' (defined as violating infered cross-dependencies between  individual response items) or are too simple (lacking complexity in the response patterns typical of non-malingered responses). The precise ``malingering condition'' shown above is validated from theoretical considerations as well as field experimental data.}\label{qnet}
 \end{figure}
 
-Multiple standardized tests~\cite{Wong2005,smith1997detection} and  validity assessment tools~\cite{ben2012interpreting} have been explored  for detecting malingering  with limited success. These tools typically aim to incorporate patterns observed in diagnostic populations that might disambiguate faked symptoms from real ones, or ask similar or related questions multiple times to verify consistency. However,  existing approaches  do not target specific disorders, require expert interpretation, are almost always  subjective, and by design are  unlikely to be effective against a malingerer with psychiatric training (See Table~\ref{tbl:methods_summary}). Other  strategies that incorporate diverse physiological monitoring and linguistic analysis~\cite{ekman1991who,mihalcea2009lie,burgoon2008cognitive,zhou2004automating}  cannot be easily  adopted  in the present context of structured or semi-structured interviews.
+Despite the general difficulty in formulating principles to detect malingering~\cite{drob2009clinical}, multiple standardized tests~\cite{Wong2005,smith1997detection} and  validity assessment tools~\cite{ben2012interpreting} have been proposed, with limited success. These tools typically aim to incorporate patterns observed in diagnostic populations that might disambiguate faked symptoms from real ones, or ask similar or related questions multiple times to verify consistency. However,  existing approaches  do not target specific disorders, almost always require expert interpretation, are  subjective, and by design are  unlikely to be effective against a malingerer with psychiatric training (See Table~\ref{tbl:methods_summary}). Other  strategies with physiological monitoring and linguistic analysis~\cite{ekman1991who,mihalcea2009lie,burgoon2008cognitive,zhou2004automating}  cannot be easily  adopted  in structured or semi-structured interviews.
 
-In algorithm \vrts we leverage the fact that
-responses  in a structured interview have emergent statistical dependencies  arising from the nature of the questions themselves, and are modulated by the trait we are aiming to detect $e.g.$, PTSD pathology. These dependencies are too
-complex to easily mimic on-the-fly, even with knowledge about how such patients tend to respond $i.e.$ with training in the mental health services.   We find that \vrts offers a robust generalizable approach to verifying response validity, can be trained to target specific disorders,  can be administered in less that $2$ minutes, and require little or no subjective interpretation.
+In  \vrts we leverage the fact that
+responses  in a structured interview have  statistical dependencies  arising from the nature of the questions themselves, and are modulated by the trait we are aiming to detect $e.g.$, PTSD pathology. We operationalize this principle without requiring human-understanding of the specific items being presented to the subject; thus making the approach   specific to the disease at hand (PTSD), while being  potentially generalizable to other disorders if appropriate training data is available.
 
+Our key finding here is that the subtle cross-dependencies between the interview items   are challenging to  mimic on-the-fly, even if the subject is  knowledgeable about how such patients tend to respond $i.e.$ with training in the mental health services.   Thus,  \vrts offers a robust  approach to verifying response validity, can target specific disorders,  can be administered in less that $4$ minutes, and require little subjective interpretation.
+
+% (3.851126325864842, 2.879873674135158) min at 95% confidence
+\def\Mpos{M^+}
+\def\Mcont{M^0}
 
 \section*{Results} 
 
+% and provided responses on the PTSD Checklist (PCL-5) for Diagnostic and Statistical Manual of Mental Disorders, Fifth Edition (DSM-5)
+
+
+
 \subsection*{Participants and Data Sources}
-The interview data used in training in this study  consists of  $n=304$ participants  recruited at a Veterans Health Administration facility for an earlier study~\cite{brenner2021development}. Veterans were eligible if they were between the ages of 18 and 89 years and able to provide written informed consent. Once eligibility was determined by the study team, participants completed a PTSD-symptom questionnaire from the CAT-PTSD item bank~\cite{gibbons2012development,brenner2021development} (comprising $211$ items) and provided responses on the PTSD Checklist for Diagnostic and Statistical Manual of Mental Disorders, Fifth Edition (DSM-5) (PCL-5). Participants in teh training dataset were interviewed using the Clinician-Administered Scale for PTSD for DSM-5 ($86$ were diagnosed, $218$ were deemed  PTSD-negative).
+Our  first   dataset  (referred to as the VA dataset)  comprises  $n=304$ participants  recruited at a Veterans Health Administration facility for an earlier study~\cite{brenner2021development}. Veterans  between the ages of 18 and 89 years were recruited with written informed consent. Once eligibility was determined by the study team, participants completed a PTSD-symptom questionnaire from the CAT-PTSD item bank~\cite{gibbons2012development,brenner2021development}, comprising $211$ items, including some items from the  PTSD Checklist (PCL-5). Participants  were also interviewed using the Clinician-Administered Scale for PTSD for Diagnostic and Statistical Manual of Mental Disorders, Fifth Edition (DSM-5), which resulted in $86$ PTSD  diagnoses, and $218$ participants  deemed as  not having PTSD. We used {\color{Red1} 60\%} of the data for inferring our generative models, and the rest was used for validation, including determining the out-of-sample AUC for identifying PTSD vs no-PTSD cases. The possibility of malingering was not recorded in this dataset.
 
-\subsection*{Key Insight}
-Our key insight  is that malingered responses  have low likelihood of being generated while respecting the emergent cross-dependencies. The proposed framework enables verifying this condition efficiently without strong a priori assumptions of the nature and structure of these cross-dependencies. This condition can also be thought of as stipulating that malingered responses have high average ``surprise'', $i.e. $ deviate more on average from the model predictions of item responses. We learn a generative model for responses to structured diagnostic interviews that can discover $n$-way dependencies between the items. Finally, we aim to robustly flag malingering by checking if two specific  response attributes $\kappa, \nu$ related to likelihood and surprise violate preset thresholds.
+The second dataset generated in the course of the present study is from online surveys conducted by a third party vendor (Prolific) hired by the study team. Referred to here as the Prolific dataset, it comprises $n= 310$ participants (200 in the US, and 110 in the UK), screened for the absence of past or present mental health diagnoses. The participants were asked to fake symptoms of PTSD while taking the \vrts interview. 
+
+In total, this study considered {\color{Red1} $n=624$} participants comprising  US Veterans, and drawn from the  general population in the US and the UK, with broad representation across sexes and ethnicities. Average completion times and detailed demographic composition of the respondents is shown in Table~\ref{tabprolific}.
 
 
-\begin{figure}
-  \includegraphics[width=\textwidth]{Figures/fig2}
-  \captionN{}\label{fig2}
-\end{figure} 
+\begin{table}[t]
+  \centering
+  
+  \captionN{Prolific Dataset Participant Characteristics and Success Rate as a percentage of the representation, at 90\% sensitivity}\label{tabprolific}
+\input{Figures/tabprolific}
+\end{table}
+
+\subsection*{Item Presentation and Response Sequence in Administration}
+In \vrts we present  a small random subset of the full item bank to the subjects. Although the models for cross-dependency are inferred using the complete response sequence to all 211 items available, presenting a smaller  item set makes the test feasible, while also producing a vast number of possible variations. In the version we validated, 20 items are presented. These are randomly generated from a distribution reflecting the  impact  of the items in the inferred models on their ability to disambiguate between responses from diagnosed PTSD patients and the control group. Impact is measured using standard SHAP analysis of the inferred models (See \Methods for details). SHAP-values for items are normalized to a probability mass function (pmf), which is then sampled  to produce the item set. We can select items adaptively similar to CAT-PTSD~\cite{brenner2021development}; such  complications have been presently avoided.
+
+
+\subsection*{Integrated Diagnostic Capability}
+Given a sequence of responses to a diagnostic interview, our first task is to determine if a particular subject should be diagnosed with PTSD,  if the  possibility of  malingering is ignored. We call this a ``naive diagnosis''. This diagnostic information might be available to \vrts externally ($e.g.$ from a physician's assessment of the patients). However, \vrts also has an integrated capability for naive diagnosis: we identify separate  generative models for 1) the diagnosed set of patients in the training set ($\Mpos$, some of them might be malingering) and 2) for the patients identified as not having PTSD ($\Mcont$). Then given the sequence of responses from a new subject, we estimate if that sequence is more likely to have been generated by the model for  $\Mpos$ vs that for $\Mcont$. We validate this diagnostic capability  using the training data described above, and we achieve good disambiguation between $\Mpos$ and $\Mcont$, with out-of-sample AUC  {\color{Red1}$0.867\pm 0.008$}, which is at par or better compared to reported tools, $e.g.$,  CAT-PTSD~\cite{Brenner_2021}. In the \vrts algorithm, for a given response sequence $\x$, the naive diagnosis risk score is denoted as $\mu(x)$, and referred to as simply the ``score'' (See \Methods for definition and computational approach).
+
+%model 9
+
+\subsection*{Principle of Characterizing Malingered Responses}
+Amongst those who have a naive PTSD diagnosis, we aim to flag subjects with  a quantifiable high estimated likelihood of malingering. Note that the in training set we only have the naive diagnoses information; thus some participants diagnosed with PTSD in the dataset could have been malingering, but are not flagged to be so. To flag malingering sunjects, our first insight  is that such response sequences  have high average ``surprise'', $i.e. $ deviate more on average from the context-specific model predictions of item responses. Our other insight is that malingering tend to generate  less complex patterns in the response sequences. We understand complexity in the formal sense: more complex objects are less compressible, and  random sequences are not significantly compressible. Thus a sequence of all 1's is very compressible and therefore non-random, but a sequence generated from teh sequential tosses of a fair coin is not very compressible, and is highly random. We hypothesize that true response sequences  will tend to have maximal randomness, conditional on  being constrained by the emergent cross-dependencies. Thus, true responses  should have the just right  degree of identifiable structure, and  no more. More structure will make it less random, and less structure will increase surprise, and thus too much and too little structure are both indicative of malingering. Both of these criteria are based on statistical properties of the response sequence, and do not require a human understanding of the items. Quantitatively, for each response sequence $\x$, we compute two quantities: $\kappa(x)$ and  $\nu(x)$, referred to as the complexity  and the surprise parameters respectively.
+
+Thus,  $\kappa, \nu, \mu$ are  random variables which are functions of the response sequence of the subject, and have distributions that may be characterized from the VA data, despite  not having designation of ``malingering'' in that  dataset. This is because that these quantities are computable from just the response sequence themselves. Concretely, we propose that a subject with a response sequence $\x$  is malingering if for a suitably chosen thresholds $\mu_0,\nu_0, \kappa_0$:
+ \cgather{
+    \big (  \mu(x)  \geqq \mu_0 \big ) \bigwedge \bigg ( \big  (\kappa(x) \leqq \kappa_0\big ) \vee \big (\nu(x) \geqq \nu_0\big )   \bigg ) 
+  }
+This may be paraphrased as that  a response sequence has high likelihood of malingering if it 1)  produces a naive diagnosis of PTSD with high probability, and 2) is either too surprising or too simple. The decision thresholds are obtained from theoretical considerations and the VA data.
+
+\subsection*{\vrts Validation Strategy}
+Since the VA data does not not direct indication of either presence of absence of malingering, we adopted an non-standard approach for validating \vrts. We assumed that the Prolific participants do not have PTSD, and that all of them were attempting to malinger. This allows us to directly measure false negative rates, as function of the \vrts parameters. Then we check how many of the VA participants are flagged as malingering amongst the ones with a naive PTSD diagnosis. To determine a lower bound on performance we can assume all of these subjects are false positives (which is unlikely, but nevertheless is an upper bound on false positives as function of \vrts parameters). This allows us to construct a lower envelop of the ROC curve, and hence estimate a lower bound of the AUC.
+
+Using this approach, we obtain a minimum AUC of 95\%.
+
+  
 
 \subsection*{\qnet Inference and Cross-talk Modeling}
 
@@ -92,6 +135,12 @@ Our key insight  is that malingered responses  have low likelihood of being gene
 
 \subsection*{Comparison Against State of Art}
 
+
+
+% \begin{figure}
+%   \includegraphics[width=\textwidth]{Figures/fig2}
+%   \captionN{}\label{fig2}
+% \end{figure} 
 
 
 \section*{Discussion}
@@ -220,7 +269,7 @@ We
 
 
 \begin{defn}[Malingering property]
-  A response vector $x$  is defined to have the malingering property if:
+  A response vector $x$  is defined to  have the malingering property if:
   \cgather{
     \big (  \mu(x)  \geqq \mu_0 \big ) \bigwedge \bigg ( \big  (\kappa(x) \leqq \kappa_0\big ) \vee \big (\nu(x) \geqq \nu_0\big )   \bigg ) 
   } Set of malingering responses is denoted as $\mathscr{M}$. 
