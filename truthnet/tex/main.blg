@@ -1,5 +1,5 @@
-This is BibTeX, Version 0.99d (TeX Live 2021)
-Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+This is BibTeX, Version 0.99d (TeX Live 2018)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: main.aux
 The style file: naturemag.bst
 Database file #1: qbiome.bib
@@ -22,45 +22,45 @@ Repeated entry---line 770 of file tnet.bib
  :                                  ,
 I'm skipping whatever remains of this entry
 Warning--I didn't find a database entry for "Lee2019"
-You've used 54 entries,
+You've used 55 entries,
             2348 wiz_defined-function locations,
-            1330 strings with 19524 characters,
-and the built_in function-call counts, 22062 in all, are:
-= -- 1558
-> -- 576
+            1336 strings with 19748 characters,
+and the built_in function-call counts, 22495 in all, are:
+= -- 1590
+> -- 588
 < -- 0
-+ -- 286
-- -- 144
-* -- 2781
-:= -- 2398
-add.period$ -- 158
-call.type$ -- 54
-change.case$ -- 58
++ -- 292
+- -- 147
+* -- 2837
+:= -- 2445
+add.period$ -- 161
+call.type$ -- 55
+change.case$ -- 59
 chr.to.int$ -- 0
-cite$ -- 54
-duplicate$ -- 1935
-empty$ -- 2055
-format.name$ -- 190
-if$ -- 4426
+cite$ -- 55
+duplicate$ -- 1972
+empty$ -- 2093
+format.name$ -- 194
+if$ -- 4511
 int.to.chr$ -- 0
-int.to.str$ -- 54
-missing$ -- 466
-newline$ -- 274
-num.names$ -- 58
-pop$ -- 357
+int.to.str$ -- 55
+missing$ -- 475
+newline$ -- 279
+num.names$ -- 59
+pop$ -- 363
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 353
+skip$ -- 359
 stack$ -- 0
-substring$ -- 1071
-swap$ -- 1973
+substring$ -- 1096
+swap$ -- 2012
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 0
-while$ -- 138
-width$ -- 56
-write$ -- 588
+while$ -- 141
+width$ -- 57
+write$ -- 599
 (There were 4 error messages)
