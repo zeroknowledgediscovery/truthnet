@@ -1,124 +1,53 @@
+\begin{tikzpicture}[font=\bf\sffamily\fontsize{8}{8}\selectfont]
 
-% \pgfplotsset{
-%     discard if/.style 2 args={
-%         x filter/.append code={
-%             \edef\tempa{\thisrow{#1}}
-%             \edef\tempb{#2}
-%             \ifx\tempa\tempb
-%                 \def\pgfmathresult{inf}
-%             \fi
-%         }
-%     },
-%     discard if not/.style 2 args={
-%         x filter/.append code={
-%             \edef\tempa{\thisrow{#1}}
-%             \edef\tempb{#2}
-%             \ifx\tempa\tempb
-%             \else
-%                 \def\pgfmathresult{inf}
-%             \fi
-%         }
-%     }
-%   }
+  \begin{groupplot}[
+    group style={columns=4,rows=2,horizontal sep=.5in, vertical sep=.65in},
+    ]
+    \def\HGT{1.1in}
 
-\pgfplotsset{
-    discard if/.style 2 args={
-        x filter/.append code={
-            \edef\tempa{\thisrow{#1}}
-            \edef\tempb{#2}
-            \ifx\tempa\tempb
-                \def\pgfmathresult{inf}
-            \fi
-        }
-    },
-    discard if not/.style 2 args={
-        x filter/.append code={
-            \edef\tempa{\thisrow{#1}}
-            \edef\tempb{#2}
-            \ifx\tempa\tempb
-            \else
-                \def\pgfmathresult{inf}
-            \fi
-        }
-    }
-}
-% \pgfplotsset{
-%     discard if/.style 2 args={
-%         x filter/.append code={
-%             \edef\tempa{\thisrow{#1}}
-%             \edef\tempb{#2}
-%             \ifx\tempa\tempb
-%                 \def\pgfmathresult{inf}
-%             \fi
-%         }
-%     },
-%     discard if not/.style 2 args={
-%         x filter/.append code={
-%             \edef\tempa{\thisrow{#1}}
-%             \edef\tempb{#2}
-%             \ifx\tempa\tempb
-%             \else
-%                 \def\pgfmathresult{inf}
-%             \fi
-%         }
-%     }
-% }
-  
-      \begin{tikzpicture}[font=\bf\sffamily\fontsize{8}{8}\selectfont]
-
-\begin{groupplot}[
-  group style={columns=4,rows=2,horizontal sep=.5in, vertical sep=.65in},
-  ]
-
-  \def\HGT{1.1in}
-
-  %\def\datafileA{Figures/plotdata/roc.csv} % Update to the correct file path if needed
-
-  \nextgroupplot[
-      axis line style={black, thick},
-   width=\HGT, 
+    \nextgroupplot[
+    axis line style={black, thick},
+    width=\HGT, 
     height=\HGT,
     scale only axis=true,
     axis on top=true,
     major tick length=0pt,
     enlargelimits=false,
-    %xmin=0,xmax=1,ymin=0,ymax=1,
+    % xmin=0,xmax=1,ymin=0,ymax=1,
     grid=both,
     grid style={dashed,semithick,draw=gray, opacity=.25},
-  ] % 1
-\pgfplotstableread[col sep=comma]{Figures/plotdata/kappa.csv}\datafileA
-\pgfplotstableread[col sep=comma]{Figures/plotdata/kappa_h.csv}\datafileB
+    ] % 1
+    \pgfplotstableread[col sep=comma]{Figures/plotdata/kappa.csv}\datafileA
+    \pgfplotstableread[col sep=comma]{Figures/plotdata/kappa_h.csv}\datafileB
+    \addplot[ybar,bar width=1pt,draw=none,fill=DarkOrange!80!black,opacity=.5] table[x=x,y=kappa] {\datafileB};
+    \addplot[smooth,no marks, ultra thick, black,] table[x=x,y=kappa] {\datafileA};
 
-\addplot[ybar,bar width=1pt,draw=none,fill=DarkOrange!80!black,opacity=.5] table[x=x,y=kappa] {\datafileB};
-\addplot[smooth,no marks, ultra thick, black,] table[x=x,y=kappa] {\datafileA};
 
-
-  
-  \nextgroupplot[
-      axis line style={black, thick},
-   width=\HGT, 
+    
+    \nextgroupplot[
+    axis line style={black, thick},
+    width=\HGT, 
     height=\HGT,
     scale only axis=true,
     axis on top=true,
     major tick length=0pt,
     enlargelimits=false,
-    %xmin=0,xmax=1,ymin=0,ymax=1,
+    % xmin=0,xmax=1,ymin=0,ymax=1,
     grid=both,
     grid style={dashed,semithick,draw=gray, opacity=.25},
-  ] % 1
-\pgfplotstableread[col sep=comma]{Figures/plotdata/nu.csv}\datafileA
-\pgfplotstableread[col sep=comma]{Figures/plotdata/nu_h.csv}\datafileB
-
-\addplot[ybar,bar width=2pt,draw=none,fill=DarkOrange!80!black,opacity=.5] table[x=x,y=mu] {\datafileB};
-\addplot[smooth,no marks, ultra thick, black,] table[x=xd,y=nu] {\datafileA};
+    ] % 1
+    \pgfplotstableread[col sep=comma]{Figures/plotdata/nu.csv}\datafileA
+    \pgfplotstableread[col sep=comma]{Figures/plotdata/nu_h.csv}\datafileB
+    \addplot[ybar,bar width=2pt,draw=none,fill=DarkOrange!80!black,opacity=.5] table[x=x,y=mu] {\datafileB};
+    \addplot[smooth,no marks, ultra thick, black,] table[x=xd,y=nu] {\datafileA};
 
 
 
     \nextgroupplot[
-     axis line style={black, thick},
+    axis line style={black, thick},
     axis background/.style={
       shade,top color=transparent!5,bottom color=transparent!1},
-     width=\HGT, 
+    width=\HGT, 
     height=\HGT,
     scale only axis=true,
     enlargelimits=false,
@@ -126,19 +55,18 @@
     major tick length=0pt,
     xmin=0,xmax=1,ymin=0,ymax=1,
     grid=both,
-     grid style={dashed,semithick,draw=gray, opacity=.25},
-  ] % 1
-\pgfplotstableread[col sep=comma]{Figures/plotdata/roc.csv}\datafileA
+    grid style={dashed,semithick,draw=gray, opacity=.25},
+    ] % 1
+    \pgfplotstableread[col sep=comma]{Figures/plotdata/roc.csv}\datafileA
+    \addplot[name path=tprU,smooth,draw=none] table[x=fpr,y=tprU] {\datafileA};
+    \addplot[name path=tprL,smooth,draw=none] table[x=fpr,y=tprL] {\datafileA};
+    \addplot[DarkOrange!80!black,opacity=.5] fill between[of=tprU and tprL];
+    \addplot[smooth,no marks, ultra thick, black,] table[x=fpr,y=tpr] {\datafileA};
 
- \addplot[name path=tprU,smooth,draw=none] table[x=fpr,y=tprU] {\datafileA};
-  \addplot[name path=tprL,smooth,draw=none] table[x=fpr,y=tprL] {\datafileA};
-  \addplot[DarkOrange!80!black,opacity=.5] fill between[of=tprU and tprL];
-\addplot[smooth,no marks, ultra thick, black,] table[x=fpr,y=tpr] {\datafileA};
 
-
-  \nextgroupplot[
-       axis line style={black, thick},
-   view={0}{90},
+    \nextgroupplot[
+    axis line style={black, thick},
+    view={0}{90},
     xtick={0,1,2,3,4},
     xticklabels={$\kappa$,$\nu$,$\mu$,dx,$\chi$},
     ytick={0,1,2,3,4},
@@ -151,96 +79,74 @@
     axis on top=false,point meta min=-1,point meta max=1,
     major tick length=0pt,
     scale only axis,
-  ] % 1
-  \addplot3 [raw gnuplot,matrix plot*,mesh/cols=5] gnuplot  {
-    plot 'Figures/plotdata/expcorr.csv' matrix with image;
-  };
+    ] % 1
+    \addplot3 [raw gnuplot,matrix plot*,mesh/cols=5] gnuplot  {
+      plot 'Figures/plotdata/expcorr.csv' matrix with image;
+    };
 
-  \nextgroupplot[
-       axis line style={black, thick},
-   axis background/.style={
+    \nextgroupplot[
+    axis line style={black, thick},
+    axis background/.style={
       shade,top color=transparent!5,bottom color=transparent!1},
-     width=\HGT, 
+    width=\HGT, 
+    height=\HGT,
+    scale only axis=true,
+    enlargelimits=0.05, 
+    axis on top=true,
+    major tick length=0pt,
+    colormap/RdGy,
+    grid=both,
+    grid style={dashed,semithick,draw=gray, opacity=.25},
+    ] 
+    \def\datafileA{Figures/plotdata/vadata_res.csv}
+  \addplot[scatter,only marks,mark options={mark size=1.2pt,opacity=.5},point meta=explicit,discard if={chi}{-1}] table[col sep=comma,x=kappa,y=nu, meta=mu] {\datafileA};
+
+    \addplot[scatter,only marks,mark=triangle*,mark options={mark size=1.2pt,fill=black,draw=gray,opacity=.5},point meta=explicit,discard if not={chi}{-1}] table[col sep=comma,x=kappa,y=nu, meta=mu] {\datafileA};
+
+ 
+
+    \nextgroupplot[
+    axis line style={black, thick},
+    axis background/.style={
+      shade,top color=transparent!5,bottom color=transparent!1},
+    width=\HGT, 
     height=\HGT,
     scale only axis=true,
     enlargelimits=true,
     axis on top=true,
-    major tick length=0pt,
-    colormap/cold,
-    grid=both,
-     grid style={dashed,semithick,draw=gray, opacity=.25},
-  ] 
-\pgfplotstableread[col sep=comma]{Figures/plotdata/vadata_res.csv}\datafileA
-
-
-\addplot[scatter,only marks,mark options={mark size=1.2pt,fill=black,opacity=.5},point meta=explicit] table[x=kappa,y=nu, meta=chi] {\datafileA};
-
-
-
-
-  \nextgroupplot[
-       axis line style={black, thick},
-   axis background/.style={
-      shade,top color=transparent!5,bottom color=transparent!1},
-     width=\HGT, 
-    height=\HGT,
-    scale only axis=true,
-    enlargelimits=true,
-    axis on top=true,
     colormap/cold,
     major tick length=0pt,
     grid=both,
-     grid style={dashed,semithick,draw=gray, opacity=.25},
-  ] 
-\pgfplotstableread[col sep=comma]{Figures/plotdata/vadata_res.csv}\datafileA
+    grid style={dashed,semithick,draw=gray, opacity=.25},
+    ] 
+    \pgfplotstableread[col sep=comma]{Figures/plotdata/vadata_res.csv}\datafileA
+    \addplot[scatter,only marks,mark options={mark size=1.2pt,fill=black,opacity=.5},point meta=explicit] table[x=mu,y=nu, meta=chi] {\datafileA};
 
 
-\addplot[scatter,only marks,mark options={mark size=1.2pt,fill=black,opacity=.5},point meta=explicit] table[x=mu,y=nu, meta=chi] {\datafileA};
+   
 
-
-%   \nextgroupplot[
-%        axis line style={black, thick},
-%    axis background/.style={
-%       shade,top color=transparent!5,bottom color=transparent!1},
-%      width=\HGT, 
-%     height=\HGT,
-%     scale only axis=true,
-%     enlargelimits=true,
-%     axis on top=true,
-%     major tick length=0pt,
-%     grid=both,
-%     colormap/jet,
-%      grid style={dashed,semithick,draw=gray, opacity=.25},
-%   ] 
-% \pgfplotstableread[col sep=comma]{Figures/plotdata/expdata_res.csv}\datafileA
-
-%\addplot[scatter,only marks,mark options={mark size=1.2pt},point meta=explicit,] table[x=kappa,y=nu,meta=mu,discard if ={chi}{-1},] % {\datafileA};
-% \addplot[scatter,only marks,mark options={mark size=1.2pt,fill=black,opacity=.5},point meta=explicit] table[x=kappa,y=nu, meta=mu] {\datafileA};
-
-
-  
-  \nextgroupplot[
-       axis line style={black, thick},
-   width=\HGT, 
+    
+    \nextgroupplot[
+    axis line style={black, thick},
+    width=\HGT, 
     height=\HGT,
     scale only axis=true,
     axis on top=true,
     major tick length=0pt,
     xmin=0,xmax=1,ymin=0,ymax=1,
     grid=both,
-      grid style={dashed,semithick,draw=gray, opacity=.25},
- ] % 1
-\pgfplotstableread[col sep=comma]{Figures/plotdata/vroc.csv}\datafileA
+    grid style={dashed,semithick,draw=gray, opacity=.25},
+    ] % 1
+    \pgfplotstableread[col sep=comma]{Figures/plotdata/vroc.csv}\datafileA
+    \addplot[smooth,no marks, ultra thick, black,] table[x=fpr,y=tpr] {\datafileA};
+    \addplot[name path=tprU,smooth,draw=none] table[x=fpr,y=tprU] {\datafileA};
+    \addplot[name path=tprL,smooth,draw=none] table[x=fpr,y=tprL] {\datafileA};
+    \addplot[DarkOrange!80!black,opacity=.5] fill between[of=tprU and tprL];
 
-\addplot[smooth,no marks, ultra thick, black,] table[x=fpr,y=tpr] {\datafileA};
- \addplot[name path=tprU,smooth,draw=none] table[x=fpr,y=tprU] {\datafileA};
-  \addplot[name path=tprL,smooth,draw=none] table[x=fpr,y=tprL] {\datafileA};
-  \addplot[DarkOrange!80!black,opacity=.5] fill between[of=tprU and tprL];
 
-
-  \nextgroupplot[
-       axis line style={black, thick},
-   view={0}{90},
+    \nextgroupplot[
+    axis line style={black, thick},
+    view={0}{90},
     xtick={0,1,2,3,4},
     xticklabels={$\kappa$,$\nu$,$\mu$,dx,$\chi$},
     ytick={0,1,2,3,4},
@@ -248,21 +154,21 @@
     width=\HGT, 
     height=\HGT,
     colormap/sepia,
-    %colorbar horizontal,colorbar style={yshift=.1in, at={(0,1.2)},anchor=north west,height=.1in},
+    % colorbar horizontal,colorbar style={yshift=.1in, at={(0,1.2)},anchor=north west,height=.1in},
     scale only axis=true,
     axis on top=false,point meta min=-1,point meta max=1,
     major tick length=0pt,
     scale only axis,
-  ] % 1
-  \addplot3 [raw gnuplot,matrix plot*,mesh/cols=5] gnuplot  {
-    plot 'Figures/plotdata/vacorr.csv' matrix with image;
-  };
+    ] % 1
+    \addplot3 [raw gnuplot,matrix plot*,mesh/cols=5] gnuplot  {
+      plot 'Figures/plotdata/vacorr.csv' matrix with image;
+    };
 
-  %\def\datafileA{Figures/plotdata/roc.csv} % Update to the correct file path if needed
+    % \def\datafileA{Figures/plotdata/roc.csv} % Update to the correct file path if needed
 
- 
+    
 
 
-  
-\end{groupplot}
+    
+  \end{groupplot}
 \end{tikzpicture}
