@@ -368,7 +368,7 @@ outer color=transparent!100]
 
 \pgfplotsset{
     discard if/.style 2 args={
-        x filter/.code={
+        x filter/.append code={
             \edef\tempa{\thisrow{#1}}
             \edef\tempb{#2}
             \ifx\tempa\tempb
@@ -377,7 +377,7 @@ outer color=transparent!100]
         }
     },
     discard if not/.style 2 args={
-        x filter/.code={
+        x filter/.append code={
             \edef\tempa{\thisrow{#1}}
             \edef\tempb{#2}
             \ifx\tempa\tempb
