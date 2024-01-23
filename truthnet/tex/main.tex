@@ -5,6 +5,10 @@
 \usepackage{float}
 % \usetikzlibrary{decorations.pathreplacing,calligraphy}
 \input{customdef}
+\usepgfplotslibrary{colormaps} % Include the colormap library
+\usepgfplotslibrary{colorbrewer}
+\usepgfplotslibrary{groupplots}
+
 \renewcommand{\baselinestretch}{.97}
 % \externaldocument[SI-]{SI}
 % \externaldocument[main-]{main}
@@ -38,10 +42,6 @@
 {\bf \sffamily \fontsize{10}{12}\selectfont \noindent   
   {\normalfont \itshape Abstract:} Malingering~\cite{Rogers1997,rogers2008clinical} or faking  the symptoms of a mental health disorder  can confound structured diagnostic interviews and hinder clinical psychiatric assessments.  We introduce an  artificial intelligence (AI) framework for detecting symptom fabrication in Post-Traumatic Stress Disorder (PTSD) diagnoses, for which malingering is a known problem~\cite{frueh2007us,taylor2007detection}, partially ascribable to the  potential for secondary financial gain from positive diagnoses.  Algorithm \vrts employs novel generative AI to infer statistical dependencies inherent in true response patterns, and flags  responses which violate these subtle  constraints. Mimicing these  emergent  patterns is difficult  even  with psychiatric training, resulting in a robust mechanism for recognizing fabrications. With a study sample of $n=624$ patients, \vrts is estimated to have a   Area Under the Curve (AUC) of $\geqq 0.95\pm 0.02$, with one sensitivity/specificity pair  of 92\% and 95\% respectively. Our tool   offers an  objective, disease-specific, fast (average time $\leqq 2$ min)  approach to detect fake  PTSD, and if adopted, can  ensure that healthcare resources and disability concessions reach  those genuinely in need,  while  helping to maintain  integrity of clinical data. Moreover, the ability to identify and help  patients who might be malingering due to other mental health conditions, poverty or   socio-economic compulsions can  improve general health outcomes  in disadvantaged communities.  
 }
-
-
-
-
 
 
 
@@ -112,6 +112,19 @@ In total, this study considered {\color{Red1} $n=624$} participants comprising  
   
 \input{Figures/tabperf}
 \end{table}
+
+
+\begin{figure}
+  \tikzexternaldisable
+  \tikzsetnextfilename{perf}
+
+  \centering
+  
+  \input{Figures/perf}
+
+  \captionN{}\label{figperf}
+\end{figure}
+
 
 \subsection*{Item Presentation and Response Sequence in Administration}
 In \vrts we present  a small random subset of the full item bank to the subjects. Although the models for cross-dependency are inferred using the complete response sequence to all 211 items available, presenting a smaller  item set makes the test feasible, while also producing a vast number of possible variations. In the version we validated, 20 items are presented. These are randomly generated from a distribution reflecting the  impact  of the items in the inferred models on their ability to disambiguate between responses from diagnosed PTSD patients and the control group. Impact is measured using standard SHAP analysis of the inferred models (See \Methods for details). SHAP-values for items are normalized to a probability mass function (pmf), which is then sampled  to produce the item set. We can select items adaptively similar to CAT-PTSD~\cite{brenner2021development}; such  complications have been presently avoided.
