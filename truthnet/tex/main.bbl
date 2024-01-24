@@ -271,6 +271,30 @@
   STATISTICS}} \textbf{\bibinfo{volume}{15}}, \bibinfo{pages}{651--674}
   (\bibinfo{year}{2006}).
 
+\bibitem{tourangeau2000psychology}
+\bibinfo{author}{Tourangeau, R.}, \bibinfo{author}{Rips, L.~J.} \&
+  \bibinfo{author}{Rasinski, K.}
+\newblock \bibinfo{title}{The psychology of survey response}
+  (\bibinfo{year}{2000}).
+
+\bibitem{malhotra2008completion}
+\bibinfo{author}{Malhotra, N.}
+\newblock \bibinfo{title}{Completion time and response order effects in web
+  surveys}.
+\newblock \emph{\bibinfo{journal}{Public opinion quarterly}}
+  \textbf{\bibinfo{volume}{72}}, \bibinfo{pages}{914--934}
+  (\bibinfo{year}{2008}).
+
+\bibitem{callegaro2009response}
+\bibinfo{author}{Callegaro, M.}, \bibinfo{author}{Yang, Y.},
+  \bibinfo{author}{Bhola, D.~S.}, \bibinfo{author}{Dillman, D.~A.} \&
+  \bibinfo{author}{Chin, T.-Y.}
+\newblock \bibinfo{title}{Response latency as an indicator of optimizing in
+  online questionnaires}.
+\newblock \emph{\bibinfo{journal}{Bulletin of Sociological Methodology/Bulletin
+  de M{\'e}thodologie Sociologique}} \textbf{\bibinfo{volume}{103}},
+  \bibinfo{pages}{5--25} (\bibinfo{year}{2009}).
+
 \bibitem{mcdermott2013malingering}
 \bibinfo{author}{McDermott, B.}, \bibinfo{author}{Dualan, I.} \&
   \bibinfo{author}{Scott, C.}
@@ -325,14 +349,6 @@
   \textbf{\bibinfo{volume}{15}}, \bibinfo{pages}{213--223}
   (\bibinfo{year}{2008}).
 
-\bibitem{vrij2001killed}
-\bibinfo{author}{Vrij, A.} \& \bibinfo{author}{Mann, S.}
-\newblock \bibinfo{title}{Who killed my relative? police officers' ability to
-  detect real-life high-stake lies}.
-\newblock \emph{\bibinfo{journal}{Psychology, Crime \& Law}}
-  \textbf{\bibinfo{volume}{7}}, \bibinfo{pages}{119--132}
-  (\bibinfo{year}{2001}).
-
 \bibitem{sartori2008accurately}
 \bibinfo{author}{Sartori, G.}, \bibinfo{author}{Agosta, S.},
   \bibinfo{author}{Zogmaister, C.}, \bibinfo{author}{Ferrara, S.~D.} \&
@@ -358,76 +374,6 @@
   questions and mouse dynamics}.
 \newblock \emph{\bibinfo{journal}{PloS one}} \textbf{\bibinfo{volume}{12}},
   \bibinfo{pages}{e0177851} (\bibinfo{year}{2017}).
-
-\bibitem{Chan2018}
-\bibinfo{author}{Chan, E.~Y.}, \bibinfo{author}{Danker-Hopfe, H.} \&
-  \bibinfo{author}{Riemann, D.}
-\newblock \bibinfo{title}{A machine learning approach to polysomnographic sleep
-  study for lie detection}.
-\newblock \emph{\bibinfo{journal}{IEEE Journal of Biomedical and Health
-  Informatics}} \textbf{\bibinfo{volume}{22}}, \bibinfo{pages}{716--722}
-  (\bibinfo{year}{2018}).
-
-\bibitem{Wang2020}
-\bibinfo{author}{Wang, X.}, \bibinfo{author}{Yang, Y.}, \bibinfo{author}{Zhang,
-  J.}, \bibinfo{author}{Wang, L.} \& \bibinfo{author}{Liu, S.}
-\newblock \bibinfo{title}{A machine learning approach to lie detection based on
-  eye movement and gesture analysis}.
-\newblock \emph{\bibinfo{journal}{IEEE Transactions on Human-Machine Systems}}
-  \textbf{\bibinfo{volume}{50}}, \bibinfo{pages}{266--273}
-  (\bibinfo{year}{2020}).
-
-\bibitem{Yu2018}
-\bibinfo{author}{Yu, H.}, \bibinfo{author}{Chen, Y.} \& \bibinfo{author}{Fu,
-  X.}
-\newblock \bibinfo{title}{Deep learning for deception detection: a
-  comprehensive review}.
-\newblock \emph{\bibinfo{journal}{IEEE Transactions on Information Forensics
-  and Security}} \textbf{\bibinfo{volume}{13}}, \bibinfo{pages}{2615--2629}
-  (\bibinfo{year}{2018}).
-
-\bibitem{Ducharme2017}
-\bibinfo{author}{Ducharme, J.~J.}, \bibinfo{author}{Langleben, D.~D.} \&
-  \bibinfo{author}{Verma, R.}
-\newblock \bibinfo{title}{Eye tracking in the detection of deception: a review
-  of the literature}.
-\newblock \emph{\bibinfo{journal}{Psychology, Crime \& Law}}
-  \textbf{\bibinfo{volume}{23}}, \bibinfo{pages}{875--895}
-  (\bibinfo{year}{2017}).
-
-\bibitem{malhotra2008completion}
-\bibinfo{author}{Malhotra, N.}
-\newblock \bibinfo{title}{Completion time and response order effects in web
-  surveys}.
-\newblock \emph{\bibinfo{journal}{Public opinion quarterly}}
-  \textbf{\bibinfo{volume}{72}}, \bibinfo{pages}{914--934}
-  (\bibinfo{year}{2008}).
-
-\bibitem{callegaro2009response}
-\bibinfo{author}{Callegaro, M.}, \bibinfo{author}{Yang, Y.},
-  \bibinfo{author}{Bhola, D.~S.}, \bibinfo{author}{Dillman, D.~A.} \&
-  \bibinfo{author}{Chin, T.-Y.}
-\newblock \bibinfo{title}{Response latency as an indicator of optimizing in
-  online questionnaires}.
-\newblock \emph{\bibinfo{journal}{Bulletin of Sociological Methodology/Bulletin
-  de M{\'e}thodologie Sociologique}} \textbf{\bibinfo{volume}{103}},
-  \bibinfo{pages}{5--25} (\bibinfo{year}{2009}).
-
-\bibitem{greszki2015exploring}
-\bibinfo{author}{Greszki, R.}, \bibinfo{author}{Meyer, M.} \&
-  \bibinfo{author}{Schoen, H.}
-\newblock \bibinfo{title}{Exploring the effects of removing “too fast”
-  responses and respondents from web surveys}.
-\newblock \emph{\bibinfo{journal}{Public Opinion Quarterly}}
-  \textbf{\bibinfo{volume}{79}}, \bibinfo{pages}{471--503}
-  (\bibinfo{year}{2015}).
-
-\bibitem{kennedy2020assessing}
-\bibinfo{author}{Kennedy, C.} \emph{et~al.}
-\newblock \bibinfo{title}{Assessing the risks to online polls from bogus
-  respondents}.
-\newblock \emph{\bibinfo{journal}{Pew Research Center}}
-  \textbf{\bibinfo{volume}{18}} (\bibinfo{year}{2020}).
 
 \bibitem{sarda2017conditional}
 \bibinfo{author}{Sarda-Espinosa, A.}, \bibinfo{author}{Subbiah, S.} \&
