@@ -140,9 +140,9 @@ Amongst those who have a naive PTSD diagnosis, we aim to flag subjects with  a q
 
 Thus,  $\kappa, \nu, \mu$ are  random variables which are functions of the response sequence of the subject, and have distributions that may be characterized from the VA data, despite  not having designation of ``malingering'' in that  dataset. This is because that these quantities are computable from just the response sequence themselves. Concretely, we propose that a subject with a response sequence $\x$  is malingering if for a suitably chosen thresholds $\mu_0,\nu_0, \kappa_0$:
  \cgather{
-    \big (  \mu(x)  \geqq \mu_0 \big ) \bigwedge \bigg ( \big  (\kappa(x) \leqq \kappa_0\big ) \vee \big (\nu(x) \geqq \nu_0\big )   \bigg ) 
+  \chi(x) \triangleq  \big (  \mu(x)  \geqq \mu_0 \big ) \bigwedge \bigg ( \big  (\kappa(x) \leqq \kappa_0\big ) \vee \big (\nu(x) \geqq \nu_0\big )   \bigg ) 
   }
-This may be paraphrased as ``a response sequence has high likelihood of malingering if it 1)  produces a naive diagnosis of PTSD with high probability, and 2) is either too surprising or too simple.'' The decision thresholds are obtained from theoretical considerations and the VA data.
+This may be paraphrased as ``a response sequence has high likelihood of malingering if it 1)  produces a naive diagnosis of PTSD with high probability, and 2) is either too surprising or too simple.'' The decision thresholds are obtained from theoretical considerations and the VA data (See \Methods).
 
 \subsection*{\vrts Validation Strategy}
 

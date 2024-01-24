@@ -219,8 +219,9 @@ class truthnet:
             self.veritas_model['model']=modelpos
             self.veritas_model['model_neg']=modelneg
             self.veritas_model['problem']=self.problem
+            self.veritas_model['shapvalues']=shap_values
 
-        else:
+        else: 
 
             X=df_test.values.astype(str)
         
