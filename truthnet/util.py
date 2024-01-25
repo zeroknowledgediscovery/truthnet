@@ -126,10 +126,12 @@ def validate(response_dataframe,C0,C1,C2,
 
 
     if validation_type == "withdx":
-        mratio=(response_dataframe[(response_dataframe.mg==-1) & (response_dataframe.dx==1)].index.size)/response_dataframe.dx.sum()
+        mratio=(response_dataframe[(response_dataframe.mg==-1)
+                                   & (response_dataframe.dx==1)].index.size)/response_dataframe.dx.sum()
         fullauc=zt.auc()
+        
         if plots:
-            plt.style.use('seaborn-dark-palette')
+            #plt.style.use('seaborn-dark-palette')
 
             plt.figure(figsize=[20,12])
             plt.subplot(231)
@@ -149,7 +151,6 @@ def validate(response_dataframe,C0,C1,C2,
             cf=response_dataframe.corr()
             plt.subplot(234)
             sns.heatmap(cf,cmap='jet',alpha=.5)
-            
 
 
             plt.subplot(235)
@@ -157,7 +158,6 @@ def validate(response_dataframe,C0,C1,C2,
             plt.plot(fpr,tpr,'g',lw=2)
             plt.gca().legend(['R20'])
             zt.get().tpr.plot(style='-b',lw=2)
-            fullauc=zt.auc()
 
             ax = plt.subplot(236)
             ax.text(0.5, 0.6, f'malinger prevalenec in DX: {mratio:.2f}', fontsize=16, ha='center')
@@ -165,13 +165,13 @@ def validate(response_dataframe,C0,C1,C2,
             ax.set_xticks([])
             ax.set_yticks([])
             ax.set_frame_on(False)
-        else:
-            return {'auc':fullauc,'mratio':mratio}
+            
+        return {'auc':fullauc,'mratio':mratio}, response_dataframe, zt
 
     if validation_type == "fnrexpt":
         fnr=response_dataframe[(response_dataframe.mg==1)].index.size/response_dataframe.index.size
         if plots:
-            plt.style.use('seaborn-dark-palette')
+            #plt.style.use('seaborn-dark-palette')
 
             plt.figure(figsize=[20,12])
             plt.subplot(231)
@@ -191,21 +191,20 @@ def validate(response_dataframe,C0,C1,C2,
             cf=response_dataframe.corr()
             plt.subplot(234)
             sns.heatmap(cf,cmap='jet',alpha=.5)
-            
 
             ax = plt.subplot(236)
             ax.text(0.5, 0.6, f'FNR in EXPT: {fnr:.2f}', fontsize=16, ha='center')
             ax.set_xticks([])
             ax.set_yticks([])
             ax.set_frame_on(False)
-        else:
-            return {'fnr':fnr}
+
+        return {'fnr':fnr}, response_dataframe
 
 
     if validation_type == "noscore":
         mrate=response_dataframe[response_dataframe.mg==-1].index.size/response_dataframe.index.size
         if plots:
-            plt.style.use('seaborn-dark-palette')
+            #plt.style.use('seaborn-dark-palette')
 
             plt.figure(figsize=[8,8])
             plt.subplot(111)
@@ -216,10 +215,9 @@ def validate(response_dataframe,C0,C1,C2,
 
             ax = plt.gca()
 
-            
             ax.text(0.65, 0.8, f'mrate: {mrate:.2f}', fontsize=16, ha='center')
-        else:
-            return {'mrate':mrate}
+
+        return {'mrate':mrate}, response_dataframe
 
     plt.savefig(outfile,dpi=300,bbox_inches='tight',transparent=True)   
 
