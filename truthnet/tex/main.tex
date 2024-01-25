@@ -9,7 +9,7 @@
 \usepgfplotslibrary{colorbrewer}
 \usepgfplotslibrary{groupplots}
 
-\renewcommand{\baselinestretch}{.97}
+\renewcommand{\baselinestretch}{.97} 
 % \externaldocument[SI-]{SI}
 % \externaldocument[main-]{main}
 % \externaldocument[EXT-]{exfig}
@@ -155,12 +155,15 @@ The generative models for response sequences inferred separately from the PTSD-p
 In the Prolific data, the average completion time was 3.4 minutes ([2.9, 3.9], 95\% CI). 
 We find that malingering flags have no significant correlation with the time to completion. The success rate of defating \vrts is observed to have a correlation of $0.48 ([-.27, .87], 95\% CI)$. Thus, fast responses  that might reflect poor quality survey in general~\cite{tourangeau2000psychology,malhotra2008completion,callegaro2009response} might not be effective in detecting malingering, espeially if participants  are putting more thought into how to fake their symptoms.
 
-%malhotra2008completion,callegaro2009response}, demonstrating a lack of attention by interview respondents\cite{greszki2015exploring}.
-
+\subsection*{Number of Distinct Variations of \vrts Implementation}
+With $r=20$ items presented, randoml;y chosen from the top $N=40$ shortlisted from the master item bank (sorted according to SHAP values, as described before), and each item having  $L=5$ possible responses, we can have $\binom{N}{r}=137,846,528,820$ variations of the test, with  $L^r\binom{N}{r} = 13,146,069,414,138,793,945,312,500$ or approximately $10^{25}$ possible responses, which is approximately equal to the number of stars in the observable universe. Thus, it is non-trivial for human subjects to ``learn'' or ``train'' to defeat the algorithm.
 
 
 \subsection*{Comparison Against State of Art}
 Structured Interview of Reported Symptoms, 2nd Edition (SIRS-2) has a reported performance of sensitivity of .80, a specificity of .975, and positive and negative predictive powers of more than .90 (based on a base rate of 31.8\%), tales 30-40 minutes to complete, and needs expert interpretation and is not disease-specific. In contrast, \vrts may eb complete in under 4 minutes, can have sensitivity and specificity bith above 90\%, has PPV over 86\% and NPV over 90\% in selected operating points, can be tuned to specific disorders, and may be administered automatically. The crucial difference in \vrts is the near-impossibility of training to defat it, and its effectiveness in the scenario that the subject has psychiatric training. The principles on which existing tool ssuch as SIRS-2 are based makes it highky unlikely to be effective if the subject is familiar with symptomologies of basic mental disorders, and the approaches generally employed to flag malingering.
+
+
+
 
 
 \section*{Discussion}
@@ -411,6 +414,13 @@ Note that the remaining condition $\mu(x) \geqq \mu_0$ is a diagnosis criterion 
 
 \bibliographystyle{naturemag}
 \bibliography{qbiome,allbib,tnet} 
+
+\section*{Software Availability}
+Software for inferring \qnet{s} is available as an open-source python package \texttt{quasinet}, and can be
+installed from the standard Python code registry.
+
+
+\section*{Ackowledgements, Author Contributions and Regulatory Approvals}
 
 
 
