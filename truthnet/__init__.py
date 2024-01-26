@@ -16,7 +16,7 @@ pip install truthnet
 
 '''
 
-from .truthnet import truthnet
+from .truthnet import truthnet, train, load_veritas_model
 
 
 

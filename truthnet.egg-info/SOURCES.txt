@@ -15,5 +15,6 @@ truthnet.egg-info/top_level.txt
 truthnet/examples/train_example.ipynb
 truthnet/examples/validate.ipynb
 truthnet/examples/validate_test.ipynb
+truthnet/examples/.ipynb_checkpoints/train_example-checkpoint.ipynb
 truthnet/examples/.ipynb_checkpoints/validate-checkpoint.ipynb
 truthnet/examples/.ipynb_checkpoints/validate_test-checkpoint.ipynb
