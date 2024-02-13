@@ -1,43 +1,61 @@
 \begin{tikzpicture}[]
-\node[anchor=center,label={[font=\bf\sffamily\fontsize{9}{9}\selectfont,text=black!50,rotate=90,yshift=.2in, xshift=1.5in]180:VA Dataset},label={[font=\bf\sffamily\fontsize{9}{9}\selectfont,text=black!50,rotate=90,yshift=.2in,xshift=-1.35in]180:Prolific Dataset}] (NN) at (0,0) {\begin{tikzpicture}[font=\bf\sffamily\fontsize{8}{8}\selectfont]
+    \def\cola{lightgray}
+    \def\colb{lightgray}
+    \def\colc{DarkOrange2}
+    \def\colma{Orchid4!50!black}
+    \def\colmb{DarkOrange}
+
+    \def\colma{RubineRed}
+    \def\colmb{RubineRed}
+    \def\colc{RubineRed}
+
+    \def\colx{black}
+
+
+    \clip (-3.85in,3.45in) rectangle (3.3in,-3.45in);
+    
+\node[anchor=center,label={[text=\colc,font=\bf\sffamily\fontsize{9}{9}\selectfont,rotate=90,yshift=.1in, xshift=3.25in]180:In sample (VA)},label={[text=\colc,font=\bf\sffamily\fontsize{9}{9}\selectfont,rotate=90,yshift=.1in, xshift=1in]180:VA Dataset},label={[text=\colc,font=\bf\sffamily\fontsize{9}{9}\selectfont,rotate=90,yshift=.1in,xshift=-.5in]180:Prolific Dataset},label={[text=\colc,font=\bf\sffamily\fontsize{9}{9}\selectfont,rotate=90,yshift=.1in,xshift=-2in]180:Mental Health Pro.}] (NN) at (0,0) {\begin{tikzpicture}[font=\sffamily\fontsize{8}{8}\selectfont]
   \begin{groupplot}[
     group style={      group name=PLOTNAME,
-columns=4,rows=3,horizontal sep=.5in, vertical sep=.85in},
-title style={xshift=-.72in,anchor=south west},xlabel style={yshift=.035in}
+      columns=4,rows=4,horizontal sep=.5in, vertical sep=.5in},
+    ylabel style={yshift=-.075in},
+title style={xshift=-.75in,anchor=south west,yshift=-.075in},xlabel style={yshift=.035in}
     ]
     \def\HGT{1.1in}
-
+    \def\WDT{1.1in}
+    \def\WDTA{1.65in}
+    \def\YSFT{-.5in}
     %1
-    \nextgroupplot[title={{\large (a)} complexity},
+    \nextgroupplot[title={{(a)} complexity},
     axis line style={black, thick},
-    width=\HGT, 
+    width=\WDT, 
     height=\HGT,
     scale only axis=true,
     axis on top=true,
     major tick length=0pt,
     enlargelimits=false,
-    xlabel={$\kappa$},
+    xlabel={\large $\kappa$},
     ylabel={probability},
     grid=both,
     grid style={dashed,semithick,draw=gray, opacity=.25},
     ] % 1
     \pgfplotstableread[col sep=comma]{Figures/plotdata/kappa.csv}\datafileA
     \pgfplotstableread[col sep=comma]{Figures/plotdata/kappa_h.csv}\datafileB
-    \addplot[ybar,bar width=1pt,draw=none,fill=Orchid1!80!black,opacity=.5] table[x=x,y=kappa] {\datafileB};
+    \addplot[ybar,bar width=1pt,draw=none,fill=\cola,opacity=.5] table[x=x,y=kappa] {\datafileB};
     \addplot[smooth,no marks, ultra thick, black,] table[x=x,y=kappa] {\datafileA};
 
 
     
     %2
-    \nextgroupplot[title={{\large (b)} surprise},
+    \nextgroupplot[title={{(b)} surprise},
     axis line style={black, thick},
-    width=\HGT, 
+    width=\WDT, 
     height=\HGT,
     scale only axis=true,
     axis on top=true,
     major tick length=0pt,
     enlargelimits=false,
-    xlabel={$\nu$},
+    xlabel={\large $\nu$},
     ylabel={probability},
     % xmin=0,xmax=1,ymin=0,ymax=1,
     grid=both,
@@ -45,17 +63,17 @@ title style={xshift=-.72in,anchor=south west},xlabel style={yshift=.035in}
     ] % 1
     \pgfplotstableread[col sep=comma]{Figures/plotdata/nu.csv}\datafileA
     \pgfplotstableread[col sep=comma]{Figures/plotdata/nu_h.csv}\datafileB
-    \addplot[ybar,bar width=2pt,draw=none,fill=Orchid1!80!black,opacity=.5] table[x=x,y=mu] {\datafileB};
+    \addplot[ybar,bar width=2pt,draw=none,fill=\cola,opacity=.5] table[x=x,y=mu] {\datafileB};
     \addplot[smooth,no marks, ultra thick, black,] table[x=xd,y=nu] {\datafileA};
 
 
 
     %3
-    \nextgroupplot[title={{\large (c)} diagnosis ROC},
+    \nextgroupplot[title={{(c)} diagnosis ROC},
     axis line style={black, thick},
     axis background/.style={
       shade,top color=transparent!5,bottom color=transparent!1},
-    width=\HGT, 
+    width=\WDT, 
     height=\HGT,
     scale only axis=true,
     enlargelimits=false,
@@ -70,12 +88,12 @@ title style={xshift=-.72in,anchor=south west},xlabel style={yshift=.035in}
     \pgfplotstableread[col sep=comma]{Figures/plotdata/roc.csv}\datafileA
     \addplot[name path=tprU,smooth,draw=none] table[x=fpr,y=tprU] {\datafileA};
     \addplot[name path=tprL,smooth,draw=none] table[x=fpr,y=tprL] {\datafileA};
-    \addplot[Orchid1!80!black,opacity=.5] fill between[of=tprU and tprL];
+    \addplot[\cola,opacity=.5] fill between[of=tprU and tprL];
     \addplot[smooth,no marks, ultra thick, black,] table[x=fpr,y=tpr] {\datafileA};
 
 
     %4
-    \nextgroupplot[title={{\large (d)} class distrib.},legend style={ anchor=east,
+    \nextgroupplot[title={{(d)} class distribution},legend style={ anchor=east,
           at={(1,.25)},
           inner sep=1pt,
           draw=none,
@@ -89,12 +107,12 @@ title style={xshift=-.72in,anchor=south west},xlabel style={yshift=.035in}
     axis line style={black, thick},
     axis background/.style={
       shade,top color=transparent!5,bottom color=transparent!1},
-    width=\HGT, 
+    width=\WDTA, 
     height=\HGT,
     scale only axis=true,
     enlargelimits=0.05,
     axis on top=true,
-    xlabel={$\mu$},
+    xlabel={\large $\mu$},
     ylabel={probability},
     major tick length=0pt,
     grid=both,
@@ -102,14 +120,17 @@ title style={xshift=-.72in,anchor=south west},xlabel style={yshift=.035in}
     ] % 1
     \pgfplotstableread[col sep=comma]{Figures/plotdata/posneg.csv}\datafileA
     \addplot[smooth,no marks, ultra thick, black,] table[x=x,y=neg] {\datafileA};
-    \addplot[smooth,no marks, ultra thick, Orchid1,] table[x=x,y=pos] {\datafileA};
+    \addplot[smooth,no marks, ultra thick, \colb,] table[x=x,y=pos] {\datafileA};
     \addlegendentry{control}
     \addlegendentry{positive}
 
     %5
-    \nextgroupplot[title={\large (e)},legend columns=3,
-        legend cell align=right,legend style={ anchor=east,
-          at={(1.95,-.325)},
+    \nextgroupplot[title={(f)},
+yshift=\YSFT,
+    legend columns=3,
+        legend cell align=right,  legend image post style={scale=2.5},  %%% <--- here
+legend style={ column sep=10pt, anchor=east,
+          at={(2.35,1.4)},
           inner sep=1pt,
           draw=none, thick,,
           fill=white,
@@ -120,12 +141,12 @@ title style={xshift=-.72in,anchor=south west},xlabel style={yshift=.035in}
           font=\bf\sffamily\fontsize{8}{8}\selectfont
         },
     axis line style={black, thick},
-    axis background/.style={
-      shade,top color=transparent!5,bottom color=transparent!1},
-    width=\HGT, 
+    % axis background/.style={
+    %   shade,top color=transparent!5,bottom color=transparent!1},
+    width=\WDT, 
     height=\HGT,
-    xlabel={$\kappa$},
-    ylabel={$\nu$},
+    xlabel={\large $\kappa$},
+    ylabel={\large $\nu$},
     scale only axis=true,
     enlargelimits=0.05, 
     axis on top=true,
@@ -133,25 +154,35 @@ title style={xshift=-.72in,anchor=south west},xlabel style={yshift=.035in}
     grid=both,
     grid style={dashed,semithick,draw=gray, opacity=.25},
     ] 
-  \draw[thick,MediumBlue,dashed,dash pattern=on 2pt off 1pt,] (axis cs:\pgfkeysvalueof{/pgfplots/xmin},0.76) -- (axis cs:\pgfkeysvalueof{/pgfplots/xmax},0.76);
-\draw[thick,dashed,MediumBlue,dash pattern=on 2pt off 1pt,] (axis cs:1.0,\pgfkeysvalueof{/pgfplots/ymin}) -- (axis cs:1.0,\pgfkeysvalueof{/pgfplots/ymax});
+    \draw[thick,\colx,dashed,dash pattern=on 2pt off 1pt,] (axis cs:\pgfkeysvalueof{/pgfplots/xmin},0.76) -- (axis cs:\pgfkeysvalueof{/pgfplots/xmax},0.76);
+    \draw[thick,dashed,\colx,dash pattern=on 2pt off 1pt,] (axis cs:1.0,\pgfkeysvalueof{/pgfplots/ymin}) -- (axis cs:1.0,\pgfkeysvalueof{/pgfplots/ymax});
     \def\datafileA{Figures/plotdata/vadata_res.csv}
-      \addplot[only marks,mark=*,mark options={mark size=1.25pt,fill=white,draw=gray,opacity=.6},discard if not={DX}{0},discard if={chi}{-1}] table[col sep=comma,x=kappa,y=nu] {\datafileA};
-      \addplot[only marks,mark=*,mark options={mark size=1.1pt,draw=Orchid4!50!black,fill=DarkOrange,draw=Orchid1,opacity=.5},discard if not={DX}{1},discard if={chi}{-1}] table[col sep=comma,x=kappa,y=nu] {\datafileA};
-      \addplot[only marks,mark=square*,mark options={mark size=.9pt,fill=black,draw=black,opacity=1},,discard if not={chi}{-1}] table[col sep=comma,x=kappa,y=nu] {\datafileA};
-\addlegendentry{no PTSD}
-\addlegendentry{PTSD}
-\addlegendentry{malingering}
+
+    \addplot[only marks,mark=*,mark options={mark size=1.25pt,fill=white,draw=gray,opacity=.6},discard if not={DX}{0},discard if={chi}{-1}] table[col sep=comma,x=kappa,y=nu] {\datafileA};
+
+    \addplot[only marks,mark=*,mark options={mark size=1.1pt,draw=\colma,fill=\colmb,opacity=.5},discard if not={DX}{1},discard if={chi}{-1}] table[col sep=comma,x=kappa,y=nu] {\datafileA};
+
+    \addplot[only marks,mark=square*,mark options={mark size=.9pt,fill=black,draw=black,opacity=1},,discard if not={chi}{-1}] table[col sep=comma,x=kappa,y=nu] {\datafileA};
+
+
+    %\addlegendimage{legend image code/.code={\node[draw,scale=2.5,inner sep=2pt,transform shape,marker=*,fill=white,draw=gray,opacity=.6] {.};}}
+    \addlegendentry{no PTSD}
+    
+   % \addlegendimage{legend image code/.code={\node[draw,scale=2.5,inner sep=2pt,transform shape,marker=*,fill=white,draw=gray,opacity=.6] {};}}
+    \addlegendentry{PTSD}
+
+   % \addlegendimage{legend image code/.code={\node[draw,scale=2.5,inner sep=2pt,transform shape,marker=*,fill=white,draw=gray,opacity=.6] {};}}
+    \addlegendentry{malingering}
 
     %6
-    \nextgroupplot[title={\large (f)},
+    \nextgroupplot[title={(g)},yshift=\YSFT,
     axis line style={black, thick},
-    axis background/.style={
-      shade,top color=transparent!5,bottom color=transparent!1},
-    width=\HGT, 
+    % axis background/.style={
+    %   shade,top color=transparent!5,bottom color=transparent!1},
+    width=\WDT, 
     height=\HGT,
-    xlabel={$\mu$},
-    ylabel={$\kappa$},
+    xlabel={\large $\mu$},
+    ylabel={\large $\kappa$},
     scale only axis=true,
     enlargelimits=true,
     axis on top=true,
@@ -160,47 +191,119 @@ title style={xshift=-.72in,anchor=south west},xlabel style={yshift=.035in}
     grid=both,
     grid style={dashed,semithick,draw=gray, opacity=.25},
     ] 
-  \draw[thick,MediumBlue,dashed,dash pattern=on 2pt off 1pt,] (axis cs:\pgfkeysvalueof{/pgfplots/xmin},1) -- (axis cs:\pgfkeysvalueof{/pgfplots/xmax},1);
-\draw[thick,dashed,MediumBlue,dash pattern=on 2pt off 1pt,] (axis cs:1.35,\pgfkeysvalueof{/pgfplots/ymin}) -- (axis cs:1.35,\pgfkeysvalueof{/pgfplots/ymax});
+  \draw[thick,\colx,dashed,dash pattern=on 2pt off 1pt,] (axis cs:\pgfkeysvalueof{/pgfplots/xmin},1) -- (axis cs:\pgfkeysvalueof{/pgfplots/xmax},1);
+\draw[thick,dashed,\colx,dash pattern=on 2pt off 1pt,] (axis cs:1.35,\pgfkeysvalueof{/pgfplots/ymin}) -- (axis cs:1.35,\pgfkeysvalueof{/pgfplots/ymax});
     \def\datafileA{Figures/plotdata/vadata_res.csv}
     \addplot[only marks,mark=*,mark options={mark size=1.25pt,fill=white,draw=gray,opacity=.6},discard if not={DX}{0},discard if={chi}{-1}] table[col sep=comma,x=mu,y=kappa] {\datafileA};
-    \addplot[only marks,mark=*,mark options={mark size=1.5pt,draw=Orchid4!50!black,fill=DarkOrange1,draw=Orchid1,opacity=.5},discard if not={DX}{1},discard if={chi}{-1}] table[col sep=comma,x=mu,y=kappa] {\datafileA};
+    \addplot[only marks,mark=*,mark options={mark size=1.5pt,draw=\colma,fill=\colmb,opacity=.5},discard if not={DX}{1},discard if={chi}{-1}] table[col sep=comma,x=mu,y=kappa] {\datafileA};
 \addplot[only marks,mark=square*,mark options={mark size=.9pt,fill=black,draw=black,opacity=1},,discard if not={chi}{-1}] table[col sep=comma,x=mu,y=kappa] {\datafileA};
 
     
     %7
-    \nextgroupplot[title={\large (g)},
-    axis line style={black, thick},
-    width=\HGT, 
-    height=\HGT,
-    scale only axis=true,
-    axis on top=true,
-    major tick length=0pt,
-    colormap/hot2,
-    xlabel={sorted items},
-    ylabel={SHAP value},
-    ylabel style={yshift=-.07in},
-    ymode=log,xmode=log
-    ] % 1
-    \draw[thick,dashed,Red1,
-    dash pattern=on 2pt off 1pt,] (axis cs:40,0.02)
-    -- (axis cs:40,0.00001);
-   \pgfplotstableread[col sep=comma]{Figures/plotdata/shpval.csv}\datafileA
-    \addplot[scatter,point meta=explicit,only marks, mark=*,mark options={mark size=.6pt}, ultra thick,
-    black,] table[x expr=\coordindex,y=shpabs,meta expr=\coordindex] {\datafileA};
-
-    %8
-    \nextgroupplot[title={{\large (h)} correlation matrix},
+    \nextgroupplot[title={{(h)} correlation matrix},yshift=\YSFT,
     axis line style={black, thick},
     view={0}{90},
     xtick={0,1,2,3,4},
     xticklabels={$\kappa$,$\nu$,$\mu$,dx,$\chi$},
     ytick={0,1,2,3,4},
     yticklabels={$\kappa$,$\nu$,$\mu$,dx,$\chi$},
-    width=\HGT, 
+    width=\WDT, 
     height=\HGT,
     colormap/pink,
-    colorbar horizontal,colorbar style={yshift=0in, height=.1in},
+    colorbar horizontal,colorbar style={yshift=\HGT+.8in, height=.1in},
+    scale only axis=true,
+    axis on top=false,point meta min=-1,point meta max=1,
+    major tick length=0pt,
+    scale only axis,
+    ] % 1
+    \addplot3 [raw gnuplot,matrix plot*,mesh/cols=5] gnuplot  {
+      plot 'Figures/plotdata/vacorr.csv' matrix with image;
+    };
+
+    %8
+    \nextgroupplot[title={(e) Selecting item bank},,yshift=-.175in, xshift=.25in,
+    axis line style={black, thick},
+    width=\WDT, 
+    height=\WDTA,
+    scale only axis=true,
+    axis on top=true,
+    major tick length=0pt,
+    colormap/hot2,
+    xlabel={sorted items},
+    ylabel={SHAP value},
+    ylabel style={yshift=.07in},
+    ymode=log,xmode=log
+    ] % 1
+    \draw[thick,dashed,Red1,
+    dash pattern=on 2pt off 1pt,] (axis cs:40,0.02)
+    -- (axis cs:40,0.00001);
+   \pgfplotstableread[col sep=comma]{Figures/plotdata/shpval.csv}\datafileA
+    \addplot[only marks, mark=*,mark options={mark size=.8pt}, fill=white, thick,
+    black!40,] table[x expr=\coordindex,y=shpabs] {\datafileA};
+
+
+    
+    %9
+    \nextgroupplot[title={ (i)},
+    axis line style={black, thick},
+    % axis background/.style={
+    %   shade,top color=transparent!5,bottom color=transparent!1},
+    width=\WDT, 
+    height=\HGT,
+    xlabel={\large $\kappa$},
+    ylabel={\large $\nu$},
+    scale only axis=true,
+    enlargelimits=0.05, 
+    axis on top=true,
+    major tick length=0pt,
+    grid=both,
+    grid style={dashed,semithick,draw=gray, opacity=.25},
+    ] 
+  \draw[thick,\colx,dashed,dash pattern=on 2pt off 1pt,] (axis cs:\pgfkeysvalueof{/pgfplots/xmin},0.76) -- (axis cs:\pgfkeysvalueof{/pgfplots/xmax},0.76);
+\draw[thick,dashed,\colx,dash pattern=on 2pt off 1pt,] (axis cs:1.0,\pgfkeysvalueof{/pgfplots/ymin}) -- (axis cs:1.0,\pgfkeysvalueof{/pgfplots/ymax});
+    \def\datafileA{Figures/plotdata/expdata_res.csv}
+    \addplot[only marks,mark=*,mark options={mark size=1.5pt,fill=white,draw=gray,opacity=.6},discard if not={DX}{False},discard if={chi}{-1}] table[col sep=comma,x=kappa,y=nu] {\datafileA};
+    \addplot[only marks,mark=*,mark options={mark size=1.7pt,draw=\colma,fill=\colmb,opacity=.5},discard if not={DX}{True},discard if={chi}{-1}] table[col sep=comma,x=kappa,y=nu] {\datafileA};
+   \addplot[only marks,mark=square*,mark options={mark size=.9pt,fill=black,draw=black,opacity=1},,discard if not={chi}{-1}] table[col sep=comma,x=kappa,y=nu] {\datafileA};
+
+
+    %10
+    \nextgroupplot[title={ (j)},
+    axis line style={black, thick},
+    % axis background/.style={
+    %   shade,top color=transparent!5,bottom color=transparent!1},
+    width=\WDT, 
+    height=\HGT,
+    scale only axis=true,
+    enlargelimits=true,
+    ylabel={\large $\kappa$},
+    xlabel={\large $\mu$},
+    axis on top=true,
+    colormap/viridis,
+    major tick length=0pt,
+    grid=both,
+    grid style={dashed,semithick,draw=gray, opacity=.25},
+    ] 
+  \draw[thick,\colx,dashed,dash pattern=on 2pt off 1pt,] (axis cs:\pgfkeysvalueof{/pgfplots/xmin},1) -- (axis cs:\pgfkeysvalueof{/pgfplots/xmax},1);
+\draw[thick,dashed,\colx,dash pattern=on 2pt off 1pt,] (axis cs:1.35,\pgfkeysvalueof{/pgfplots/ymin}) -- (axis cs:1.35,\pgfkeysvalueof{/pgfplots/ymax});
+    \def\datafileA{Figures/plotdata/expdata_res.csv}
+     \addplot[only marks,mark=*,mark options={mark size=1.5pt,fill=white,draw=gray,opacity=.6},discard if not={DX}{False},discard if={chi}{-1}] table[col sep=comma,x=mu,y=kappa] {\datafileA};
+    \addplot[only marks,mark=*,mark options={mark size=1.7pt,draw=\colma,fill=\colmb,opacity=.5},discard if not={DX}{True},discard if={chi}{-1}] table[col sep=comma,x=mu,y=kappa] {\datafileA};
+\addplot[only marks,mark=square*,mark options={mark size=.9pt,fill=black,draw=black,opacity=1},,discard if not={chi}{-1}] table[col sep=comma,y=kappa,x=mu] {\datafileA};
+
+   
+        %11
+    \nextgroupplot[title={ (k)},
+    axis line style={black, thick},
+    view={0}{90},
+    xtick={0,1,2,3,4},
+    xticklabels={$\kappa$,$\nu$,$\mu$,dx,$\chi$},
+    ytick={0,1,2,3,4},
+    yticklabels={$\kappa$,$\nu$,$\mu$,dx,$\chi$},
+    width=\WDT, 
+    height=\HGT,
+    colormap/pink,
+    % colorbar horizontal,colorbar style={yshift=.1in, at={(0,1.2)},anchor=north west,height=.1in},
     scale only axis=true,
     axis on top=false,point meta min=-1,point meta max=1,
     major tick length=0pt,
@@ -209,62 +312,13 @@ title style={xshift=-.72in,anchor=south west},xlabel style={yshift=.035in}
     \addplot3 [raw gnuplot,matrix plot*,mesh/cols=5] gnuplot  {
       plot 'Figures/plotdata/expcorr.csv' matrix with image;
     };
-    
-    %9
-    \nextgroupplot[title={\large (i)},
+
+
+    %12
+    \nextgroupplot[title={{ (o)} \vrts ROC}, xshift=-.25in, yshift=-.8in,
     axis line style={black, thick},
-    axis background/.style={
-      shade,top color=transparent!5,bottom color=transparent!1},
-    width=\HGT, 
-    height=\HGT,
-    xlabel={$\kappa$},
-    ylabel={$\nu$},
-    scale only axis=true,
-    enlargelimits=0.05, 
-    axis on top=true,
-    major tick length=0pt,
-    grid=both,
-    grid style={dashed,semithick,draw=gray, opacity=.25},
-    ] 
-  \draw[thick,MediumBlue,dashed,dash pattern=on 2pt off 1pt,] (axis cs:\pgfkeysvalueof{/pgfplots/xmin},0.76) -- (axis cs:\pgfkeysvalueof{/pgfplots/xmax},0.76);
-\draw[thick,dashed,MediumBlue,dash pattern=on 2pt off 1pt,] (axis cs:1.0,\pgfkeysvalueof{/pgfplots/ymin}) -- (axis cs:1.0,\pgfkeysvalueof{/pgfplots/ymax});
-    \def\datafileA{Figures/plotdata/expdata_res.csv}
-    \addplot[only marks,mark=*,mark options={mark size=1.25pt,fill=white,draw=gray,opacity=.6},discard if not={DX}{False},discard if={chi}{-1}] table[col sep=comma,x=kappa,y=nu] {\datafileA};
-    \addplot[only marks,mark=*,mark options={mark size=1.5pt,draw=Orchid4!50!black,fill=DarkOrange1,draw=Orchid1,opacity=.5},discard if not={DX}{True},discard if={chi}{-1}] table[col sep=comma,x=kappa,y=nu] {\datafileA};
-   \addplot[only marks,mark=square*,mark options={mark size=.9pt,fill=black,draw=black,opacity=1},,discard if not={chi}{-1}] table[col sep=comma,x=kappa,y=nu] {\datafileA};
-
-
-    %10
-    \nextgroupplot[title={\large (j)},
-    axis line style={black, thick},
-    axis background/.style={
-      shade,top color=transparent!5,bottom color=transparent!1},
-    width=\HGT, 
-    height=\HGT,
-    scale only axis=true,
-    enlargelimits=true,
-    ylabel={$\kappa$},
-    xlabel={$\mu$},
-    axis on top=true,
-    colormap/viridis,
-    major tick length=0pt,
-    grid=both,
-    grid style={dashed,semithick,draw=gray, opacity=.25},
-    ] 
-  \draw[thick,MediumBlue,dashed,dash pattern=on 2pt off 1pt,] (axis cs:\pgfkeysvalueof{/pgfplots/xmin},1) -- (axis cs:\pgfkeysvalueof{/pgfplots/xmax},1);
-\draw[thick,dashed,MediumBlue,dash pattern=on 2pt off 1pt,] (axis cs:1.35,\pgfkeysvalueof{/pgfplots/ymin}) -- (axis cs:1.35,\pgfkeysvalueof{/pgfplots/ymax});
-    \def\datafileA{Figures/plotdata/expdata_res.csv}
-     \addplot[only marks,mark=*,mark options={mark size=1.25pt,fill=white,draw=gray,opacity=.6},discard if not={DX}{False},discard if={chi}{-1}] table[col sep=comma,x=mu,y=kappa] {\datafileA};
-    \addplot[only marks,mark=*,mark options={mark size=1.5pt,draw=Orchid4!50!black,fill=DarkOrange1,draw=Orchid1,opacity=.5},discard if not={DX}{True},discard if={chi}{-1}] table[col sep=comma,x=mu,y=kappa] {\datafileA};
-\addplot[only marks,mark=square*,mark options={mark size=.9pt,fill=black,draw=black,opacity=1},,discard if not={chi}{-1}] table[col sep=comma,y=kappa,x=mu] {\datafileA};
-
-   
-
-    %11
-    \nextgroupplot[title={{\large (k)} \vrts ROC},
-    axis line style={black, thick},
-    width=\HGT, 
-    height=\HGT,
+    width=\WDTA, 
+    height=\WDTA,
     scale only axis=true,
     axis on top=true,
     major tick length=0pt,
@@ -278,18 +332,69 @@ title style={xshift=-.72in,anchor=south west},xlabel style={yshift=.035in}
     \addplot[smooth,no marks, ultra thick, black,] table[x=fpr,y=tpr] {\datafileA};
     \addplot[name path=tprU,smooth,draw=none] table[x=fpr,y=tprU] {\datafileA};
     \addplot[name path=tprL,smooth,draw=none] table[x=fpr,y=tprL] {\datafileA};
-    \addplot[Orchid1!80!black,opacity=.5] fill between[of=tprU and tprL];
+    \addplot[\cola,opacity=.5] fill between[of=tprU and tprL];
 
  
-        %12
-    \nextgroupplot[title={\large (l)},
+
+        
+    %13
+    \nextgroupplot[title={ (l)},
+    axis line style={black, thick},
+    % axis background/.style={
+    %   shade,top color=transparent!5,bottom color=transparent!1},
+    width=\WDT, 
+    height=\HGT,
+    xlabel={\large $\kappa$},
+    ylabel={\large $\nu$},
+    scale only axis=true,
+    enlargelimits=0.05, 
+    axis on top=true,
+    major tick length=0pt,
+    grid=both,
+    grid style={dashed,semithick,draw=gray, opacity=.25},
+    ] 
+  \draw[thick,\colx,dashed,dash pattern=on 2pt off 1pt,] (axis cs:\pgfkeysvalueof{/pgfplots/xmin},0.76) -- (axis cs:\pgfkeysvalueof{/pgfplots/xmax},0.76);
+\draw[thick,dashed,\colx,dash pattern=on 2pt off 1pt,] (axis cs:1.0,\pgfkeysvalueof{/pgfplots/ymin}) -- (axis cs:1.0,\pgfkeysvalueof{/pgfplots/ymax});
+    \def\datafileA{Figures/plotdata/expdata_psych_res.csv}
+    \addplot[only marks,mark=*,mark options={mark size=1.5pt,fill=white,draw=gray,opacity=.6},discard if not={DX}{False},discard if={chi}{-1}] table[col sep=comma,x=kappa,y=nu] {\datafileA};
+    \addplot[only marks,mark=*,mark options={mark size=1.7pt,draw=\colma,fill=\colmb,opacity=.5},discard if not={DX}{True},discard if={chi}{-1}] table[col sep=comma,x=kappa,y=nu] {\datafileA};
+   \addplot[only marks,mark=square*,mark options={mark size=.9pt,fill=black,draw=black,opacity=1},,discard if not={chi}{-1}] table[col sep=comma,x=kappa,y=nu] {\datafileA};
+
+
+    %14
+    \nextgroupplot[title={ (m)},
+    axis line style={black, thick},
+    % axis background/.style={
+    %   shade,top color=transparent!5,bottom color=transparent!1},
+    width=\WDT, 
+    height=\HGT,
+    scale only axis=true,
+    enlargelimits=true,
+    ylabel={\large $\kappa$},
+    xlabel={\large $\mu$},
+    axis on top=true,
+    colormap/viridis,
+    major tick length=0pt,
+    grid=both,
+    grid style={dashed,semithick,draw=gray, opacity=.25},
+    ] 
+  \draw[thick,\colx,dashed,dash pattern=on 2pt off 1pt,] (axis cs:\pgfkeysvalueof{/pgfplots/xmin},1) -- (axis cs:\pgfkeysvalueof{/pgfplots/xmax},1);
+\draw[thick,dashed,\colx,dash pattern=on 2pt off 1pt,] (axis cs:1.35,\pgfkeysvalueof{/pgfplots/ymin}) -- (axis cs:1.35,\pgfkeysvalueof{/pgfplots/ymax});
+    \def\datafileA{Figures/plotdata/expdata_psych_res.csv}
+     \addplot[only marks,mark=*,mark options={mark size=1.5pt,fill=white,draw=gray,opacity=.6},discard if not={DX}{False},discard if={chi}{-1}] table[col sep=comma,x=mu,y=kappa] {\datafileA};
+    \addplot[only marks,mark=*,mark options={mark size=1.7pt,draw=\colma,fill=\colmb,opacity=.5},discard if not={DX}{True},discard if={chi}{-1}] table[col sep=comma,x=mu,y=kappa] {\datafileA};
+\addplot[only marks,mark=square*,mark options={mark size=.9pt,fill=black,draw=black,opacity=1},,discard if not={chi}{-1}] table[col sep=comma,y=kappa,x=mu] {\datafileA};
+
+    
+        %15
+    \nextgroupplot[title={ (n)},
     axis line style={black, thick},
     view={0}{90},
     xtick={0,1,2,3,4},
     xticklabels={$\kappa$,$\nu$,$\mu$,dx,$\chi$},
     ytick={0,1,2,3,4},
     yticklabels={$\kappa$,$\nu$,$\mu$,dx,$\chi$},
-    width=\HGT, 
+    width=\WDT, 
     height=\HGT,
     colormap/pink,
     % colorbar horizontal,colorbar style={yshift=.1in, at={(0,1.2)},anchor=north west,height=.1in},
@@ -299,8 +404,32 @@ title style={xshift=-.72in,anchor=south west},xlabel style={yshift=.035in}
     scale only axis,
     ] % 1
     \addplot3 [raw gnuplot,matrix plot*,mesh/cols=5] gnuplot  {
-      plot 'Figures/plotdata/vacorr.csv' matrix with image;
+      plot 'Figures/plotdata/exp_psychcorr.csv' matrix with image;
     };
+
+    % %16
+    % \nextgroupplot[title={{\large (p)} \vrts ROC},
+    % axis line style={black, thick},
+    % width=\HGT, 
+    % height=\HGT,
+    % scale only axis=true,
+    % axis on top=true,
+    % major tick length=0pt,
+    % xlabel={1-specificity},
+    % ylabel={sensitivity},
+    % xmin=0,xmax=1,ymin=0,ymax=1,
+    % grid=both,
+    % grid style={dashed,semithick,draw=gray, opacity=.25},
+    % ] % 1
+    % \pgfplotstableread[col sep=comma]{Figures/plotdata/vroc.csv}\datafileA
+    % \addplot[smooth,no marks, ultra thick, black,] table[x=fpr,y=tpr] {\datafileA};
+    % \addplot[name path=tprU,smooth,draw=none] table[x=fpr,y=tprU] {\datafileA};
+    % \addplot[name path=tprL,smooth,draw=none] table[x=fpr,y=tprL] {\datafileA};
+    % \addplot[Orchid1!80!black,opacity=.5] fill between[of=tprU and tprL];
+
+
+
+
  \end{groupplot}
 \end{tikzpicture}};
 

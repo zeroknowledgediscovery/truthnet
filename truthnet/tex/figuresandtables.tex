@@ -1,0 +1,68 @@
+
+
+\begin{figure}
+  \tikzexternalenable
+  \tikzsetnextfilename{scheme}
+  \centering
+  % \tikzXtrue
+  \iftikzX  
+  \input{Figures/scheme}
+  \else
+  \includegraphics[width=.92\textwidth]{Figures/External/scheme}
+  \fi
+ 
+  \vspace{-12pt}
+  
+  \captionN{\textbf{Conceptual framework.} Using a  dataset of responses to a validated structured interview for PTSD diagnoses, along with physician-validated clinical diagnoses, we infer generative models for responses for PTSD patients. In our framework for detecting  malingering, we flag responses as those which are highly ``surprising'' (defined as violating infered cross-dependencies between  individual response items) or are too simple (lacking complexity in the response patterns typical of non-malingered responses). The precise ``malingering condition'' shown above is validated from theoretical considerations as well as field experimental data.}\label{figscheme}
+\end{figure}
+
+\begin{table}[t]
+  \centering 
+  
+  \captionN{Demographic Characteristics and Malingering Success Rates (PL Dataset)$^\star$ at 94.2\% sensitivity}\label{tabprolific}
+  \sffamily\fontsize{9}{9}\selectfont
+\input{Figures/tabprolific}
+\vskip .5em
+$^\star$Using $\kappa_0=1,\nu_0=0.76, \mu_0=1.35$.
+\end{table}
+ 
+\begin{table}[t]
+  \centering
+  
+  \captionN{Lower Bounds on Performance trade-offs at Different Population Prevalences of PTSD Malingering$^\dag$}\label{tabperf}
+  \sffamily\fontsize{9}{11}\selectfont
+  
+  \input{Figures/tabperf}
+
+  \vskip .5em
+  
+$\dag$ Abbreviations: Population prevalence (prev.), Positive Predictive Value (ppv), Negative Predictive Value (npv), Accuracy (acc), Positive Likelihood Ratio (LR+), Negative Likelihood Ratio (LR-). 99\% confidence  intervals calculated  for $n=310+0.6 \times 304 = 492$.
+\end{table}
+\begin{table}[t]
+  \centering
+  
+  \sffamily\fontsize{10}{8}\selectfont
+ 
+\captionN{Demographic characteristics of participating mental health professionals}\label{tabpsych}
+
+  
+\input{Figures/tabpsych}
+
+\end{table}
+
+
+\begin{figure}
+  \tikzexternalenable
+  \tikzsetnextfilename{perf}
+ 
+  \centering
+%\tikzXtrue
+  \iftikzX
+  \input{Figures/perf}
+  \else
+\includegraphics[width=\textwidth]{Figures/External/perf}
+  \fi 
+  \vspace{-10pt}
+  
+  \captionN{\textbf{Training and performance.} a, distribution of the complexity parameter. b, distribution of the surprise parameter. c, ROC curve for diagnosis of PTSD without consideration of possible malingering using \qnet models, $i.e.$ using the $\mu$ parameter as risk. d, Class distribution for setting $\mu_0=1.35$. e, distribution of SHAP values of the CAT-PTSD master item bank, showing the threshold above which the \vrts subset is selected. Panels f-n, out-of-sample results for the three datasets, namely out-of-sample portion of the VA dataset, the PL and the PS datasets. Notably, the different categories of responses obtained comprise ones that are deemd to not have PTSD without any need to consider malingering, those which are diagnosed as  having PTSD, and those who are flagged as malingering. Panels h,k,n show  correlation between the three \vrts parameters, and $\chi$ which is an indicator variable for malingering flags. dx is the indiator of physician-confirmed diagnosis (only available for the VA data), or estimated diagnosis using the $\mu_0$ threshold. Panel o illsutrates the lower envelop of teh ROC curve for \vrts, and 95\% confidence bounds.}\label{figperf}
+\end{figure}
