@@ -1,0 +1,70 @@
+This is BibTeX, Version 0.99d (TeX Live 2018)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: main.aux
+The style file: naturemag.bst
+Database file #1: qbiome.bib
+Database file #2: allbib.bib
+Database file #3: tnet.bib
+Repeated entry---line 369 of file tnet.bib
+ : @article{frueh2007us
+ :                     ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 706 of file tnet.bib
+ : @article{sarda2017conditional
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 726 of file tnet.bib
+ : @inproceedings{fuglede2004jensen
+ :                                 ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 809 of file tnet.bib
+ : @article{mcdermott2013malingering
+ :                                  ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 830 of file tnet.bib
+ : @article{matto2019systematic
+ :                             ,
+I'm skipping whatever remains of this entry
+Warning--empty journal in tourangeau2000psychology
+You've used 51 entries,
+            2348 wiz_defined-function locations,
+            1306 strings with 18897 characters,
+and the built_in function-call counts, 20530 in all, are:
+= -- 1442
+> -- 532
+< -- 1
++ -- 264
+- -- 133
+* -- 2558
+:= -- 2224
+add.period$ -- 147
+call.type$ -- 51
+change.case$ -- 56
+chr.to.int$ -- 0
+cite$ -- 52
+duplicate$ -- 1811
+empty$ -- 1936
+format.name$ -- 175
+if$ -- 4133
+int.to.chr$ -- 0
+int.to.str$ -- 51
+missing$ -- 435
+newline$ -- 257
+num.names$ -- 55
+pop$ -- 363
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 346
+stack$ -- 0
+substring$ -- 951
+swap$ -- 1821
+text.length$ -- 1
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 1
+while$ -- 131
+width$ -- 53
+write$ -- 549
+(There were 5 error messages)
