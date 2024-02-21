@@ -1,0 +1,130 @@
+I really like the approach and analysis. But you are correct in suggesting perhaps that I might dislike some of the introduction and conclusion where the problem of detecting simulated symptoms is framed by a traditional perspective on malingering. I think we need to step away from the lay and forensic definition of malingering. It is outdated, and leads to bad outcomes.  I rewrote a paragraph below: I think some of the logic is needed in the Introduction, but didn’t have time to do that. Rather than referring to malingering, we need to refer to simulated symptoms or feigned symptoms. Assuming inaccurate symptom reports are malingering would be a major error. Additional data would be needed, and there is usually no way to prove what is ultimately a philosophical and non—empric debate about motivation. In fact the data on feigned symptoms is pretty clear that it is complicated. That being said, everybody can agree that inaccurate symptom measurement is a problem, so it is a scientific and moral good to ensure that diagnosis is reserved for thos providing accurate data. Those providing inaccurate data: they require more attention, not less attention, because they are using a deceptive strategy that is self-destructive. Humans may not be good lie detectors individually, but society is built around reputation and the detection of crude forms of deception. My edited text and the four needed refereces are pasted below.
+
+ 
+So:
+
+Back away from malingering. It raises lots of questions, opens you up to critique, and distracts one from the greater issue of feigned symptoms and the good that comes from picking up on them. As an analogy: when a teenager lies to their parent, detecting the lie is usually needed to keep them safe from themselves. The categorization of them as a liar is not helpful.
+
+Focus on simulated or feigned symptoms. Scientifically, this is much more honest and empirical. From a public health perspective, leads to much more interesting future work. We see faked PCL-5s in therapy all the time: way too high, or way too low, in people with PTSD. It is important!
+
+I think you need to address (relevant to the AI paper) the worry that machine learning can replicate or amplify bias. Is there a possibility that the training data has this bias? So, to make this plain: what would be the effect of implicit bias in clinicians be on the detection of malingering in PTSD patients? If this bias were severe, how would it affect the approach that was developed here? I think this should be thought through and addressed. If so, I would guess that it would make the training data noisy (some true PTSD identified as malingering, some true malingering identified as PTSD). Probably not a problem and possibly even a benefit for machine learning if the noise is random. But there may be some need to confirm that the response style (decreased entropy) is not shared with a demographic risk factor in a future study.
+ 
+ 
+DISCUSSION
+
+The VeRITAS algorithm introduced here aims to identify simulated symptoms in patient self-reported PTSD symptoms. While we demonstrate applicability in assessments for PTSD, the underlying principles
+
+are generally applicable for detecting simulated symptoms for other mental health disorders, and even more generally for vetting adversarial responses in structured interviews.
+
+ 
+
+Our findings are relevant to the detection of feigned, faked, or simulated symptoms. Although these are traditionally thought to reflecting malingering,  it is important to understand that the commonly applied construct of malingering has led to a misunderstanding of the nature of simulated symptoms. At a descriptive level, simulated symptoms are characterized by a response style that prevents the accurate measure of symptom severity in the evaluation of a medical syndrome. Simulated symptoms are found in  factitious disorder and malingering. Factitious disorder is a psychiatric condition which involves simulated symptoms. But unlike in the case of malingering, feigning poor health is thought to be unintentional insofar as there are no clear positive incentives for illness and there the person is unaware of the fact that they do not have a medical disorder. Malingering is not a diagnostic category in DSM-5 but rather is coded in a special section on clinical phenomena that are not well understood and/or do not represent a mental illness (DSM-5-TR for reference). While the lay language of malingering suggests that with regards to clinical deception, “you know it when you see it”, empirical work on malingering suggests a far more complex picture than that of a criminally motivated deception. The three subtypes of malingered PTSD symptoms include manufactured, exaggerated, and misattributed (Resnick). Malingered symptoms can be motivated by criminological, pathogenic, or adaptational motivations (Rogers). For example, in the emergency department a patient with a highly problematic substance use disorder may accurately judge that a clinician cannot be trusted to provide an unbiased assessment of their need for care and resources. In such a case, a short term strategy with adaptive value could be to simulate symptoms. In the long term, the strategy would be maladaptive and further erode trust between the patient and clinician.  In fact, empirical studies of malingering in the emergency department have shown evidence that far from faking bad and lacking psychopathology, persons who feign symptoms of a psychiatric disorder are  at higher risk for psychopathology, mortality, are more likely to be homeless or Black/African-American, and more likely to have a substance use disorder than matched controls (Lee et al., 2021, Dell et al., 2021). Thus, the problem of simulated symptoms and inaccurate diagnosis is not one of detecting malingering in order to deny resources, but rather the prevention of potentially harmful side effects on inappropriate treatments such as medications or involuntary psychiatric hospitalization, and a likely missed opportunity to reduce the risk of mortality and morbidity by meeting the true needs of the person feigning symptoms. Additionally, the measurement of PTSD symptom severity is used to guide treatment decisions. Invalid responses in a person with true PTSD would lead to potentially harmful treatment escalation.
+
+ 
+
+ 
+
+https://pubmed.ncbi.nlm.nih.gov/34373126/
+
+https://pubmed.ncbi.nlm.nih.gov/34147918/
+
+ 
+
+Resnick PJ. The detection of malingered mental illness. Behav Sci Law 1984;2. https://doi.org/10.1002/bsl.2370020104
+
+ 
+
+Rogers R, Bender SD, editors. Clinical assessment of malingering and deception. New York, NY: The Guilford Press; 2020.
+
+ 
+
+
+ 
+
+Estimates of the prevalence of simulated symptoms for PTSD in psychiatric and criminal justice settings range from 8% to 64%34,39,40. This variability in reported estimates highlights the complexity of the issue and the need for reliable, rigorous, and principled methods for detecting deception in this context 41.
+
+ 
+
+Identifying such behaviors efficiently and discreetly, avoiding the stigma of a “malingering
+
+7 test”, is crucial in addressing the multifaceted challenges encountered in clinical practice.
+
+ 
+
+Our approach represents a significant departure from traditional methods of malingering detection, which often
+
+rely on domain-specific knowledge42 and standardized tests developed through extensive research on both
+
+genuine patients and malingerers (Table 4). While these traditional methods, including the SIRS23 (requiring
+
+30-40 minutes and expert assessments), the Structured Inventory of Malingered Symptomology (SIMS)24, and
+
+validity scales associated with the Minnesota Multiphasic Personality Inventory-225, have shown accuracy rates
+
+in the range of 85% to 95% depending on the specific problem context43–46, they come with limitations. These
+
+include the requirement for substantial expertise to develop and administer, vulnerabilities to clinician bias, and
+
+the potential for false positives and negatives. Detection of malingering by clinical experts may be susceptible to implicit bias (Lee et al., 2021). Furthermore, they may not easily extend to other contexts or
+
+disorders, and their effectiveness can be compromised by coaching or prior knowledge of psychiatric symptomology.
+
+ 
+
+Thus, current clinical practice lacks an unbiased approach to the detection of simulated symptoms.  Attempting to
+
+make such assessments without any formal tools is problematic, since humans are generally poor at detecting
+
+dissimulation, with accuracy rates often barely surpassing chance26.
+
+In contrast, VeRITAS leverages statistical differences in an individual’s response patterns compared to a set
+
+of baseline responses, aiming to capture the complex, often non-obvious dependencies between interview
+
+questions. The underlying model is a nonparametric generative model that maps the inter-question relations
+
+and dependencies, enabling the detection of inconsistencies indicative of malingering.
+
+Our findings indicate that VeRITAS can achieve high sensitivity and specificity in detecting malingering, with
+
+performance metrics potentially surpassing or at least comparable to those of existing state-of-the-art techniques,
+
+but with several advantages. VeRITAS requires less time for administration, does not necessitate domainspecific
+
+expertise for interpretation, and minimizes the risk of bias. Moreover, its design makes it challenging for
+
+individuals, even those with psychiatric training, to defeat the system through coaching or preparation.
+
+However, the impact of VeRITAS in clinical practice must be evaluated carefully, particularly for unintended
+
+ethical implications, especially with respect to vulnerable communities within which the impact of mental health
+
+disorders are often exacerbated by limited access to healthcare, socio-economic instability, and the stigma
+
+surrounding mental health diagnoses. A non-zero risk of false positives could unjustly exclude vulnerable individuals
+
+from receiving necessary care, and the algorithm’s reliance on statistical patterns may overlook the
+
+nuanced expressions of PTSD symptoms across different cultures, possibly leading to biased assessments. This
+
+underscores the importance of integrating cultural sensitivity into the algorithm’s development and emphasizing
+
+the indispensable role of human judgment in the diagnostic process26,41. Ongoing research and validation in
+
+diverse settings are imperative to refine the algorithm’s application, ensuring it serves as a tool for empowerment
+
+rather than exclusion, particularly in underserved populations.
+
+In conclusion, while malingering presents a persistent challenge in the accurate diagnosis and treatment of
+
+PTSD, our study offers a promising new direction for detection methods. By employing a sophisticated, datadriven
+
+approach that transcends the limitations of traditional methods, VeRITAS provides a powerful tool for
+
+clinicians and researchers. Its adoption could significantly enhance the integrity of PTSD diagnoses, ensuring
+
+that resources are allocated to those genuinely in need and supporting the broader goals of psychiatric care
+
+and research. However, further research and validation across diverse populations and settings are essential to
+
+fully realize its potential and applicability in clinical practice.
